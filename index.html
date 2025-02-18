@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Bella Mare Cleaners' Guide</title>
+  <meta charset="UTF-8" />
+  <title>Bella Mare Cleaners’ Guide & Quiz</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -37,7 +37,7 @@
       padding: 10px 20px;
       font-size: 1rem;
       border-radius: 4px;
-      cursor: not-allowed;  /* default to disabled look */
+      cursor: not-allowed; /* default to disabled look */
       opacity: 0.6;
     }
     #submitBtn.enabled {
@@ -49,18 +49,27 @@
       color: #666;
       margin-top: 30px;
     }
+    #nameField {
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
   <h1>Bella Mare Beachside Apartments</h1>
   <h2>Cleaners’ Key Points & Quiz</h2>
 
+  <!-- Name Field -->
+  <div id="nameField">
+    <label for="participantName"><strong>Enter your name:</strong></label>
+    <input type="text" id="participantName" name="participantName" placeholder="e.g., John Doe" oninput="checkNameFilled()">
+  </div>
+
   <form id="quizForm">
     <!-- SECTION 1 -->
     <section>
       <h3>1. Property Layout & Access</h3>
       <p>- There are no lifts on-site; access to upper floors is via stairwells only.<br>
-         - Cleaners must be prepared to carry supplies and equipment up/down the stairs.</p>
+         - Cleaners must be prepared to carry supplies up/down the stairs.</p>
       <div class="question">
         <p><strong>Question 1 (True/False):</strong> Bella Mare has elevators for easy access to upper floors.</p>
         <label>
@@ -172,38 +181,63 @@
   </form>
 
   <div class="footer-note">
-    <p><em>Note:</em> You can only press <strong>Submit</strong> after all answers are correct!</p>
+    <p><em>Note:</em> You can only press <strong>Submit</strong> after all answers are correct!<br>
+    Once you submit, your answers and name will be sent to Supabase.</p>
   </div>
 
-  <script>
-    // Correct answers in a simple key-value object
+  <!-- Include the supabase-js client (v2) from a CDN or local package. Example: -->
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+    // Replace with your actual Supabase details
+    const supabaseUrl = "https://czzbegsfbnuhpsnsehvy.supabase.co";
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN6emJlZ3NmYm51aHBzbnNlaHZ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk3NjExMzIsImV4cCI6MjA1NTMzNzEzMn0.1nvoKeX0mJgdY2indHp4iZmmf0z1pBCD2jAP8NxHy3k";
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    // Correct answers key
     const correctAnswers = {
-      q1: "false",  // Q1: Bella Mare has no lifts => "Has lifts?" is False
-      q2: "false",  // Q2: Block stairwells is acceptable? => False
-      q3: "true",   // Q3: Report broken fixtures => True
-      q4: "true",   // Q4: Separate bins => True
-      q5: "false",  // Q5: Cleaners add chemicals => False
-      q6: "false",  // Q6: Prop fire door open? => False
-      q7: "true"    // Q7: Expect extra work in busy periods => True
+      q1: "false",  // Bella Mare has no lifts => correct is "False"
+      q2: "false",  // It's acceptable to block stairwells? => "False"
+      q3: "true",   // Report broken fixture => "True"
+      q4: "true",   // Separate trash/recyclables => "True"
+      q5: "false",  // Cleaners add pool chemicals => "False"
+      q6: "false",  // Prop open fire doors is OK => "False"
+      q7: "true"    // Expect more frequent cleans in busy periods => "True"
     };
 
+    const quizForm = document.getElementById('quizForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const participantNameInput = document.getElementById('participantName');
+
+    // This will track each question’s selected answer
+    let userAnswers = {};
+
+    // Check if participant name is filled
+    function checkNameFilled() {
+      // If name is blank, we disable the submit button. If name is present, we proceed to check answers as usual.
+      const nameValue = participantNameInput.value.trim();
+      if (!nameValue) {
+        submitBtn.disabled = true;
+        submitBtn.classList.remove('enabled');
+      } else {
+        // If name is filled, re-check answers to see if we can enable the button
+        checkAnswers();
+      }
+    }
+
+    // Check if all answers are correct
     function checkAnswers() {
       // Collect all radio inputs from the form
       const formElements = document.querySelectorAll('#quizForm input[type="radio"]');
-      let allCorrect = true;
+      userAnswers = {};  // Reset answers each time
 
-      // We'll track if each question has a correct answer selected
-      // We'll do so by building a state for each question, then comparing
-      const userAnswers = {};
-
-      // Go through each radio input. If it is checked, record that as the user's answer
-      formElements.forEach(radio => {
+      formElements.forEach((radio) => {
         if (radio.checked) {
           userAnswers[radio.name] = radio.value;
         }
       });
 
-      // Check if all questions have been answered correctly
+      let allCorrect = true;
       for (let key in correctAnswers) {
         if (!userAnswers[key] || userAnswers[key] !== correctAnswers[key]) {
           allCorrect = false;
@@ -211,26 +245,80 @@
         }
       }
 
-      const submitBtn = document.getElementById('submitBtn');
+      // Check participant name as well
+      const nameValue = participantNameInput.value.trim();
+      if (!nameValue) {
+        allCorrect = false;
+      }
+
       if (allCorrect) {
         submitBtn.disabled = false;
         submitBtn.classList.add('enabled');
-        submitBtn.style.cursor = 'pointer';
       } else {
         submitBtn.disabled = true;
         submitBtn.classList.remove('enabled');
-        submitBtn.style.cursor = 'not-allowed';
       }
     }
 
-    // Optional: We can warn user if they try to submit with correct answers
-    // or provide some feedback on submission. Right now, it does nothing special.
-    document.getElementById('quizForm').addEventListener('submit', function(event) {
-      // If any are incorrect, the button is still disabled.
-      // If the button is enabled, you can process the form or show an alert.
-      alert("Form submitted! All answers are correct.");
-      event.preventDefault(); // For demo: prevent real submission
+    // Submit event handler
+    quizForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const nameValue = participantNameInput.value.trim();
+      if (!nameValue) {
+        alert("Please enter your name before submitting.");
+        return;
+      }
+
+      // We already know answers are correct if the button is enabled, but let's confirm:
+      let allCorrect = true;
+      for (let q in correctAnswers) {
+        if (!userAnswers[q] || userAnswers[q] !== correctAnswers[q]) {
+          allCorrect = false;
+          break;
+        }
+      }
+
+      if (!allCorrect) {
+        alert("Some answers are incorrect or missing. Please verify.");
+        return;
+      }
+
+      // At this point, all answers are correct. We'll submit data to Supabase.
+      // Prepare the row to insert
+      const rowToInsert = {
+        participant: nameValue,
+        q1: userAnswers.q1,
+        q2: userAnswers.q2,
+        q3: userAnswers.q3,
+        q4: userAnswers.q4,
+        q5: userAnswers.q5,
+        q6: userAnswers.q6,
+        q7: userAnswers.q7
+      };
+
+      // Insert into "cleaners_quiz_responses" table
+      let { data, error } = await supabase
+        .from('cleaners_quiz_responses')
+        .insert([rowToInsert]);
+
+      if (error) {
+        console.error("Supabase insert error:", error);
+        alert("There was an error saving your quiz response. Please try again or contact admin.");
+      } else {
+        alert("Your quiz responses have been successfully submitted!");
+        // Optionally, you could redirect, or clear the form, etc.
+        // For example, to disable the form after submission:
+        quizForm.reset();
+        submitBtn.disabled = true;
+        submitBtn.classList.remove('enabled');
+      }
     });
+
+    // Expose the checkAnswers and checkNameFilled to the window, 
+    // so the HTML elements' oninput/onclick can call them
+    window.checkAnswers = checkAnswers;
+    window.checkNameFilled = checkNameFilled;
   </script>
 </body>
 </html>
