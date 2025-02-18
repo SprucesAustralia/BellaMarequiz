@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bella Mare Cleaners' Guide</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1, h2 {
+      color: #2b547e;
+    }
+    section {
+      background: #fff;
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    .question {
+      margin-top: 10px;
+      padding: 10px;
+      background: #f0f8ff;
+      border-left: 4px solid #2b547e;
+      border-radius: 4px;
+    }
+    .question label {
+      margin-right: 15px;
+    }
+    #submitBtn {
+      background: #2b547e;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: not-allowed;  /* default to disabled look */
+      opacity: 0.6;
+    }
+    #submitBtn.enabled {
+      cursor: pointer;
+      opacity: 1;
+    }
+    .footer-note {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bella Mare Beachside Apartments</h1>
+  <h2>Cleaners’ Key Points & Quiz</h2>
+
+  <form id="quizForm">
+    <!-- SECTION 1 -->
+    <section>
+      <h3>1. Property Layout & Access</h3>
+      <p>- There are no lifts on-site; access to upper floors is via stairwells only.<br>
+         - Cleaners must be prepared to carry supplies and equipment up/down the stairs.</p>
+      <div class="question">
+        <p><strong>Question 1 (True/False):</strong> Bella Mare has elevators for easy access to upper floors.</p>
+        <label>
+          <input type="radio" name="q1" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q1" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section>
+      <h3>2. Daily Cleaning Responsibilities (Common Areas)</h3>
+      <p>- Keep stairwells, hallways, and the BBQ/pool area clean and free of debris.<br>
+         - Never block exits or stairwells with cleaning equipment.</p>
+      <div class="question">
+        <p><strong>Question 2 (True/False):</strong> It is acceptable to block the stairwells with cleaning supplies if you're working quickly.</p>
+        <label>
+          <input type="radio" name="q2" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q2" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section>
+      <h3>3. Apartment Housekeeping</h3>
+      <p>- Report any maintenance issues (broken items, leaks) to management.<br>
+         - Always lock up and secure the unit after cleaning.</p>
+      <div class="question">
+        <p><strong>Question 3 (True/False):</strong> If you find a broken fixture in an apartment, you should let management know.</p>
+        <label>
+          <input type="radio" name="q3" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q3" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section>
+      <h3>4. Waste Management & Recycling</h3>
+      <p>- Dispose of trash and recyclables in their designated bins.<br>
+         - Keep bin areas tidy and avoid mixing regular garbage with recyclables.</p>
+      <div class="question">
+        <p><strong>Question 4 (True/False):</strong> It’s important to place trash and recyclables in separate, labeled bins.</p>
+        <label>
+          <input type="radio" name="q4" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q4" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+    </section>
+
+    <!-- SECTION 5 -->
+    <section>
+      <h3>5. Pool & Spa Maintenance (Cleaner’s Role)</h3>
+      <p>- Clear debris from around the pool/spa area daily.<br>
+         - Alert management if pool water looks cloudy or chemicals seem off; do not add chemicals yourself.</p>
+      <div class="question">
+        <p><strong>Question 5 (True/False):</strong> Cleaners should personally add pool chemicals if the water looks cloudy.</p>
+        <label>
+          <input type="radio" name="q5" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q5" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+    </section>
+
+    <!-- SECTION 6 -->
+    <section>
+      <h3>6. Basic Emergency & Safety Notes</h3>
+      <p>- In a fire or other emergency, use stairwells for evacuation.<br>
+         - Never wedge open fire doors; keep corridors clear for safe exit.</p>
+      <div class="question">
+        <p><strong>Question 6 (True/False):</strong> It’s okay to keep fire doors propped open for convenience as long as someone is nearby.</p>
+        <label>
+          <input type="radio" name="q6" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q6" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+    </section>
+
+    <!-- SECTION 7 -->
+    <section>
+      <h3>7. Occasional Tasks & Helpful Tips</h3>
+      <p>- During peak seasons, be prepared for more frequent cleans.<br>
+         - Stay alert to any unusual damage or suspicious activity and inform management promptly.</p>
+      <div class="question">
+        <p><strong>Question 7 (True/False):</strong> In busy periods, cleaners should anticipate extra work and maintain frequent checks on common areas.</p>
+        <label>
+          <input type="radio" name="q7" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q7" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+    </section>
+
+    <button type="submit" id="submitBtn" disabled>Submit</button>
+  </form>
+
+  <div class="footer-note">
+    <p><em>Note:</em> You can only press <strong>Submit</strong> after all answers are correct!</p>
+  </div>
+
+  <script>
+    // Correct answers in a simple key-value object
+    const correctAnswers = {
+      q1: "false",  // Q1: Bella Mare has no lifts => "Has lifts?" is False
+      q2: "false",  // Q2: Block stairwells is acceptable? => False
+      q3: "true",   // Q3: Report broken fixtures => True
+      q4: "true",   // Q4: Separate bins => True
+      q5: "false",  // Q5: Cleaners add chemicals => False
+      q6: "false",  // Q6: Prop fire door open? => False
+      q7: "true"    // Q7: Expect extra work in busy periods => True
+    };
+
+    function checkAnswers() {
+      // Collect all radio inputs from the form
+      const formElements = document.querySelectorAll('#quizForm input[type="radio"]');
+      let allCorrect = true;
+
+      // We'll track if each question has a correct answer selected
+      // We'll do so by building a state for each question, then comparing
+      const userAnswers = {};
+
+      // Go through each radio input. If it is checked, record that as the user's answer
+      formElements.forEach(radio => {
+        if (radio.checked) {
+          userAnswers[radio.name] = radio.value;
+        }
+      });
+
+      // Check if all questions have been answered correctly
+      for (let key in correctAnswers) {
+        if (!userAnswers[key] || userAnswers[key] !== correctAnswers[key]) {
+          allCorrect = false;
+          break;
+        }
+      }
+
+      const submitBtn = document.getElementById('submitBtn');
+      if (allCorrect) {
+        submitBtn.disabled = false;
+        submitBtn.classList.add('enabled');
+        submitBtn.style.cursor = 'pointer';
+      } else {
+        submitBtn.disabled = true;
+        submitBtn.classList.remove('enabled');
+        submitBtn.style.cursor = 'not-allowed';
+      }
+    }
+
+    // Optional: We can warn user if they try to submit with correct answers
+    // or provide some feedback on submission. Right now, it does nothing special.
+    document.getElementById('quizForm').addEventListener('submit', function(event) {
+      // If any are incorrect, the button is still disabled.
+      // If the button is enabled, you can process the form or show an alert.
+      alert("Form submitted! All answers are correct.");
+      event.preventDefault(); // For demo: prevent real submission
+    });
+  </script>
+</body>
+</html>
