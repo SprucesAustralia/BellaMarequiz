@@ -10,7 +10,7 @@
       background: #f9f9f9;
       color: #333;
     }
-    h1, h2 {
+    h1, h2, h3 {
       color: #2b547e;
     }
     section {
@@ -52,6 +52,10 @@
     #nameField {
       margin-bottom: 20px;
     }
+    .bonus-section {
+      background-color: #fffbea;
+      border-left: 4px solid #ffa500; /* a different color to highlight bonus */
+    }
   </style>
 </head>
 <body>
@@ -65,13 +69,20 @@
   </div>
 
   <form id="quizForm">
-    <!-- SECTION 1 -->
+    <!-- =================================
+         SECTION 1: Property Overview
+         ================================= -->
     <section>
-      <h3>1. Property Layout & Access</h3>
-      <p>- There are no lifts on-site; access to upper floors is via stairwells only.<br>
-         - Cleaners must be prepared to carry supplies up/down the stairs.</p>
+      <h3>Section 1: Property Overview</h3>
+      <p>
+        Bella Mare Beachside Apartments is located at 5 Hill St in Coolangatta, Queensland.
+        It is a comfortable 3-star property catering to a mix of tourists, families, and some long-stay guests.
+        Note that there are no elevators on-site; only stairs to access upper floors.
+      </p>
+
+      <!-- Q1 -->
       <div class="question">
-        <p><strong>Question 1 (True/False):</strong> Bella Mare has elevators for easy access to upper floors.</p>
+        <p><strong>1️⃣ Bella Mare Beachside Apartments is a 5-star hotel. (False – it’s 3-star)</strong></p>
         <label>
           <input type="radio" name="q1" value="true" onclick="checkAnswers()"> True
         </label>
@@ -79,15 +90,9 @@
           <input type="radio" name="q1" value="false" onclick="checkAnswers()"> False
         </label>
       </div>
-    </section>
-
-    <!-- SECTION 2 -->
-    <section>
-      <h3>2. Daily Cleaning Responsibilities (Common Areas)</h3>
-      <p>- Keep stairwells, hallways, and the BBQ/pool area clean and free of debris.<br>
-         - Never block exits or stairwells with cleaning equipment.</p>
+      <!-- Q2 -->
       <div class="question">
-        <p><strong>Question 2 (True/False):</strong> It is acceptable to block the stairwells with cleaning supplies if you're working quickly.</p>
+        <p><strong>2️⃣ The property is located at 5 Hill St, Coolangatta, Queensland. (True)</strong></p>
         <label>
           <input type="radio" name="q2" value="true" onclick="checkAnswers()"> True
         </label>
@@ -95,15 +100,9 @@
           <input type="radio" name="q2" value="false" onclick="checkAnswers()"> False
         </label>
       </div>
-    </section>
-
-    <!-- SECTION 3 -->
-    <section>
-      <h3>3. Apartment Housekeeping</h3>
-      <p>- Report any maintenance issues (broken items, leaks) to management.<br>
-         - Always lock up and secure the unit after cleaning.</p>
+      <!-- Q3 -->
       <div class="question">
-        <p><strong>Question 3 (True/False):</strong> If you find a broken fixture in an apartment, you should let management know.</p>
+        <p><strong>3️⃣ Guests at Bella Mare expect daily room cleaning. (False – only weekly or departure clean)</strong></p>
         <label>
           <input type="radio" name="q3" value="true" onclick="checkAnswers()"> True
         </label>
@@ -111,15 +110,9 @@
           <input type="radio" name="q3" value="false" onclick="checkAnswers()"> False
         </label>
       </div>
-    </section>
-
-    <!-- SECTION 4 -->
-    <section>
-      <h3>4. Waste Management & Recycling</h3>
-      <p>- Dispose of trash and recyclables in their designated bins.<br>
-         - Keep bin areas tidy and avoid mixing regular garbage with recyclables.</p>
+      <!-- Q4 -->
       <div class="question">
-        <p><strong>Question 4 (True/False):</strong> It’s important to place trash and recyclables in separate, labeled bins.</p>
+        <p><strong>4️⃣ There are no elevators in the building, only stairs. (True)</strong></p>
         <label>
           <input type="radio" name="q4" value="true" onclick="checkAnswers()"> True
         </label>
@@ -127,15 +120,9 @@
           <input type="radio" name="q4" value="false" onclick="checkAnswers()"> False
         </label>
       </div>
-    </section>
-
-    <!-- SECTION 5 -->
-    <section>
-      <h3>5. Pool & Spa Maintenance (Cleaner’s Role)</h3>
-      <p>- Clear debris from around the pool/spa area daily.<br>
-         - Alert management if pool water looks cloudy or chemicals seem off; do not add chemicals yourself.</p>
+      <!-- Q5 -->
       <div class="question">
-        <p><strong>Question 5 (True/False):</strong> Cleaners should personally add pool chemicals if the water looks cloudy.</p>
+        <p><strong>5️⃣ Bella Mare mainly serves long-term business residents. (False – it’s a mix of tourists, families, and long-stay guests)</strong></p>
         <label>
           <input type="radio" name="q5" value="true" onclick="checkAnswers()"> True
         </label>
@@ -145,13 +132,20 @@
       </div>
     </section>
 
-    <!-- SECTION 6 -->
+    <!-- =================================
+         SECTION 2: Cleaning Schedules & Expectations
+         ================================= -->
     <section>
-      <h3>6. Basic Emergency & Safety Notes</h3>
-      <p>- In a fire or other emergency, use stairwells for evacuation.<br>
-         - Never wedge open fire doors; keep corridors clear for safe exit.</p>
+      <h3>Section 2: Cleaning Schedules & Expectations</h3>
+      <p>
+        At Bella Mare, a departure clean is done after every checkout. Guests staying more than a week also receive a weekly clean. 
+        Airbnb bookings might have additional cleaning requests because they often expect "Enhanced Clean" standards. 
+        Linen changes are generally handled by the cleaners, not the guests.
+      </p>
+      
+      <!-- Q6 -->
       <div class="question">
-        <p><strong>Question 6 (True/False):</strong> It’s okay to keep fire doors propped open for convenience as long as someone is nearby.</p>
+        <p><strong>6️⃣ Every guest room gets a departure clean after checkout. (True)</strong></p>
         <label>
           <input type="radio" name="q6" value="true" onclick="checkAnswers()"> True
         </label>
@@ -159,15 +153,9 @@
           <input type="radio" name="q6" value="false" onclick="checkAnswers()"> False
         </label>
       </div>
-    </section>
-
-    <!-- SECTION 7 -->
-    <section>
-      <h3>7. Occasional Tasks & Helpful Tips</h3>
-      <p>- During peak seasons, be prepared for more frequent cleans.<br>
-         - Stay alert to any unusual damage or suspicious activity and inform management promptly.</p>
+      <!-- Q7 -->
       <div class="question">
-        <p><strong>Question 7 (True/False):</strong> In busy periods, cleaners should anticipate extra work and maintain frequent checks on common areas.</p>
+        <p><strong>7️⃣ Guests staying more than one week receive a weekly clean. (True)</strong></p>
         <label>
           <input type="radio" name="q7" value="true" onclick="checkAnswers()"> True
         </label>
@@ -175,17 +163,335 @@
           <input type="radio" name="q7" value="false" onclick="checkAnswers()"> False
         </label>
       </div>
+      <!-- Q8 -->
+      <div class="question">
+        <p><strong>8️⃣ Guests are required to strip their own beds before cleaners arrive. (False – cleaners handle all linen and bedding changes)</strong></p>
+        <label>
+          <input type="radio" name="q8" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q8" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q9 -->
+      <div class="question">
+        <p><strong>9️⃣ If a guest books through Airbnb, their unit may have extra cleaning requests. (True – Airbnb guests expect “Enhanced Clean” standards)</strong></p>
+        <label>
+          <input type="radio" name="q9" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q9" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q10 -->
+      <div class="question">
+        <p><strong>🔟 If a guest’s unit is very messy, cleaners may charge an extra cleaning fee without telling management. (False – report to management first)</strong></p>
+        <label>
+          <input type="radio" name="q10" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q10" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
     </section>
 
+    <!-- =================================
+         SECTION 3: Room Types & Unique Features
+         ================================= -->
+    <section>
+      <h3>Section 3: Room Types & Unique Features</h3>
+      <p>
+        Bella Mare offers 2-bedroom apartments (single-level and split-level/villa), as well as 3-bedroom split-level units.
+        Some have balconies or patios, which cleaners must also tidy. All apartments include full kitchens and in-unit laundries.
+        It is crucial to check appliances like ovens, microwaves, washers, etc., during each clean.
+      </p>
+
+      <!-- Q11 -->
+      <div class="question">
+        <p><strong>1️⃣1️⃣ The 2-Bedroom Single-Level are the largest and can fit up to 6 people. (False – they are smaller, usually for 4 guests)</strong></p>
+        <label>
+          <input type="radio" name="q11" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q11" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q12 -->
+      <div class="question">
+        <p><strong>1️⃣2️⃣ The 2-bedroom apartments come in both single-level and double-level layouts. (True)</strong></p>
+        <label>
+          <input type="radio" name="q12" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q12" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q13 -->
+      <div class="question">
+        <p><strong>1️⃣3️⃣ The 3-bedroom villas have an internal staircase. (True – they are two-level units)</strong></p>
+        <label>
+          <input type="radio" name="q13" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q13" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q14 -->
+      <div class="question">
+        <p><strong>1️⃣4️⃣ Some apartments have balconies or patios, and cleaners must clean these too. (True)</strong></p>
+        <label>
+          <input type="radio" name="q14" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q14" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q15 -->
+      <div class="question">
+        <p><strong>1️⃣5️⃣ Every apartment has a full kitchen and laundry, so appliances must be checked during cleaning. (True)</strong></p>
+        <label>
+          <input type="radio" name="q15" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q15" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+    </section>
+
+    <!-- =================================
+         SECTION 4: Parking & Guest Interaction
+         ================================= -->
+    <section>
+      <h3>Section 4: Parking & Guest Interaction</h3>
+      <p>
+        Parking is free for both guests and staff, though there may be time limits on nearby streets. 
+        Cleaners should use visitor or staff-marked parking spots rather than taking up a numbered guest space. 
+        Always remain professional when interacting with guests; never gossip or reveal private information.
+      </p>
+
+      <!-- Q16 -->
+      <div class="question">
+        <p><strong>1️⃣6️⃣ Cleaners must always park in the underground garage in the numbered guest spots. (False – use visitor or staff spaces)</strong></p>
+        <label>
+          <input type="radio" name="q16" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q16" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q17 -->
+      <div class="question">
+        <p><strong>1️⃣7️⃣ If a guest complains about their room being dirty on arrival, you should ignore it and let management deal with it later. (False – report immediately)</strong></p>
+        <label>
+          <input type="radio" name="q17" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q17" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q18 -->
+      <div class="question">
+        <p><strong>1️⃣8️⃣ The main guest entrance is on Hill Street, but some rooms can be accessed from Boundary Street. (True)</strong></p>
+        <label>
+          <input type="radio" name="q18" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q18" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q19 -->
+      <div class="question">
+        <p><strong>1️⃣9️⃣ Parking is free for guests and staff. (True – though street parking may have time limits)</strong></p>
+        <label>
+          <input type="radio" name="q19" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q19" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q20 -->
+      <div class="question">
+        <p><strong>2️⃣0️⃣ When interacting with guests, it’s okay to gossip about other guests if they ask questions. (False – maintain professionalism)</strong></p>
+        <label>
+          <input type="radio" name="q20" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q20" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+    </section>
+
+    <!-- =================================
+         SECTION 5: Fire Alarms & Safety
+         ================================= -->
+    <section>
+      <h3>Section 5: Fire Alarms & Safety</h3>
+      <p>
+        In the event of a fire alarm, evacuate immediately using the stairwells; do not finish your current cleaning task. 
+        Fire doors must remain closed unless you are passing through. Keep all exits and stairs clear of obstructions.
+      </p>
+
+      <!-- Q21 -->
+      <div class="question">
+        <p><strong>2️⃣1️⃣ If the fire alarm sounds, cleaners should finish their task first before evacuating. (False – evacuate immediately)</strong></p>
+        <label>
+          <input type="radio" name="q21" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q21" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q22 -->
+      <div class="question">
+        <p><strong>2️⃣2️⃣ Fire doors must always be left open for better airflow. (False – they should remain closed)</strong></p>
+        <label>
+          <input type="radio" name="q22" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q22" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q23 -->
+      <div class="question">
+        <p><strong>2️⃣3️⃣ Cleaners should never block stairwells with cleaning carts or supplies. (True – stairways must stay clear)</strong></p>
+        <label>
+          <input type="radio" name="q23" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q23" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q24 -->
+      <div class="question">
+        <p><strong>2️⃣4️⃣ If you see a guest struggling with luggage on the stairs, you can offer help if it’s safe. (True)</strong></p>
+        <label>
+          <input type="radio" name="q24" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q24" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q25 -->
+      <div class="question">
+        <p><strong>2️⃣5️⃣ If you discover a fire in an apartment, you should call 000 and pull the nearest fire alarm. (True)</strong></p>
+        <label>
+          <input type="radio" name="q25" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q25" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+    </section>
+
+    <!-- =================================
+         SECTION 6: Housekeeping Best Practices
+         ================================= -->
+    <section>
+      <h3>Section 6: Housekeeping Best Practices</h3>
+      <p>
+        Safety is paramount. Always use proper tools and protective equipment when handling sharp objects or cleaning chemicals. 
+        Treat any items left behind by guests as lost property—do not take them for personal use. Thoroughly clean under furniture
+        and inside drawers, as guests often check these hidden spots.
+      </p>
+
+      <!-- Q26 -->
+      <div class="question">
+        <p><strong>2️⃣6️⃣ If you find broken glass or sharp objects while cleaning, you should carefully pick them up with your hands. (False – use gloves or proper tools)</strong></p>
+        <label>
+          <input type="radio" name="q26" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q26" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q27 -->
+      <div class="question">
+        <p><strong>2️⃣7️⃣ Cleaning chemicals should be properly stored after use, never left inside guest rooms. (True)</strong></p>
+        <label>
+          <input type="radio" name="q27" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q27" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q28 -->
+      <div class="question">
+        <p><strong>2️⃣8️⃣ If you find a personal item left behind by a guest, you should take it home if it looks valuable. (False – report as lost property)</strong></p>
+        <label>
+          <input type="radio" name="q28" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q28" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q29 -->
+      <div class="question">
+        <p><strong>2️⃣9️⃣ Guests can request extra linen or cleaning products, and it’s okay to provide them if available. (True – just document it)</strong></p>
+        <label>
+          <input type="radio" name="q29" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q29" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+      <!-- Q30 -->
+      <div class="question">
+        <p><strong>3️⃣0️⃣ It is important to clean under furniture, inside drawers, and under beds. (True)</strong></p>
+        <label>
+          <input type="radio" name="q30" value="true" onclick="checkAnswers()"> True
+        </label>
+        <label>
+          <input type="radio" name="q30" value="false" onclick="checkAnswers()"> False
+        </label>
+      </div>
+    </section>
+
+    <!-- =================================
+         BONUS QUESTION
+         ================================= -->
+    <section class="bonus-section">
+      <h3>Bonus Question: Room Type Combinations</h3>
+      <p>
+        Occasionally, Bella Mare cleaners must handle different departure cleans for varied unit layouts. Below are some possible 
+        "trick" combinations, but only one is correct for Bella Mare:
+      </p>
+
+      <div class="question">
+        <p><strong>Which of the following is the correct combination of room types for departure cleans?</strong></p>
+
+        <label>
+          <input type="radio" name="q31" value="option1" onclick="checkAnswers()">
+          2-Bedroom Double-Level Departure, 2-Bedroom Triple-Level, 3 Bedrooms 2 bath Single-level
+        </label><br>
+        <label>
+          <input type="radio" name="q31" value="option2" onclick="checkAnswers()">
+          2-Bedroom Single-Level Weekly only, 1-Bedroom Split-Level Departure, 3 Bedrooms 1 bath
+        </label><br>
+        <label>
+          <input type="radio" name="q31" value="option3" onclick="checkAnswers()">
+          2-Bedroom Single-Level Departure, 2-Bedroom Split-Level Departure, 3 Bedrooms 2 bath Split-level
+        </label><br>
+        <label>
+          <input type="radio" name="q31" value="option4" onclick="checkAnswers()">
+          2-Bedroom Combined Suite, 2-Bedroom Loft Duplex, 4 Bedrooms 3 bath
+        </label><br>
+      </div>
+    </section>
+
+    <!-- =================================
+         SUBMIT BUTTON
+         ================================= -->
     <button type="submit" id="submitBtn" disabled>Submit</button>
   </form>
 
   <div class="footer-note">
-    <p><em>Note:</em> You can only press <strong>Submit</strong> after all answers are correct!<br>
-    Once you submit, your answers and name will be sent to Supabase.</p>
+    <p>
+      <em>Note:</em> You can only press <strong>Submit</strong> after all answers are correct!<br>
+      Once you submit, your answers and name will be sent to Supabase.
+    </p>
   </div>
 
-  <!-- Include the supabase-js client (v2) from a CDN or local package. Example: -->
+  <!-- Include the supabase-js client (v2) -->
   <script type="module">
     import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
@@ -194,15 +500,46 @@
     const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN6emJlZ3NmYm51aHBzbnNlaHZ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk3NjExMzIsImV4cCI6MjA1NTMzNzEzMn0.1nvoKeX0mJgdY2indHp4iZmmf0z1pBCD2jAP8NxHy3k";
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Correct answers key
+    // Correct answers key (q1 to q30 = True/False, q31 is the bonus multiple-choice)
     const correctAnswers = {
-      q1: "false",  // Bella Mare has no lifts => correct is "False"
-      q2: "false",  // It's acceptable to block stairwells? => "False"
-      q3: "true",   // Report broken fixture => "True"
-      q4: "true",   // Separate trash/recyclables => "True"
-      q5: "false",  // Cleaners add pool chemicals => "False"
-      q6: "false",  // Prop open fire doors is OK => "False"
-      q7: "true"    // Expect more frequent cleans in busy periods => "True"
+      q1:  "false", // 5-star? => False
+      q2:  "true",  // Located at 5 Hill St => True
+      q3:  "false", // Daily cleaning? => False
+      q4:  "true",  // No elevators => True
+      q5:  "false", // Mainly business? => False
+
+      q6:  "true",  // Departure clean after checkout => True
+      q7:  "true",  // Weekly clean for >1 week => True
+      q8:  "false", // Guests must strip beds => False
+      q9:  "true",  // Airbnb may have extra requests => True
+      q10: "false", // Charge extra fee w/o telling mgmt => False
+
+      q11: "false", // 2-BR Single-Level are the largest => False
+      q12: "true",  // 2-BR: single + double-level => True
+      q13: "true",  // 3-BR villas have internal staircase => True
+      q14: "true",  // Clean balconies/patios => True
+      q15: "true",  // Full kitchen + laundry => True
+
+      q16: "false", // Always park in guest spots => False
+      q17: "false", // Ignore dirty-room complaints => False
+      q18: "true",  // Some rooms accessible from Boundary => True
+      q19: "true",  // Parking is free => True
+      q20: "false", // Gossip is okay => False
+
+      q21: "false", // Finish task first in fire alarm => False
+      q22: "false", // Fire doors left open => False
+      q23: "true",  // Never block stairwells => True
+      q24: "true",  // Can help guest with luggage => True
+      q25: "true",  // Call 000 & pull fire alarm => True
+
+      q26: "false", // Pick up sharp glass w/ bare hands => False
+      q27: "true",  // Store chemicals properly => True
+      q28: "false", // Take valuable lost items => False
+      q29: "true",  // Provide extra linen if available => True
+      q30: "true",  // Clean under furniture, etc. => True
+
+      // Bonus question: correct is "option3"
+      q31: "option3"
     };
 
     const quizForm = document.getElementById('quizForm');
@@ -214,13 +551,11 @@
 
     // Check if participant name is filled
     function checkNameFilled() {
-      // If name is blank, we disable the submit button. If name is present, we proceed to check answers as usual.
       const nameValue = participantNameInput.value.trim();
       if (!nameValue) {
         submitBtn.disabled = true;
         submitBtn.classList.remove('enabled');
       } else {
-        // If name is filled, re-check answers to see if we can enable the button
         checkAnswers();
       }
     }
@@ -270,7 +605,7 @@
         return;
       }
 
-      // We already know answers are correct if the button is enabled, but let's confirm:
+      // Double-check all answers are correct (should be if the button is enabled)
       let allCorrect = true;
       for (let q in correctAnswers) {
         if (!userAnswers[q] || userAnswers[q] !== correctAnswers[q]) {
@@ -284,17 +619,42 @@
         return;
       }
 
-      // At this point, all answers are correct. We'll submit data to Supabase.
       // Prepare the row to insert
       const rowToInsert = {
         participant: nameValue,
+        // questions 1 to 30
         q1: userAnswers.q1,
         q2: userAnswers.q2,
         q3: userAnswers.q3,
         q4: userAnswers.q4,
         q5: userAnswers.q5,
         q6: userAnswers.q6,
-        q7: userAnswers.q7
+        q7: userAnswers.q7,
+        q8: userAnswers.q8,
+        q9: userAnswers.q9,
+        q10: userAnswers.q10,
+        q11: userAnswers.q11,
+        q12: userAnswers.q12,
+        q13: userAnswers.q13,
+        q14: userAnswers.q14,
+        q15: userAnswers.q15,
+        q16: userAnswers.q16,
+        q17: userAnswers.q17,
+        q18: userAnswers.q18,
+        q19: userAnswers.q19,
+        q20: userAnswers.q20,
+        q21: userAnswers.q21,
+        q22: userAnswers.q22,
+        q23: userAnswers.q23,
+        q24: userAnswers.q24,
+        q25: userAnswers.q25,
+        q26: userAnswers.q26,
+        q27: userAnswers.q27,
+        q28: userAnswers.q28,
+        q29: userAnswers.q29,
+        q30: userAnswers.q30,
+        // bonus
+        q31: userAnswers.q31
       };
 
       // Insert into "cleaners_quiz_responses" table
@@ -307,16 +667,14 @@
         alert("There was an error saving your quiz response. Please try again or contact admin.");
       } else {
         alert("Your quiz responses have been successfully submitted!");
-        // Optionally, you could redirect, or clear the form, etc.
-        // For example, to disable the form after submission:
+        // Optionally, reset the form or disable it
         quizForm.reset();
         submitBtn.disabled = true;
         submitBtn.classList.remove('enabled');
       }
     });
 
-    // Expose the checkAnswers and checkNameFilled to the window, 
-    // so the HTML elements' oninput/onclick can call them
+    // Expose the checkAnswers and checkNameFilled to the window
     window.checkAnswers = checkAnswers;
     window.checkNameFilled = checkNameFilled;
   </script>
