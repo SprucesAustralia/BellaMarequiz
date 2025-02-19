@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bella Mare - Home</title>
+  <style>
+    body {
+      margin: 0; 
+      padding: 0; 
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #2b547e;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 60px);
+      padding: 1rem;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+      max-width: 400px;
+      margin-top: 2rem;
+    }
+
+    .nav-button {
+      background: #2b547e;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      margin: 0.5rem 0;
+      text-decoration: none;
+      font-size: 1.2rem;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .nav-button:hover {
+      background: #1f4363;
+    }
+
+    footer {
+      text-align: center;
+      background: #2b547e;
+      color: white;
+      padding: 0.5rem;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+
+    @media (min-width: 600px) {
+      main {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bella Mare Beachside Apartments</h1>
+  </header>
+
+  <main>
+    <h2>Home</h2>
+    <p>Welcome! Please choose one of the following options:</p>
+
+    <div class="button-container">
+      <a class="nav-button" href="roster.html">Current Roster</a>
+      <a class="nav-button" href="payments.html">Payments & Finance</a>
+      <a class="nav-button" href="property-info.html">Property & HSK Info</a>
+      <a class="nav-button" href="quiz.html">Cleaner’s Quiz</a>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Bella Mare Beachside Apartments
+  </footer>
+</body>
+</html>
