@@ -20,14 +20,13 @@
     }
 
     main {
-      max-width: 600px;
+      max-width: 800px; /* increased width to better display the maps */
       margin: 2rem auto;
       padding: 1rem;
     }
 
-    h2 {
+    h2, h3, h4 {
       color: #2b547e;
-      text-align: center;
     }
 
     .nav-button {
@@ -57,6 +56,42 @@
       width: 100%;
       margin-top: 1rem;
     }
+
+    .map-container {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    iframe {
+      border: 0;
+      width: 100%;
+      max-width: 600px;
+      height: 450px;
+    }
+
+    .info-box {
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      margin: 1.5rem 0;
+      padding: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 0.5rem;
+      text-align: left;
+    }
+    th {
+      background-color: #eee;
+    }
   </style>
 </head>
 <body>
@@ -66,22 +101,56 @@
 
   <main>
     <h2>Property & HSK Operational Info</h2>
+
+    <!-- Original welcome text -->
     <p><strong>Welcome to Bella Mare Beachside Apartments!</strong></p>
     <p>
-      Italian for “Beautiful Sea,” Bella Mare Holiday Apartments are an attractive 3.5-star Mediterranean-style complex
-      conveniently located just across the road from picturesque Greenmount and Coolangatta Beach and a short stroll
-      to the restaurants, clubs, and shops of Coolangatta and Tweed Heads.
+      Italian for “Beautiful Sea,” Bella Mare Holiday Apartments are an attractive 3.5-star 
+      Mediterranean-style complex conveniently located just across the road from picturesque Greenmount 
+      and Coolangatta Beach and a short stroll to the restaurants, clubs, and shops of Coolangatta 
+      and Tweed Heads. 
     </p>
     <p>
-      Popular Rainbow Bay beach is also within easy walking distance, and the fun and excitement of Twin Towns Services 
-      Club is just across the road from our Coolangatta Accommodation. Buses to Surfers Paradise and the major tourist 
-      attractions depart from right outside our door, and the onsite tour desk can organise all your tours for you.
+      Popular Rainbow Bay beach is also within easy walking distance, and the fun and excitement 
+      of Twin Towns Services Club is just across the road from our Coolangatta Accommodation. 
+      Buses to Surfers Paradise and the major tourist attractions depart from right outside our door, 
+      and the onsite tour desk can organise all your tours for you.
     </p>
 
-    <h3>Contact</h3>
+    <!-- Additional property details -->
+    <div class="info-box">
+      <h3>BELLA MARE BEACHSIDE APARTMENTS</h3>
+      <p><strong>Address:</strong> 5 Hill St, Coolangatta QLD 4225, Australia</p>
+      <p><strong>Star Rating:</strong> 3-star beachside apartment complex</p>
+      <p><strong>Guest Types:</strong> Tourists, families, business travelers, long-stay guests</p>
+    </div>
+
+    <!-- First embedded map (general location) -->
+    <h3>Location Map</h3>
+    <div class="map-container">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3828.764021924301!2d153.54246901137358!3d-28.16677267582195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b91003074ec782b%3A0xdd6faebce062ebe5!2sBella%20Mare%20Beachside%20Apartments!5e1!3m2!1sen!2sph!4v1739942767780!5m2!1sen!2sph"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+    <!-- Next embedded map (parking view) -->
+    <h3>Parking View</h3>
+    <div class="map-container">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!4v1739942878020!6m8!1m7!1sJwEhRyrVyGBOdYOtBAtyGQ!2m2!1d-28.1670795776463!2d153.5456713775275!3f280.20573595472445!4f6.548438680016048!5f0.7820865974627469"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+    <h3>Contact Details</h3>
     <p>
-      Phone: 07 5599 2755<br>
-      Email: info@bellamare.com.au
+      <strong>Phone:</strong> 07 5599 2755<br>
+      <strong>Email:</strong> info@bellamare.com.au
     </p>
 
     <h3>Location</h3>
@@ -89,6 +158,75 @@
       5 Hill Street<br>
       Coolangatta QLD 4225 AU
     </p>
+
+    <!-- Key Housekeeping Information Section -->
+    <h2>Key Housekeeping Information</h2>
+
+    <h4>Building & Access</h4>
+    <ul>
+      <li>Floors: Up to four levels, no elevators, only stair access.</li>
+      <li>Parking: Free underground (limited) and nearby street parking.</li>
+      <li>Fire Safety: Smoke detectors in each unit, stairwells for evacuation. Never prop open fire doors or block exits.</li>
+    </ul>
+
+    <h4>Cleaning Responsibilities</h4>
+    <ul>
+      <li>Departure Clean: After each guest checkout.</li>
+      <li>Weekly Clean: For stays longer than 10 days.</li>
+      <li>No Daily Housekeeping: Unless specially requested.</li>
+      <li>Focus Areas: Bathrooms, kitchens, bedrooms, balconies/patios; proper trash removal and recycling; reporting damages.</li>
+    </ul>
+
+    <h4>Room Types & Features</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Room Type</th>
+          <th>Typical Occupancy</th>
+          <th>Key Features</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2-Bedroom (Single Level)</td>
+          <td>Up to 4 guests</td>
+          <td>Two bedrooms, often 2 bathrooms</td>
+        </tr>
+        <tr>
+          <td>2-Bedroom (Villa)</td>
+          <td>Up to 4 guests</td>
+          <td>Internal stairs; split level; same amenities</td>
+        </tr>
+        <tr>
+          <td>3-Bedroom Villa</td>
+          <td>Up to 6 guests</td>
+          <td>Largest size, multiple levels, 2+ bathrooms</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>All have kitchens, laundry, and possibly a balcony or patio.</p>
+
+    <h4>Cleaning Standards</h4>
+    <ul>
+      <li>High-Profile Areas: Mirrors, taps, toilets, kitchen counters, floors.</li>
+      <li>Appliances: Oven, microwave, fridge, washer/dryer—clean inside/out.</li>
+      <li>Bedding: Change all linens on departure cleans; weekly linen changes for long-stay guests.</li>
+      <li>Balconies/Patios: Sweep and wipe outdoor furniture.</li>
+      <li>Chemicals: Use properly; store securely (never in guest rooms).</li>
+    </ul>
+
+    <h4>Additional Tips</h4>
+    <ul>
+      <li>Keep stairwells clear; do not block with carts.</li>
+      <li>Secure doors after cleaning; respect guest privacy.</li>
+      <li>Report broken items, leaks, or suspicious activity immediately.</li>
+      <li>Adhere to fire safety: if alarm sounds, evacuate via stairs immediately.</li>
+      <li>Wear PPE when handling chemicals or sharp objects.</li>
+      <li>Never keep lost-and-found items; inform management if you find valuables.</li>
+    </ul>
+
+    <p>Thank you for maintaining high standards and safety at Bella Mare. 
+       Cleanliness and professionalism help ensure positive guest experiences and reviews!</p>
 
     <a class="nav-button" href="index.html">Back to Home</a>
   </main>
