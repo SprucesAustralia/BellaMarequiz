@@ -20,13 +20,25 @@
     }
 
     main {
-      max-width: 800px; /* increased width to better display the maps */
+      max-width: 600px;
       margin: 2rem auto;
       padding: 1rem;
+      background-color: #fff;
+      border-radius: 5px;
+    }
+
+    h1, h2, h3, h4 {
+      margin-top: 1.2rem;
+      margin-bottom: 0.6rem;
+      color: #2b547e;
     }
 
     h2, h3, h4 {
-      color: #2b547e;
+      text-align: center;
+    }
+
+    p {
+      line-height: 1.5;
     }
 
     .nav-button {
@@ -57,40 +69,59 @@
       margin-top: 1rem;
     }
 
-    .map-container {
-      margin: 1.5rem 0;
-      text-align: center;
+    section {
+      margin-bottom: 2rem;
     }
 
     iframe {
+      display: block;
+      margin: 1rem auto;
+      max-width: 100%;
       border: 0;
-      width: 100%;
-      max-width: 600px;
       height: 450px;
     }
 
-    .info-box {
-      background: #fff;
-      border-radius: 4px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-      margin: 1.5rem 0;
-      padding: 1rem;
+    ul {
+      list-style: disc;
+      margin-left: 1.5rem;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1rem 0;
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 1rem;
     }
-    table, th, td {
-      border: 1px solid #ccc;
+
+    label {
+      font-weight: bold;
+      margin-bottom: 0.3rem;
     }
-    th, td {
+
+    input[type="text"],
+    textarea {
       padding: 0.5rem;
-      text-align: left;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+      box-sizing: border-box;
     }
-    th {
-      background-color: #eee;
+
+    button[type="submit"] {
+      width: fit-content;
+      padding: 0.75rem 1.5rem;
+      background-color: #2b547e;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      align-self: flex-start;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #1f4363;
     }
   </style>
 </head>
@@ -101,56 +132,22 @@
 
   <main>
     <h2>Property & HSK Operational Info</h2>
-
-    <!-- Original welcome text -->
     <p><strong>Welcome to Bella Mare Beachside Apartments!</strong></p>
     <p>
-      Italian for “Beautiful Sea,” Bella Mare Holiday Apartments are an attractive 3.5-star 
-      Mediterranean-style complex conveniently located just across the road from picturesque Greenmount 
-      and Coolangatta Beach and a short stroll to the restaurants, clubs, and shops of Coolangatta 
-      and Tweed Heads. 
+      Italian for “Beautiful Sea,” Bella Mare Holiday Apartments are an attractive 3.5-star Mediterranean-style complex
+      conveniently located just across the road from picturesque Greenmount and Coolangatta Beach and a short stroll
+      to the restaurants, clubs, and shops of Coolangatta and Tweed Heads.
     </p>
     <p>
-      Popular Rainbow Bay beach is also within easy walking distance, and the fun and excitement 
-      of Twin Towns Services Club is just across the road from our Coolangatta Accommodation. 
-      Buses to Surfers Paradise and the major tourist attractions depart from right outside our door, 
-      and the onsite tour desk can organise all your tours for you.
+      Popular Rainbow Bay beach is also within easy walking distance, and the fun and excitement of Twin Towns Services 
+      Club is just across the road from our Coolangatta Accommodation. Buses to Surfers Paradise and the major tourist 
+      attractions depart from right outside our door, and the onsite tour desk can organise all your tours for you.
     </p>
 
-    <!-- Additional property details -->
-    <div class="info-box">
-      <h3>BELLA MARE BEACHSIDE APARTMENTS</h3>
-      <p><strong>Address:</strong> 5 Hill St, Coolangatta QLD 4225, Australia</p>
-      <p><strong>Star Rating:</strong> 3-star beachside apartment complex</p>
-      <p><strong>Guest Types:</strong> Tourists, families, business travelers, long-stay guests</p>
-    </div>
-
-    <!-- First embedded map (general location) -->
-    <h3>Location Map</h3>
-    <div class="map-container">
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3828.764021924301!2d153.54246901137358!3d-28.16677267582195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b91003074ec782b%3A0xdd6faebce062ebe5!2sBella%20Mare%20Beachside%20Apartments!5e1!3m2!1sen!2sph!4v1739942767780!5m2!1sen!2sph"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-    </div>
-
-    <!-- Next embedded map (parking view) -->
-    <h3>Parking View</h3>
-    <div class="map-container">
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!4v1739942878020!6m8!1m7!1sJwEhRyrVyGBOdYOtBAtyGQ!2m2!1d-28.1670795776463!2d153.5456713775275!3f280.20573595472445!4f6.548438680016048!5f0.7820865974627469"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-    </div>
-
-    <h3>Contact Details</h3>
+    <h3>Contact</h3>
     <p>
-      <strong>Phone:</strong> 07 5599 2755<br>
-      <strong>Email:</strong> info@bellamare.com.au
+      Phone: 07 5599 2755<br>
+      Email: info@bellamare.com.au
     </p>
 
     <h3>Location</h3>
@@ -159,76 +156,124 @@
       Coolangatta QLD 4225 AU
     </p>
 
-    <!-- Key Housekeeping Information Section -->
-    <h2>Key Housekeeping Information</h2>
-
-    <h4>Building & Access</h4>
-    <ul>
-      <li>Floors: Up to four levels, no elevators, only stair access.</li>
-      <li>Parking: Free underground (limited) and nearby street parking.</li>
-      <li>Fire Safety: Smoke detectors in each unit, stairwells for evacuation. Never prop open fire doors or block exits.</li>
-    </ul>
-
-    <h4>Cleaning Responsibilities</h4>
-    <ul>
-      <li>Departure Clean: After each guest checkout.</li>
-      <li>Weekly Clean: For stays longer than 10 days.</li>
-      <li>No Daily Housekeeping: Unless specially requested.</li>
-      <li>Focus Areas: Bathrooms, kitchens, bedrooms, balconies/patios; proper trash removal and recycling; reporting damages.</li>
-    </ul>
-
-    <h4>Room Types & Features</h4>
-    <table>
-      <thead>
-        <tr>
-          <th>Room Type</th>
-          <th>Typical Occupancy</th>
-          <th>Key Features</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>2-Bedroom (Single Level)</td>
-          <td>Up to 4 guests</td>
-          <td>Two bedrooms, often 2 bathrooms</td>
-        </tr>
-        <tr>
-          <td>2-Bedroom (Villa)</td>
-          <td>Up to 4 guests</td>
-          <td>Internal stairs; split level; same amenities</td>
-        </tr>
-        <tr>
-          <td>3-Bedroom Villa</td>
-          <td>Up to 6 guests</td>
-          <td>Largest size, multiple levels, 2+ bathrooms</td>
-        </tr>
-      </tbody>
-    </table>
-    <p>All have kitchens, laundry, and possibly a balcony or patio.</p>
-
-    <h4>Cleaning Standards</h4>
-    <ul>
-      <li>High-Profile Areas: Mirrors, taps, toilets, kitchen counters, floors.</li>
-      <li>Appliances: Oven, microwave, fridge, washer/dryer—clean inside/out.</li>
-      <li>Bedding: Change all linens on departure cleans; weekly linen changes for long-stay guests.</li>
-      <li>Balconies/Patios: Sweep and wipe outdoor furniture.</li>
-      <li>Chemicals: Use properly; store securely (never in guest rooms).</li>
-    </ul>
-
-    <h4>Additional Tips</h4>
-    <ul>
-      <li>Keep stairwells clear; do not block with carts.</li>
-      <li>Secure doors after cleaning; respect guest privacy.</li>
-      <li>Report broken items, leaks, or suspicious activity immediately.</li>
-      <li>Adhere to fire safety: if alarm sounds, evacuate via stairs immediately.</li>
-      <li>Wear PPE when handling chemicals or sharp objects.</li>
-      <li>Never keep lost-and-found items; inform management if you find valuables.</li>
-    </ul>
-
-    <p>Thank you for maintaining high standards and safety at Bella Mare. 
-       Cleanliness and professionalism help ensure positive guest experiences and reviews!</p>
-
     <a class="nav-button" href="index.html">Back to Home</a>
+
+    <!-- NEW SECTION: Rooms -->
+    <section id="rooms">
+      <h2>Rooms</h2>
+      
+      <h3>2 Bedrooms</h3>
+      <iframe src="https://www.google.com/maps/embed?pb=!4v1739953266909!6m8!1m7!1sCAoSLEFGMVFpcE9WbWlNa2JydFlmd2lXYTlFd3JHT2J4ZGVWMU0xRGNJMUtiTG5X!2m2!1d-28.1665810638984!2d153.5452748476485!3f163.6792895917966!4f-15.793674707108309!5f0.7820865974627469"
+              width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      
+      <h3>2 Bedroom Split Level</h3>
+      <iframe src="https://www.google.com/maps/embed?pb=!4v1739953376874!6m8!1m7!1sCAoSLEFGMVFpcE5yRmNoWmV5VDZNcklDaENaQTVzVDJ0ZVFoVExhMmN0THYzd3VW!2m2!1d-28.16694118292071!2d153.5454805857059!3f326.5597633088433!4f-15.979578636381376!5f0.7820865974627469"
+              width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+    <!-- NEW SECTION: Common Areas -->
+    <section id="common-areas">
+      <h2>Common Areas</h2>
+      <iframe src="https://www.google.com/maps/embed?pb=!4v1739953037495!6m8!1m7!1sCAoSLEFGMVFpcFBnd3NGX2NIdTJRYW1BVy1rejNQNVhzQm1IN19hSm44Vkp4OW4w!2m2!1d-28.166824350609012!2d153.54530320977702!3f273.4597!4f0!5f0.7820865974627469"
+              width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+      <iframe src="https://www.google.com/maps/embed?pb=!4v1739953087677!6m8!1m7!1sCAoSLEFGMVFpcFBhQTFKcjF1LWJKam9SNUQ2bVp3MTg3ZUFPZW5KcTJBdUp2WUp4!2m2!1d-28.16654703372368!2d153.5451089067562!3f160.75119557395115!4f-6.235340197330331!5f0.7820865974627469"
+              width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+      <h3>Reception Area</h3>
+      <iframe src="https://www.google.com/maps/embed?pb=!4v1739953171244!6m8!1m7!1sCAoSLEFGMVFpcE1RSjdlZ3VyMmJRU05xSFhJTjA1c1RUdmpFcDFibU5kYUFuV2Jn!2m2!1d-28.16668584897019!2d153.5451526654391!3f338.71865261485704!4f-4.146217060165014!5f0.7820865974627469"
+              width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+    <!-- NEW SECTION: Property & Layout -->
+    <section id="property-layout">
+      <h2>Property & Layout</h2>
+      <ul>
+        <li>The resort/property has around 25–26 apartments in total.</li>
+        <li>There are 8 stairwells, each containing around 7 apartments (a mix of 2-bedroom apartments and 2-bedroom villas at the top).</li>
+        <li>No elevators; all floors are accessed by stairs.</li>
+        <li>There is one gym on-site that needs daily cleaning (vacuuming + equipment wipe-down).</li>
+        <li>There is 1 three-bedroom apartment in the complex; the rest are primarily 2-bedroom apartments (or villas).</li>
+        <li>Each apartment has its own laundry facilities (washer and dryer).</li>
+        <li>Most apartments have a shower over the bath in the second bathroom; only about 2 apartments have shower curtains (the rest have glass panels).</li>
+        <li>No dedicated spa baths; there are no large spa tubs requiring special cleaning.</li>
+        <li>The complex has no lifts, so cleaners typically bring supplies to the bottom of each stairwell and then carry items up.</li>
+        <li>Thursday is generally the quietest day.</li>
+        <li>Vacuuming of stairwells is required once a week; this can be spread out, as long as each stairwell is done weekly.</li>
+        <li>The gym requires daily vacuuming and wiping down of equipment.</li>
+        <li>Management is open to flexible scheduling. If it gets busier, more cleaners can be called in via a WhatsApp broadcast system.</li>
+        <li>Check-ins are generally from 2 PM; check-outs at 10 AM. Some guests leave earlier, and about two requests per week come in for late check-outs.</li>
+      </ul>
+    </section>
+
+    <!-- NEW SECTION: Cleaning Scope & Standards -->
+    <section id="cleaning-scope-standards">
+      <h2>Cleaning Scope & Standards</h2>
+      <ul>
+        <li><strong>Departure cleans:</strong> Full clean, including kitchen, bathrooms, making the beds with fresh linen, etc.</li>
+        <li><strong>Mid-stay service (for guests staying 10+ nights):</strong>
+          <ul>
+            <li>Change bed sheets and towels.</li>
+            <li>Basic clean of bathrooms (wipe surfaces, etc.).</li>
+            <li>Tidy kitchen and restock amenities (dishwasher powder, tea towels, etc.).</li>
+            <li>No vacuum/mop (apartments each have a vacuum for guest use).</li>
+          </ul>
+        </li>
+        <li><strong>Bedrooms:</strong> Typically, a two-bedroom apartment has one queen bed and two singles. The three-bedroom has two queen beds plus two singles.</li>
+        <li><strong>Bedding style:</strong> Most apartments use two sheets and a blanket or throw at the foot of the bed. In winter, doonas are provided and laundered/stored accordingly.</li>
+        <li><strong>Rollaway beds & port-a-cots:</strong> Housekeepers/managers usually provide a separate linen pack for the guests to set up themselves.</li>
+        <li><strong>Dishwashers:</strong> Each apartment has one; guests are asked to run it prior to checkout, so dishes are generally not an issue.</li>
+        <li><strong>Lost property:</strong> On-site managers do a quick sweep after guests depart; found items are stored in the office until claimed.</li>
+        <li><strong>Stair cleaning gear:</strong> There is a stair climber trolley with triangular wheels available to reduce physical strain when carrying linens/supplies upstairs.</li>
+      </ul>
+    </section>
+
+    <!-- NEW SECTION: Communication & Allocation -->
+    <section id="communication-allocation">
+      <h2>Communication & Allocation</h2>
+      <ul>
+        <li>Management currently uses WhatsApp to communicate with housekeeping staff.</li>
+        <li>A 48-hour notice is typically given for the next day’s cleans; updates are often sent again the afternoon prior.</li>
+        <li>Larger scheduling overviews can be provided up to a week in advance but can change based on bookings or cancellations.</li>
+        <li>Management (Neil and one additional manager) are on-site and can assist with tasks like room stripping if it’s very busy.</li>
+      </ul>
+    </section>
+
+    <!-- NEW SECTION: Frequently Asked Questions -->
+    <section id="faq">
+      <h2>Frequently Asked Questions</h2>
+      
+      <h4>Q1: Are there elevators in the complex?</h4>
+      <p><strong>A1:</strong> No, all floors are accessed by stairs. The property does not have any lifts.</p>
+
+      <h4>Q2: Do any apartments have spa baths?</h4>
+      <p><strong>A2:</strong> No, there are no dedicated spa baths or large tubs that require special cleaning.</p>
+
+      <h4>Q3: What are the check-in and check-out times?</h4>
+      <p><strong>A3:</strong> Standard check-in is 2 PM, and check-out is by 10 AM. Some guests may leave earlier or request a late check-out.</p>
+
+      <h4>Q4: Are rollaway beds made by housekeeping?</h4>
+      <p><strong>A4:</strong> Typically, no. Housekeeping provides a linen pack for rollaway beds and port-a-cots, which guests set up themselves.</p>
+
+      <h4>Q5: Is there a gym on-site and how is it maintained?</h4>
+      <p><strong>A5:</strong> Yes, there is one gym on-site. It is vacuumed and the equipment is wiped down daily.</p>
+    </section>
+
+    <!-- NEW SECTION: Submit More Questions -->
+    <section id="submit-questions">
+      <h2>Submit More Questions!</h2>
+      <p>If you have any additional questions, please fill out the form below:</p>
+      <form action="#" method="post">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="question">Your Question:</label>
+        <textarea id="question" name="question" rows="4" required></textarea>
+
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+    
   </main>
 
   <footer>
