@@ -34,12 +34,17 @@
       height: 600px;
     }
 
+    .button-container {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
     .nav-button {
       background: #2b547e;
       color: #fff;
       text-align: center;
       padding: 0.75rem 1.5rem;
-      margin-top: 1rem;
       text-decoration: none;
       font-size: 1rem;
       border-radius: 8px;
@@ -78,7 +83,11 @@
       scrolling="no">
     </iframe>
 
-    <a class="nav-button" href="index.html">Back to Home</a>
+    <div class="button-container">
+      <a class="nav-button" href="index.html">Back to Home</a>
+      <!-- New button for reporting change in availability -->
+      <a class="nav-button" href="report-availability.html">Report Change in Availability</a>
+    </div>
   </main>
 
   <footer>
