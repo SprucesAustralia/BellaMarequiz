@@ -132,23 +132,25 @@
       }
       .rate-table tr {
         display: block;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem; /* Added spacing between rows */
       }
       .rate-table td {
         display: block;
-        text-align: right;
+        text-align: left; /* Changed from right to left for better readability */
         position: relative;
-        padding-left: 50%;
+        padding-left: 60%; /* Increased from 50% to give more space for labels */
         box-sizing: border-box;
+        word-wrap: break-word; /* Ensures long text wraps properly */
       }
       .rate-table td::before {
         content: attr(data-label);
         position: absolute;
         left: 0;
-        width: 50%;
+        width: 60%; /* Increased from 50% to match td padding */
         padding-left: 0.5rem;
         font-weight: bold;
         text-align: left;
+        word-wrap: break-word; /* Ensures long labels wrap properly */
       }
     }
 
