@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- Added viewport meta tag for mobile scaling -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bella Mare - Property & HSK Info</title>
   <style>
     body {
@@ -73,12 +75,13 @@
       margin-bottom: 2rem;
     }
 
+    /* Updated iframe styles for responsiveness */
     iframe {
       display: block;
       margin: 1rem auto;
-      max-width: 100%;
-      border: 0;
+      width: 100%;
       height: 450px;
+      border: 0;
     }
 
     ul {
@@ -123,6 +126,58 @@
     button[type="submit"]:hover {
       background-color: #1f4363;
     }
+
+    /* Media query for mobile devices (max-width: 600px) */
+    @media screen and (max-width: 600px) {
+      main {
+        width: 100%;
+        padding: 0.5rem;
+      }
+
+      header {
+        padding: 0.5rem;
+      }
+
+      footer {
+        padding: 0.5rem;
+      }
+
+      .nav-button {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      iframe {
+        height: 300px;
+      }
+
+      input[type="text"],
+      textarea {
+        font-size: 1.2rem;
+        padding: 0.75rem;
+      }
+
+      button[type="submit"] {
+        font-size: 1.2rem;
+        padding: 1rem 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+      }
+
+      h4 {
+        font-size: 1rem;
+      }
+
+      ul {
+        margin-left: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -158,34 +213,35 @@
 
     <a class="nav-button" href="index.html">Back to Home</a>
 
-    <!-- NEW SECTION: Rooms -->
+    <!-- Rooms Section -->
     <section id="rooms">
       <h2>Rooms</h2>
       
       <h3>2 Bedrooms</h3>
+      <!-- Removed width and height attributes -->
       <iframe src="https://www.google.com/maps/embed?pb=!4v1739953266909!6m8!1m7!1sCAoSLEFGMVFpcE9WbWlNa2JydFlmd2lXYTlFd3JHT2J4ZGVWMU0xRGNJMUtiTG5X!2m2!1d-28.1665810638984!2d153.5452748476485!3f163.6792895917966!4f-15.793674707108309!5f0.7820865974627469"
-              width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       
       <h3>2 Bedroom Split Level</h3>
       <iframe src="https://www.google.com/maps/embed?pb=!4v1739953376874!6m8!1m7!1sCAoSLEFGMVFpcE5yRmNoWmV5VDZNcklDaENaQTVzVDJ0ZVFoVExhMmN0THYzd3VW!2m2!1d-28.16694118292071!2d153.5454805857059!3f326.5597633088433!4f-15.979578636381376!5f0.7820865974627469"
-              width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </section>
 
-    <!-- NEW SECTION: Common Areas -->
+    <!-- Common Areas Section -->
     <section id="common-areas">
       <h2>Common Areas</h2>
       <iframe src="https://www.google.com/maps/embed?pb=!4v1739953037495!6m8!1m7!1sCAoSLEFGMVFpcFBnd3NGX2NIdTJRYW1BVy1rejNQNVhzQm1IN19hSm44Vkp4OW4w!2m2!1d-28.166824350609012!2d153.54530320977702!3f273.4597!4f0!5f0.7820865974627469"
-              width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
       <iframe src="https://www.google.com/maps/embed?pb=!4v1739953087677!6m8!1m7!1sCAoSLEFGMVFpcFBhQTFKcjF1LWJKam9SNUQ2bVp3MTg3ZUFPZW5KcTJBdUp2WUp4!2m2!1d-28.16654703372368!2d153.5451089067562!3f160.75119557395115!4f-6.235340197330331!5f0.7820865974627469"
-              width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
       <h3>Reception Area</h3>
       <iframe src="https://www.google.com/maps/embed?pb=!4v1739953171244!6m8!1m7!1sCAoSLEFGMVFpcE1RSjdlZ3VyMmJRU05xSFhJTjA1c1RUdmpFcDFibU5kYUFuV2Jn!2m2!1d-28.16668584897019!2d153.5451526654391!3f338.71865261485704!4f-4.146217060165014!5f0.7820865974627469"
-              width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </section>
 
-    <!-- NEW SECTION: Property & Layout -->
+    <!-- Property & Layout Section -->
     <section id="property-layout">
       <h2>Property & Layout</h2>
       <ul>
@@ -206,7 +262,7 @@
       </ul>
     </section>
 
-    <!-- NEW SECTION: Cleaning Scope & Standards -->
+    <!-- Cleaning Scope & Standards Section -->
     <section id="cleaning-scope-standards">
       <h2>Cleaning Scope & Standards</h2>
       <ul>
@@ -228,7 +284,7 @@
       </ul>
     </section>
 
-    <!-- NEW SECTION: Communication & Allocation -->
+    <!-- Communication & Allocation Section -->
     <section id="communication-allocation">
       <h2>Communication & Allocation</h2>
       <ul>
@@ -239,7 +295,7 @@
       </ul>
     </section>
 
-    <!-- NEW SECTION: Frequently Asked Questions -->
+    <!-- Frequently Asked Questions Section -->
     <section id="faq">
       <h2>Frequently Asked Questions</h2>
       
@@ -259,7 +315,7 @@
       <p><strong>A5:</strong> Yes, there is one gym on-site. It is vacuumed and the equipment is wiped down daily.</p>
     </section>
 
-    <!-- NEW SECTION: Submit More Questions -->
+    <!-- Submit More Questions Section -->
     <section id="submit-questions">
       <h2>Submit More Questions!</h2>
       <p>If you have any additional questions, please fill out the form below:</p>
@@ -277,7 +333,7 @@
   </main>
 
   <footer>
-    &copy; 2025 Bella Mare Beachside Apartments
+    © 2025 Bella Mare Beachside Apartments
   </footer>
 </body>
 </html>
