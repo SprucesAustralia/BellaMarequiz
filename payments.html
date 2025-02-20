@@ -68,6 +68,7 @@
     .rate-table {
       width: 100%;
       border-collapse: collapse;
+      table-layout: fixed; /* Ensures consistent column widths */
     }
 
     .rate-table th, .rate-table td {
@@ -78,6 +79,22 @@
 
     .rate-table th {
       background-color: #eee;
+    }
+
+    /* Specific column widths */
+    .rate-table th:nth-child(1),
+    .rate-table td:nth-child(1) {
+      width: 30%; /* Room Type */
+    }
+
+    .rate-table th:nth-child(2),
+    .rate-table td:nth-child(2) {
+      width: 35%; /* Pay Rate / Weekly Service Rate */
+    }
+
+    .rate-table th:nth-child(3),
+    .rate-table td:nth-child(3) {
+      width: 35%; /* Average Time */
     }
 
     ul {
