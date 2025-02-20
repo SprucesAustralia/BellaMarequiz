@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bella Mare - Home</title>
   <style>
     body {
-      margin: 0; 
-      padding: 0; 
+      margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
       background-color: #f9f9f9;
       color: #333;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
     }
 
     header {
@@ -24,7 +28,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: calc(100vh - 60px);
+      flex: 1;
       padding: 1rem;
     }
 
@@ -34,6 +38,7 @@
       width: 90%;
       max-width: 400px;
       margin-top: 2rem;
+      gap: 1rem;
     }
 
     .nav-button {
@@ -41,7 +46,6 @@
       color: #fff;
       text-align: center;
       padding: 1rem;
-      margin: 0.5rem 0;
       text-decoration: none;
       font-size: 1.2rem;
       border-radius: 8px;
@@ -57,9 +61,23 @@
       background: #2b547e;
       color: white;
       padding: 0.5rem;
-      position: relative;
-      bottom: 0;
-      width: 100%;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      h2 {
+        font-size: 1.2rem;
+      }
     }
 
     @media (min-width: 600px) {
@@ -82,13 +100,13 @@
       <a class="nav-button" href="roster.html">Current Roster</a>
       <a class="nav-button" href="payments.html">Payments & Finance</a>
       <a class="nav-button" href="property-info.html">Property & HSK Info</a>
-      <!-- Renamed button -->
       <a class="nav-button" href="academy.html">Bella Mare Beachside Academy</a>
+      <a class="nav-button" href="https://www.helpicams.com/" target="_blank" rel="noopener">Help & Info</a>
     </div>
   </main>
 
   <footer>
-    &copy; 2025 Bella Mare Beachside Apartments
+    © 2025 Bella Mare Beachside Apartments
   </footer>
 </body>
 </html>
