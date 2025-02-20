@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Report Change in Availability</title>
   <style>
     body {
-      margin: 0; 
+      margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
       background-color: #f9f9f9;
       color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     header {
@@ -19,7 +23,14 @@
       text-align: center;
     }
 
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
     main {
+      flex: 1;
+      width: 100%;
       max-width: 600px;
       margin: 0 auto;
       padding: 1rem;
@@ -28,10 +39,16 @@
       gap: 1rem;
     }
 
+    h2 {
+      font-size: 1.25rem;
+      margin: 0.5rem 0;
+    }
+
     label {
       display: block;
       margin-bottom: 0.5rem;
       font-weight: bold;
+      font-size: 0.9rem;
     }
 
     input[type="date"],
@@ -42,10 +59,13 @@
       font-size: 1rem;
       margin-bottom: 1rem;
       box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
 
     textarea {
       resize: vertical;
+      min-height: 100px;
     }
 
     .warning {
@@ -54,20 +74,43 @@
       padding: 1rem;
       border-radius: 5px;
       color: #856404;
+      font-size: 0.9rem;
     }
 
-    .submit-button {
-      background: #2b547e;
-      color: #fff;
+    .button-container {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .submit-button,
+    .back-button {
       padding: 0.75rem 1.5rem;
       border: none;
       border-radius: 8px;
       font-size: 1rem;
       cursor: pointer;
+      width: 45%;
+      max-width: 200px;
+    }
+
+    .submit-button {
+      background: #2b547e;
+      color: #fff;
     }
 
     .submit-button:hover {
       background: #1f4363;
+    }
+
+    .back-button {
+      background: #666;
+      color: #fff;
+    }
+
+    .back-button:hover {
+      background: #444;
     }
 
     footer {
@@ -75,10 +118,36 @@
       background: #2b547e;
       color: white;
       padding: 0.5rem;
-      position: relative;
-      bottom: 0;
       width: 100%;
-      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 0.75rem;
+      }
+
+      h1 {
+        font-size: 1.2rem;
+      }
+
+      h2 {
+        font-size: 1.1rem;
+      }
+
+      main {
+        padding: 0.75rem;
+      }
+
+      .submit-button,
+      .back-button {
+        width: 100%;
+        max-width: none;
+      }
+
+      .button-container {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
@@ -114,12 +183,15 @@
       <label for="comments">Additional comments:</label>
       <textarea id="comments" name="comments" rows="4" placeholder="Any extra details..."></textarea>
 
-      <button type="submit" class="submit-button">Submit</button>
+      <div class="button-container">
+        <button type="submit" class="submit-button">Submit</button>
+        <button type="button" class="back-button" onclick="history.back()">Go Back</button>
+      </div>
     </form>
   </main>
 
   <footer>
-    &copy; 2025 Bella Mare Beachside Apartments
+    © 2025 Bella Mare Beachside Apartments
   </footer>
 </body>
 </html>
