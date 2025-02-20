@@ -66,7 +66,7 @@
     }
 
     .rate-table {
-      width: 100%;
+      width: 100%; /* Ensures tables are as wide as the "Payments & Finance" title (up to max-width: 600px) */
       border-collapse: collapse;
       table-layout: fixed; /* Ensures consistent column widths */
     }
@@ -81,7 +81,7 @@
       background-color: #eee;
     }
 
-    /* Specific column widths */
+    /* Specific column widths (adjusted to fit within 100% width) */
     .rate-table th:nth-child(1),
     .rate-table td:nth-child(1) {
       width: 30%; /* Room Type */
@@ -205,7 +205,7 @@
     </ul>
 
     <h3>Weekly Service</h3>
-    <p>A weekly service takes place if a guest has stayed for over 10 days. The rate for a weekly service is 40% of the standard departure clean:</p>
+    <p>A weekly service takes place if a guest has stayed for over 10 days. The rate for a weekly service is 40% of the standard departure clean. The time for a weekly service is also 40% of the departure cleaning time from the table above:</p>
     <div class="table-wrapper">
       <table class="rate-table">
         <thead>
@@ -219,17 +219,17 @@
           <tr>
             <td data-label="Room Type">2 Bed</td>
             <td data-label="Weekly Service Rate">$24</td>
-            <td data-label="Average Time">~1 hour 30 minutes</td>
+            <td data-label="Average Time">~36 minutes</td>
           </tr>
           <tr>
             <td data-label="Room Type">2 Bed Split</td>
             <td data-label="Weekly Service Rate">$28</td>
-            <td data-label="Average Time">~1 hour 45 minutes</td>
+            <td data-label="Average Time">~42 minutes</td>
           </tr>
           <tr>
             <td data-label="Room Type">3 Bed</td>
             <td data-label="Weekly Service Rate">$34</td>
-            <td data-label="Average Time">~2 hours</td>
+            <td data-label="Average Time">~48 minutes</td>
           </tr>
         </tbody>
       </table>
