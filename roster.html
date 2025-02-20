@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bella Mare - Current Roster</title>
   <style>
     body {
-      margin: 0; 
+      margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
       background-color: #f9f9f9;
       color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     header {
@@ -24,6 +28,7 @@
       flex-direction: column;
       align-items: center;
       padding: 1rem;
+      flex: 1;
     }
 
     iframe {
@@ -34,8 +39,23 @@
       height: 600px;
     }
 
+    /* Media queries for responsive iframe height */
+    @media (max-width: 768px) {
+      iframe {
+        height: 500px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      iframe {
+        height: 400px;
+      }
+    }
+
     .button-container {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 1rem;
       margin-top: 1rem;
     }
@@ -60,8 +80,6 @@
       background: #2b547e;
       color: white;
       padding: 0.5rem;
-      position: relative;
-      bottom: 0;
       width: 100%;
       margin-top: 1rem;
     }
@@ -80,18 +98,17 @@
     <iframe 
       src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Australia%2FBrisbane&showPrint=0&src=Y19mMTdlOTExMmM1MGVhNzhlYmE1MDg0MWFhNTUzZTg4OWVjNzllZGFhYzk4ZjJlZTA5Mjc3NmYzOTlhMDY0OTBiQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&color=%239E69AF"
       frameborder="0" 
-      scrolling="no">
+      scrolling="auto">
     </iframe>
 
     <div class="button-container">
       <a class="nav-button" href="index.html">Back to Home</a>
-      <!-- New button for reporting change in availability -->
       <a class="nav-button" href="report-availability.html">Report Change in Availability</a>
     </div>
   </main>
 
   <footer>
-    &copy; 2025 Bella Mare Beachside Apartments
+    © 2025 Bella Mare Beachside Apartments
   </footer>
 </body>
 </html>
