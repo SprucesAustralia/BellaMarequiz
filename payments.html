@@ -2,14 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bella Mare - Payments & Finance</title>
   <style>
     body {
-      margin: 0; 
+      margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
       background-color: #f9f9f9;
       color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
     header {
@@ -23,6 +28,7 @@
       max-width: 600px;
       margin: 2rem auto;
       padding: 1rem;
+      flex: 1;
     }
 
     h2 {
@@ -52,24 +58,87 @@
       background: #2b547e;
       color: white;
       padding: 0.5rem;
-      position: relative;
-      bottom: 0;
-      width: 100%;
-      margin-top: 1rem;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      margin-bottom: 1rem;
     }
 
     .rate-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 1rem;
     }
+
     .rate-table th, .rate-table td {
       border: 1px solid #ccc;
       padding: 0.5rem;
       text-align: left;
     }
+
     .rate-table th {
       background-color: #eee;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    p, h3 {
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        font-size: 16px;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      h3 {
+        font-size: 1.2rem;
+      }
+      header h1 {
+        font-size: 1.5rem;
+      }
+      .nav-button {
+        display: block;
+        width: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
+      }
+      .rate-table {
+        display: block;
+      }
+      .rate-table thead {
+        display: none;
+      }
+      .rate-table tr {
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .rate-table td {
+        display: block;
+        text-align: right;
+        position: relative;
+        padding-left: 50%;
+        box-sizing: border-box;
+      }
+      .rate-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 0.5rem;
+        font-weight: bold;
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 400px) {
+      main {
+        padding: 0.5rem;
+      }
     }
   </style>
 </head>
@@ -82,32 +151,34 @@
     <h2>Payments & Finance</h2>
     <p>Below are the standard pay rates and average cleaning times (departure clean):</p>
 
-    <table class="rate-table">
-      <thead>
-        <tr>
-          <th>Room Type</th>
-          <th>Pay Rate</th>
-          <th>Average Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>2 Bed</td>
-          <td>$60</td>
-          <td>~1 hour 30 minutes</td>
-        </tr>
-        <tr>
-          <td>2 Bed Split</td>
-          <td>$70</td>
-          <td>~1 hour 45 minutes</td>
-        </tr>
-        <tr>
-          <td>3 Bed</td>
-          <td>$85</td>
-          <td>~2 hours</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table class="rate-table">
+        <thead>
+          <tr>
+            <th>Room Type</th>
+            <th>Pay Rate</th>
+            <th>Average Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Room Type">2 Bed</td>
+            <td data-label="Pay Rate">$60</td>
+            <td data-label="Average Time">~1 hour 30 minutes</td>
+          </tr>
+          <tr>
+            <td data-label="Room Type">2 Bed Split</td>
+            <td data-label="Pay Rate">$70</td>
+            <td data-label="Average Time">~1 hour 45 minutes</td>
+          </tr>
+          <tr>
+            <td data-label="Room Type">3 Bed</td>
+            <td data-label="Pay Rate">$85</td>
+            <td data-label="Average Time">~2 hours</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <p><strong>Note:</strong> Actual cleaning time may vary depending on:</p>
     <ul>
@@ -118,32 +189,34 @@
 
     <h3>Weekly Service</h3>
     <p>A weekly service takes place if a guest has stayed for over 10 days. The rate for a weekly service is 40% of the standard departure clean:</p>
-    <table class="rate-table">
-      <thead>
-        <tr>
-          <th>Room Type</th>
-          <th>Weekly Service Rate</th>
-          <th>Average Time</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>2 Bed</td>
-          <td>$24</td>
-          <td>~1 hour 30 minutes</td>
-        </tr>
-        <tr>
-          <td>2 Bed Split</td>
-          <td>$28</td>
-          <td>~1 hour 45 minutes</td>
-        </tr>
-        <tr>
-          <td>3 Bed</td>
-          <td>$34</td>
-          <td>~2 hours</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table class="rate-table">
+        <thead>
+          <tr>
+            <th>Room Type</th>
+            <th>Weekly Service Rate</th>
+            <th>Average Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Room Type">2 Bed</td>
+            <td data-label="Weekly Service Rate">$24</td>
+            <td data-label="Average Time">~1 hour 30 minutes</td>
+          </tr>
+          <tr>
+            <td data-label="Room Type">2 Bed Split</td>
+            <td data-label="Weekly Service Rate">$28</td>
+            <td data-label="Average Time">~1 hour 45 minutes</td>
+          </tr>
+          <tr>
+            <td data-label="Room Type">3 Bed</td>
+            <td data-label="Weekly Service Rate">$34</td>
+            <td data-label="Average Time">~2 hours</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <h3>Additional Work</h3>
     <p>From time to time, we may request extra work. This will be paid in blocks of 15 minutes, each block paying <strong>$10 AUD</strong>.</p>
@@ -158,7 +231,7 @@
   </main>
 
   <footer>
-    &copy; 2025 Bella Mare Beachside Apartments
+    © 2025 Bella Mare Beachside Apartments
   </footer>
 </body>
 </html>
