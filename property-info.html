@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- Viewport meta tag for mobile scaling -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bella Mare - Property & HSK Info</title>
   <style>
     body {
-      margin: 0; 
+      margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
       background-color: #f9f9f9;
       color: #333;
+      overflow-x: hidden;
     }
 
     header {
@@ -22,17 +22,19 @@
     }
 
     main {
-      max-width: 600px;
+      max-width: 100%;
       margin: 2rem auto;
       padding: 1rem;
       background-color: #fff;
       border-radius: 5px;
+      box-sizing: border-box;
     }
 
     h1, h2, h3, h4 {
       margin-top: 1.2rem;
       margin-bottom: 0.6rem;
       color: #2b547e;
+      word-wrap: break-word;
     }
 
     h2, h3, h4 {
@@ -41,19 +43,22 @@
 
     p {
       line-height: 1.5;
+      word-wrap: break-word;
     }
 
     .nav-button {
-      display: inline-block;
+      display: block;
       background: #2b547e;
       color: #fff;
       text-align: center;
       padding: 0.75rem 1.5rem;
-      margin-top: 1rem;
+      margin: 1rem auto;
       text-decoration: none;
       font-size: 1rem;
       border-radius: 8px;
       transition: background 0.3s;
+      width: 90%;
+      box-sizing: border-box;
     }
 
     .nav-button:hover {
@@ -65,8 +70,6 @@
       background: #2b547e;
       color: white;
       padding: 0.5rem;
-      position: relative;
-      bottom: 0;
       width: 100%;
       margin-top: 1rem;
     }
@@ -75,7 +78,6 @@
       margin-bottom: 2rem;
     }
 
-    /* Updated iframe styles for responsiveness */
     iframe {
       display: block;
       margin: 1rem auto;
@@ -88,7 +90,7 @@
       list-style: disc;
       margin-left: 1.5rem;
       line-height: 1.8;
-      font-size: 1rem;
+      word-wrap: break-word;
     }
 
     form {
@@ -129,66 +131,18 @@
       background-color: #1f4363;
     }
 
-    /* Media query for mobile devices (max-width: 600px) */
     @media screen and (max-width: 600px) {
-      main {
-        width: 100%;
-        padding: 0.5rem;
-      }
-
-      header {
-        padding: 0.5rem;
-      }
-
-      footer {
-        padding: 0.5rem;
-      }
-
-      .nav-button {
-        width: 100%;
-        box-sizing: border-box;
-      }
-
-      iframe {
-        height: 300px;
-      }
-
-      input[type="text"],
-      textarea {
-        font-size: 1.2rem;
-        padding: 0.75rem;
-      }
-
-      button[type="submit"] {
-        font-size: 1.2rem;
-        padding: 1rem 2rem;
-      }
-
-      h2 {
-        font-size: 1.5rem;
-      }
-
-      h3 {
-        font-size: 1.2rem;
-      }
-
-      h4 {
-        font-size: 1rem;
-      }
-
-      ul {
-        margin-left: 1rem;
-        font-size: 1.1rem;
-        line-height: 1.8;
-      }
-
-      li {
-        margin-bottom: 0.5rem;
-      }
-
-      section {
-        margin-bottom: 1.5rem;
-      }
+      main { padding: 0.5rem; }
+      header { padding: 0.5rem; }
+      footer { padding: 0.5rem; }
+      .nav-button { width: 100%; }
+      iframe { height: 300px; }
+      h2 { font-size: 1.5rem; }
+      h3 { font-size: 1.2rem; }
+      h4 { font-size: 1rem; }
+      ul { margin-left: 1rem; font-size: 1rem; }
+      input[type="text"], textarea { font-size: 1.2rem; padding: 0.75rem; }
+      button[type="submit"] { font-size: 1.2rem; padding: 1rem 2rem; }
     }
   </style>
 </head>
@@ -213,8 +167,9 @@
 
     <h3>Contact</h3>
     <p>
-      Phone: 07 5599 2755<br>
-      Email: info@bellamare.com.au
+      hi@spruces.co<br>
+      +61 412 130 643 WhatsApp<br>
+      +63 945 7050 535 WhatsApp 2
     </p>
 
     <h3>Location</h3>
@@ -225,54 +180,47 @@
 
     <a class="nav-button" href="index.html">Back to Home</a>
 
-    <!-- Rooms Section -->
     <section id="rooms">
       <h2>Rooms</h2>
-      
       <h3>2 Bedrooms</h3>
       <iframe src="https://www.google.com/maps/embed?pb=!4v1739953266909!6m8!1m7!1sCAoSLEFGMVFpcE9WbWlNa2JydFlmd2lXYTlFd3JHT2J4ZGVWMU0xRGNJMUtiTG5X!2m2!1d-28.1665810638984!2d153.5452748476485!3f163.6792895917966!4f-15.793674707108309!5f0.7820865974627469"
               allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      
       <h3>2 Bedroom Split Level</h3>
       <iframe src="https://www.google.com/maps/embed?pb=!4v1739953376874!6m8!1m7!1sCAoSLEFGMVFpcE5yRmNoWmV5VDZNcklDaENaQTVzVDJ0ZVFoVExhMmN0THYzd3VW!2m2!1d-28.16694118292071!2d153.5454805857059!3f326.5597633088433!4f-15.979578636381376!5f0.7820865974627469"
               allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </section>
 
-    <!-- Common Areas Section -->
     <section id="common-areas">
       <h2>Common Areas</h2>
       <iframe src="https://www.google.com/maps/embed?pb=!4v1739953037495!6m8!1m7!1sCAoSLEFGMVFpcFBnd3NGX2NIdTJRYW1BVy1rejNQNVhzQm1IN19hSm44Vkp4OW4w!2m2!1d-28.166824350609012!2d153.54530320977702!3f273.4597!4f0!5f0.7820865974627469"
               allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
       <iframe src="https://www.google.com/maps/embed?pb=!4v1739953087677!6m8!1m7!1sCAoSLEFGMVFpcFBhQTFKcjF1LWJKam9SNUQ2bVp3MTg3ZUFPZW5KcTJBdUp2WUp4!2m2!1d-28.16654703372368!2d153.5451089067562!3f160.75119557395115!4f-6.235340197330331!5f0.7820865974627469"
               allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
       <h3>Reception Area</h3>
       <iframe src="https://www.google.com/maps/embed?pb=!4v1739953171244!6m8!1m7!1sCAoSLEFGMVFpcE1RSjdlZ3VyMmJRU05xSFhJTjA1c1RUdmpFcDFibU5kYUFuV2Jn!2m2!1d-28.16668584897019!2d153.5451526654391!3f338.71865261485704!4f-4.146217060165014!5f0.7820865974627469"
               allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </section>
 
-    <!-- Updated Property & Layout Section -->
     <section id="property-layout">
       <h2>Property & Layout</h2>
       <ul>
-        <li>The apartments are on the 8th floor, each containing around 7 apartments (a mix of 2-bedroom and 3-bedroom apartments). The villas are at the top.</li>
-        <li>There are no elevators; all floors are accessed by stairs.</li>
+        <li>The resort/property has around 25–26 apartments in total.</li>
+        <li>There are 8 stairwells, each containing around 7 apartments (a mix of 2-bedroom apartments and 2-bedroom villas at the top).</li>
+        <li>No elevators; all floors are accessed by stairs.</li>
         <li>There is one gym on-site that needs daily cleaning (vacuuming + equipment wipe-down).</li>
-        <li>There is 1 three-bedroom apartment and 3 two-bedroom apartments (or villas).</li>
+        <li>There is 1 three-bedroom apartment in the complex; the rest are primarily 2-bedroom apartments (or villas).</li>
         <li>Each apartment has its own laundry facilities (washer and dryer).</li>
-        <li>Most apartments have a shower over the bath in the second bathroom; only about 2 apartments have glass panels for shower curtains (the rest have glass panels).</li>
+        <li>Most apartments have a shower over the bath in the second bathroom; only about 2 apartments have shower curtains (the rest have glass panels).</li>
         <li>No dedicated spa baths; there are no large spa tubs requiring special cleaning.</li>
         <li>The complex has no lifts, so cleaners typically bring supplies to the bottom of each stairwell and then carry items up.</li>
         <li>Thursday is generally the quietest day.</li>
         <li>Vacuuming of stairwells is required once a week; this can be spread out, as long as each stairwell is done weekly.</li>
         <li>The gym requires daily vacuuming and wiping down of equipment.</li>
         <li>Management is open to flexible scheduling. If it gets busier, more cleaners can be called in via a WhatsApp broadcast system.</li>
-        <li>Check-ins are generally from 2 PM; check-outs at 11 AM. Some guests leave earlier, and about two requests per week come in for late check-outs.</li>
+        <li>Check-ins are generally from 2 PM; check-outs at 10 AM. Some guests leave earlier, and about two requests per week come in for late check-outs.</li>
       </ul>
     </section>
 
-    <!-- Updated Cleaning Scope & Standards Section -->
     <section id="cleaning-scope-standards">
       <h2>Cleaning Scope & Standards</h2>
       <ul>
@@ -294,7 +242,6 @@
       </ul>
     </section>
 
-    <!-- Communication & Allocation Section -->
     <section id="communication-allocation">
       <h2>Communication & Allocation</h2>
       <ul>
@@ -305,41 +252,31 @@
       </ul>
     </section>
 
-    <!-- Frequently Asked Questions Section -->
     <section id="faq">
       <h2>Frequently Asked Questions</h2>
-      
       <h4>Q1: Are there elevators in the complex?</h4>
       <p><strong>A1:</strong> No, all floors are accessed by stairs. The property does not have any lifts.</p>
-
       <h4>Q2: Do any apartments have spa baths?</h4>
       <p><strong>A2:</strong> No, there are no dedicated spa baths or large tubs that require special cleaning.</p>
-
       <h4>Q3: What are the check-in and check-out times?</h4>
-      <p><strong>A3:</strong> Standard check-in is 2 PM, and check-out is by 11 AM. Some guests may leave earlier or request a late check-out.</p>
-
+      <p><strong>A3:</strong> Standard check-in is 2 PM, and check-out is by 10 AM. Some guests may leave earlier or request a late check-out.</p>
       <h4>Q4: Are rollaway beds made by housekeeping?</h4>
       <p><strong>A4:</strong> Typically, no. Housekeeping provides a linen pack for rollaway beds and port-a-cots, which guests set up themselves.</p>
-
       <h4>Q5: Is there a gym on-site and how is it maintained?</h4>
       <p><strong>A5:</strong> Yes, there is one gym on-site. It is vacuumed and the equipment is wiped down daily.</p>
     </section>
 
-    <!-- Submit More Questions Section -->
     <section id="submit-questions">
       <h2>Submit More Questions!</h2>
       <p>If you have any additional questions, please fill out the form below:</p>
       <form action="#" method="post">
         <label for="name">Your Name:</label>
         <input type="text" id="name" name="name" required>
-
         <label for="question">Your Question:</label>
         <textarea id="question" name="question" rows="4" required></textarea>
-
         <button type="submit">Submit</button>
       </form>
     </section>
-    
   </main>
 
   <footer>
