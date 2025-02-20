@@ -39,17 +39,22 @@
       color: #2b547e;
     }
     .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
       margin: 1rem 0;
-      text-align: center;
     }
     .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      max-width: 560px;
-      height: 315px;
-      margin-bottom: 1rem;
+      height: 100%;
     }
     .typeform-container {
       margin: 2rem 0;
+      min-height: 400px; /* Default for larger screens */
     }
     .keywords-section {
       background-color: #fff;
@@ -120,6 +125,32 @@
       bottom: 0;
       width: 100%;
       margin-top: 1rem;
+    }
+    /* Media Queries for Mobile Optimization */
+    @media (max-width: 600px) {
+      main {
+        padding: 0.5rem; /* Reduce padding on mobile */
+      }
+      .keywords-table {
+        display: block;
+      }
+      .keywords-table tr {
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .keywords-table td {
+        display: block;
+        text-align: left;
+      }
+      .keywords-table td:first-child {
+        font-weight: bold;
+      }
+      .keywords-table input {
+        width: 100%; /* Full width on mobile */
+      }
+      .typeform-container {
+        min-height: 80vh; /* Larger vertical size on mobile */
+      }
     }
   </style>
 </head>
@@ -222,13 +253,13 @@
 
       <button id="submitBtn" disabled>Submit</button>
       <div class="congratulations" id="congratsMsg">
-        &#10004; Congratulations! You have unlocked the final submission.
+        ✔ Congratulations! You have unlocked the final submission.
       </div>
     </div>
   </main>
 
   <footer>
-    &copy; 2025 Bella Mare Beachside Apartments
+    © 2025 Bella Mare Beachside Apartments
   </footer>
 
   <!-- Supabase Insertion Script -->
