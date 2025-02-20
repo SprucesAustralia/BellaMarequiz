@@ -36,6 +36,11 @@
       text-align: center;
     }
 
+    h3 {
+      color: #2b547e;
+      margin-top: 1.5rem;
+    }
+
     .nav-button {
       display: inline-block;
       background: #2b547e;
@@ -60,51 +65,31 @@
       padding: 0.5rem;
     }
 
-    .table-wrapper {
-      overflow-x: auto;
-      margin-bottom: 1rem;
-    }
-
-    .rate-table {
-      width: 100%; /* Ensures tables are as wide as the "Payments & Finance" title (up to max-width: 600px) */
-      border-collapse: collapse;
-      table-layout: fixed; /* Ensures consistent column widths */
-    }
-
-    .rate-table th, .rate-table td {
-      border: 1px solid #ccc;
-      padding: 0.5rem;
-      text-align: left;
-    }
-
-    .rate-table th {
-      background-color: #eee;
-    }
-
-    /* Specific column widths (adjusted to fit within 100% width) */
-    .rate-table th:nth-child(1),
-    .rate-table td:nth-child(1) {
-      width: 30%; /* Room Type */
-    }
-
-    .rate-table th:nth-child(2),
-    .rate-table td:nth-child(2) {
-      width: 35%; /* Pay Rate / Weekly Service Rate */
-    }
-
-    .rate-table th:nth-child(3),
-    .rate-table td:nth-child(3) {
-      width: 35%; /* Average Time */
+    p {
+      margin: 0.5rem 0;
     }
 
     ul {
       padding-left: 1.5rem;
+      margin: 0.5rem 0;
     }
 
-    p, h3 {
+    .entry {
       margin-bottom: 1rem;
+      padding: 0.5rem;
+      background-color: #f1f1f1;
+      border-radius: 4px;
     }
 
+    .entry p {
+      margin: 0.25rem 0;
+    }
+
+    .entry strong {
+      margin-right: 0.5rem;
+    }
+
+    /* Mobile adjustments */
     @media (max-width: 600px) {
       body {
         font-size: 16px;
@@ -124,37 +109,6 @@
         padding: 1rem;
         box-sizing: border-box;
       }
-      .rate-table {
-        display: block;
-      }
-      .rate-table thead {
-        display: none;
-      }
-      .rate-table tr {
-        display: block;
-        margin-bottom: 0.5rem; /* Added spacing between rows */
-      }
-      .rate-table td {
-        display: block;
-        text-align: left; /* Changed from right to left for better readability */
-        position: relative;
-        padding-left: 60%; /* Increased from 50% to give more space for labels */
-        box-sizing: border-box;
-        word-wrap: break-word; /* Ensures long text wraps properly */
-      }
-      .rate-table td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 0;
-        width: 60%; /* Increased from 50% to match td padding */
-        padding-left: 0.5rem;
-        font-weight: bold;
-        text-align: left;
-        word-wrap: break-word; /* Ensures long labels wrap properly */
-      }
-    }
-
-    @media (max-width: 400px) {
       main {
         padding: 0.5rem;
       }
@@ -170,33 +124,20 @@
     <h2>Payments & Finance</h2>
     <p>Below are the standard pay rates and average cleaning times (departure clean):</p>
 
-    <div class="table-wrapper">
-      <table class="rate-table">
-        <thead>
-          <tr>
-            <th>Room Type</th>
-            <th>Pay Rate</th>
-            <th>Average Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-label="Room Type">2 Bed</td>
-            <td data-label="Pay Rate">$60</td>
-            <td data-label="Average Time">~1 hour 30 minutes</td>
-          </tr>
-          <tr>
-            <td data-label="Room Type">2 Bed Split</td>
-            <td data-label="Pay Rate">$70</td>
-            <td data-label="Average Time">~1 hour 45 minutes</td>
-          </tr>
-          <tr>
-            <td data-label="Room Type">3 Bed</td>
-            <td data-label="Pay Rate">$85</td>
-            <td data-label="Average Time">~2 hours</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="entry">
+      <p><strong>Room Type:</strong> 2 Bed</p>
+      <p><strong>Pay Rate:</strong> $60</p>
+      <p><strong>Average Time:</strong> ~1 hour 30 minutes</p>
+    </div>
+    <div class="entry">
+      <p><strong>Room Type:</strong> 2 Bed Split</p>
+      <p><strong>Pay Rate:</strong> $70</p>
+      <p><strong>Average Time:</strong> ~1 hour 45 minutes</p>
+    </div>
+    <div class="entry">
+      <p><strong>Room Type:</strong> 3 Bed</p>
+      <p><strong>Pay Rate:</strong> $85</p>
+      <p><strong>Average Time:</strong> ~2 hours</p>
     </div>
 
     <p><strong>Note:</strong> Actual cleaning time may vary depending on:</p>
@@ -207,44 +148,29 @@
     </ul>
 
     <h3>Weekly Service</h3>
-    <p>A weekly service takes place if a guest has stayed for over 10 days. The rate for a weekly service is 40% of the standard departure clean. The time for a weekly service is also 40% of the departure cleaning time from the table above:</p>
-    <div class="table-wrapper">
-      <table class="rate-table">
-        <thead>
-          <tr>
-            <th>Room Type</th>
-            <th>Weekly Service Rate</th>
-            <th>Average Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-label="Room Type">2 Bed</td>
-            <td data-label="Weekly Service Rate">$24</td>
-            <td data-label="Average Time">~36 minutes</td>
-          </tr>
-          <tr>
-            <td data-label="Room Type">2 Bed Split</td>
-            <td data-label="Weekly Service Rate">$28</td>
-            <td data-label="Average Time">~42 minutes</td>
-          </tr>
-          <tr>
-            <td data-label="Room Type">3 Bed</td>
-            <td data-label="Weekly Service Rate">$34</td>
-            <td data-label="Average Time">~48 minutes</td>
-          </tr>
-        </tbody>
-      </table>
+    <p>A weekly service takes place if a guest has stayed for over 10 days. The rate for a weekly service is 40% of the standard departure clean. The time for a weekly service is also 40% of the departure cleaning time:</p>
+
+    <div class="entry">
+      <p><strong>Room Type:</strong> 2 Bed</p>
+      <p><strong>Weekly Service Rate:</strong> $24</p>
+      <p><strong>Average Time:</strong> ~36 minutes</p>
+    </div>
+    <div class="entry">
+      <p><strong>Room Type:</strong> 2 Bed Split</p>
+      <p><strong>Weekly Service Rate:</strong> $28</p>
+      <p><strong>Average Time:</strong> ~42 minutes</p>
+    </div>
+    <div class="entry">
+      <p><strong>Room Type:</strong> 3 Bed</p>
+      <p><strong>Weekly Service Rate:</strong> $34</p>
+      <p><strong>Average Time:</strong> ~48 minutes</p>
     </div>
 
     <h3>Additional Work</h3>
     <p>From time to time, we may request extra work. This will be paid in blocks of 15 minutes, each block paying <strong>$10 AUD</strong>.</p>
 
     <h3>Payment Method</h3>
-    <p>
-      Please note, we pay via ABN (Australian Business Number), not TFN (Tax File Number),
-      as this work falls under legislation for contracted services.
-    </p>
+    <p>Please note, we pay via ABN (Australian Business Number), not TFN (Tax File Number), as this work falls under legislation for contracted services.</p>
 
     <a class="nav-button" href="index.html">Back to Home</a>
   </main>
