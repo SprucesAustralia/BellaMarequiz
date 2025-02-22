@@ -56,66 +56,6 @@
       margin: 2rem 0;
       min-height: 400px; /* Default for larger screens */
     }
-    .keywords-section {
-      background-color: #fff;
-      padding: 1rem;
-      border-radius: 4px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-      margin-bottom: 2rem;
-    }
-    .keywords-section h3 {
-      margin-top: 0;
-    }
-    .keywords-section p {
-      margin-bottom: 1rem;
-    }
-    .keywords-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 1rem;
-    }
-    .keywords-table td {
-      padding: 0.5rem;
-    }
-    .keywords-table input {
-      width: 90%;
-      padding: 0.5rem;
-    }
-    #nameInputSection {
-      margin-top: 1rem;
-      display: none; /* hidden until all keywords are correct */
-    }
-    #nameInputSection label {
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-    #nameInputSection input {
-      width: 100%;
-      max-width: 300px;
-      padding: 0.5rem;
-    }
-    #submitBtn {
-      margin-top: 1rem;
-      background-color: #2b547e;
-      color: #fff;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 4px;
-      cursor: not-allowed;
-      opacity: 0.6;
-    }
-    #submitBtn.enabled {
-      cursor: pointer;
-      opacity: 1;
-    }
-    .congratulations {
-      display: none;
-      margin-top: 1rem;
-      color: green;
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
     footer {
       text-align: center;
       background: #2b547e;
@@ -130,23 +70,6 @@
     @media (max-width: 600px) {
       main {
         padding: 0.5rem; /* Reduce padding on mobile */
-      }
-      .keywords-table {
-        display: block;
-      }
-      .keywords-table tr {
-        display: block;
-        margin-bottom: 1rem;
-      }
-      .keywords-table td {
-        display: block;
-        text-align: left;
-      }
-      .keywords-table td:first-child {
-        font-weight: bold;
-      }
-      .keywords-table input {
-        width: 100%; /* Full width on mobile */
       }
       .typeform-container {
         min-height: 80vh; /* Larger vertical size on mobile */
@@ -169,10 +92,7 @@
 
   <main>
     <h2>Bella Mare Beachside Academy</h2>
-    <p>
-      Welcome to our Academy! Below are training videos, Typeform quizzes, and
-      at the end, please enter the correct keywords from each training to unlock the final submission.
-    </p>
+    <p>Welcome to Bella Mare Beachside Academy! We're excited to have you on board. Below, you'll find our training courses divided into compulsory and optional sections. Complete the compulsory courses to unlock a special bonus!</p>
 
     <!-- Embedded Videos -->
     <div class="video-container">
@@ -193,9 +113,12 @@
       </iframe>
     </div>
 
-    <!-- Typeform Embeds -->
+    <!-- Compulsory Courses Section -->
+    <h3>Compulsory Courses</h3>
+    <p>Complete all of the compulsory courses below to receive a $30 bonus after your first day of cleaning!</p>
+
     <div class="typeform-container">
-      <div data-tf-live="01JMEC6XDXD3FGJV34VHMZQ6S6"></div>
+      <div data-tf-live="01JMNWXWAVACAFE577JHFTF6EM"></div>
       <script src="//embed.typeform.com/next/embed.js"></script>
     </div>
 
@@ -205,168 +128,30 @@
     </div>
 
     <div class="typeform-container">
-      <div data-tf-live="01JMEC9QG76ZZ81RAYKMX6MZ47"></div>
-      <script src="//embed.typeform.com/next/embed.js"></script>
-    </div>
-
-    <div class="typeform-container">
       <div data-tf-live="01JMECBW3M26DTZZW7ACJVG692"></div>
       <script src="//embed.typeform.com/next/embed.js"></script>
     </div>
 
-    <!-- Keywords Section -->
-    <div class="keywords-section">
-      <h3>Enter Your Video+Quiz Keywords</h3>
-      <p>Please enter the 6 keywords you learned from the training. (For now, all are <strong>“done”</strong>.)</p>
+    <!-- Go Professional Section -->
+    <h3>Go Professional! (Optional)</h3>
+    <p>These courses are optional but highly recommended for those looking to advance their skills.</p>
 
-      <table class="keywords-table">
-        <tr>
-          <td>Keyword 1:</td>
-          <td><input type="text" id="keyword1" oninput="checkKeywords()"></td>
-        </tr>
-        <tr>
-          <td>Keyword 2:</td>
-          <td><input type="text" id="keyword2" oninput="checkKeywords()"></td>
-        </tr>
-        <tr>
-          <td>Keyword 3:</td>
-          <td><input type="text" id="keyword3" oninput="checkKeywords()"></td>
-        </tr>
-        <tr>
-          <td>Keyword 4:</td>
-          <td><input type="text" id="keyword4" oninput="checkKeywords()"></td>
-        </tr>
-        <tr>
-          <td>Keyword 5:</td>
-          <td><input type="text" id="keyword5" oninput="checkKeywords()"></td>
-        </tr>
-        <tr>
-          <td>Keyword 6:</td>
-          <td><input type="text" id="keyword6" oninput="checkKeywords()"></td>
-        </tr>
-      </table>
-
-      <div id="nameInputSection">
-        <label for="participantName">Enter Your Full Name:</label>
-        <input type="text" id="participantName" placeholder="John Doe">
-      </div>
-
-      <button id="submitBtn" disabled>Submit</button>
-      <div class="congratulations" id="congratsMsg">
-        ✔ Congratulations! You have unlocked the final submission.
-      </div>
+    <div class="typeform-container">
+      <div data-tf-live="01JMEC6XDXD3FGJV34VHMZQ6S6"></div>
+      <script src="//embed.typeform.com/next/embed.js"></script>
     </div>
+
+    <div class="typeform-container">
+      <div data-tf-live="01JMEC9QG76ZZ81RAYKMX6MZ47"></div>
+      <script src="//embed.typeform.com/next/embed.js"></script>
+    </div>
+
+    <!-- Certificate Message -->
+    <p>Each course completion will generate a certificate, this will be issued within 48 hours, or you may contact hi@spruces.co to request your certificate sooner!</p>
   </main>
 
   <footer>
     © 2025 Bella Mare Beachside Apartments
   </footer>
-
-  <!-- Supabase Insertion Script -->
-  <script type="module">
-    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
-    const supabaseUrl = "https://czzbegsfbnuhpsnsehvy.supabase.co";
-    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN6emJlZ3NmYm51aHBzbnNlaHZ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk3NjExMzIsImV4cCI6MjA1NTMzNzEzMn0.1nvoKeX0mJgdY2indHp4iZmmf0z1pBCD2jAP8NxHy3k";
-    const supabase = createClient(supabaseUrl, supabaseKey);
-
-    const submitBtn = document.getElementById('submitBtn');
-    const congratsMsg = document.getElementById('congratsMsg');
-    const nameInputSection = document.getElementById('nameInputSection');
-    const participantName = document.getElementById('participantName');
-
-    // The correct keywords for now (all "done")
-    const correctKeywords = ["done", "done", "done", "done", "done", "done"];
-
-    function checkKeywords() {
-      // Grab values
-      const kw1 = (document.getElementById('keyword1').value || '').trim().toLowerCase();
-      const kw2 = (document.getElementById('keyword2').value || '').trim().toLowerCase();
-      const kw3 = (document.getElementById('keyword3').value || '').trim().toLowerCase();
-      const kw4 = (document.getElementById('keyword4').value || '').trim().toLowerCase();
-      const kw5 = (document.getElementById('keyword5').value || '').trim().toLowerCase();
-      const kw6 = (document.getElementById('keyword6').value || '').trim().toLowerCase();
-
-      const userKeywords = [kw1, kw2, kw3, kw4, kw5, kw6];
-
-      // Check if all match "done"
-      let allDone = true;
-      for (let i = 0; i < 6; i++) {
-        if (userKeywords[i] !== correctKeywords[i]) {
-          allDone = false;
-          break;
-        }
-      }
-
-      if (allDone) {
-        // Reveal Name input + Congratulatory message
-        nameInputSection.style.display = "block";
-        congratsMsg.style.display = "block";
-        // Enable or disable the submit based on name
-        checkAllFields();
-      } else {
-        // Hide name input
-        nameInputSection.style.display = "none";
-        congratsMsg.style.display = "none";
-        submitBtn.disabled = true;
-        submitBtn.classList.remove('enabled');
-      }
-    }
-
-    // Checks if name is entered and keywords are all "done"
-    function checkAllFields() {
-      const nameVal = participantName.value.trim();
-      // If name is blank => disable
-      if (!nameVal) {
-        submitBtn.disabled = true;
-        submitBtn.classList.remove('enabled');
-      } else {
-        // Name + all keywords correct => enable
-        submitBtn.disabled = false;
-        submitBtn.classList.add('enabled');
-      }
-    }
-
-    participantName.addEventListener('input', checkAllFields);
-
-    // Handle final submission
-    submitBtn.addEventListener('click', async () => {
-      // If button is disabled, do nothing
-      if (submitBtn.disabled) return;
-
-      const nameVal = participantName.value.trim();
-      if (!nameVal) {
-        alert("Please enter your full name to submit.");
-        return;
-      }
-
-      // Gather keyword inputs
-      const rowToInsert = {
-        // We'll reuse the "participant" column or something similar
-        participant: nameVal,
-        academy_keyword1: document.getElementById('keyword1').value.trim(),
-        academy_keyword2: document.getElementById('keyword2').value.trim(),
-        academy_keyword3: document.getElementById('keyword3').value.trim(),
-        academy_keyword4: document.getElementById('keyword4').value.trim(),
-        academy_keyword5: document.getElementById('keyword5').value.trim(),
-        academy_keyword6: document.getElementById('keyword6').value.trim(),
-        // Optional: we can note the "source" to differentiate from quiz forms
-        source: "academy_page"
-      };
-
-      let { data, error } = await supabase
-        .from('cleaners_quiz_responses') // same table used for quiz
-        .insert([rowToInsert]);
-
-      if (error) {
-        console.error("Supabase insert error:", error);
-        alert("Error saving your Academy submission. Please contact admin.");
-      } else {
-        alert("Your Academy submission has been received. Thank you!");
-        // Clear fields or redirect as desired
-        window.location.href = "index.html";
-      }
-    });
-  </script>
 </body>
 </html>
