@@ -56,11 +56,49 @@
       background: #1f4363;
     }
 
+    .info-text {
+      background-color: #e0f7fa;
+      padding: 1rem;
+      margin-top: 2rem;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 800px;
+    }
+
+    .info-text ul {
+      list-style-type: disc;
+      margin-left: 1.5rem;
+    }
+
+    .info-text li {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
     .map-image {
       width: 100%;
       max-width: 800px;
       height: auto;
       margin-top: 2rem;
+    }
+
+    .sliding-banner {
+      width: 100%;
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+
+    .sliding-banner p {
+      white-space: nowrap;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2b547e;
+      animation: slide 10s linear infinite;
+    }
+
+    @keyframes slide {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
 
     footer {
@@ -111,7 +149,21 @@
       <a class="nav-button" href="helpicams.html" target="_blank" rel="noopener">HelpiCams</a>
     </div>
 
+    <div class="info-text">
+      <ul>
+        <li>Allow 5-7 minutes to find parking</li>
+        <li>Apartments 2 - 32 are all 2 bed apartments. 33 - 55 are 2 bed villas. 38 is the 3 bed villa</li>
+        <li>Black t-shirt will be your uniform</li>
+        <li>Drink plenty of water, and carry a water bottle to stay hydrated</li>
+        <li>We operate in QLD time!</li>
+      </ul>
+    </div>
+
     <img class="map-image" src="mapimage.png" alt="Map of Bella Mare Beachside Apartments">
+
+    <div class="sliding-banner">
+      <p>Welcome 😊</p>
+    </div>
   </main>
 
   <footer>
