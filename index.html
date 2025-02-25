@@ -20,7 +20,9 @@
       background-color: #2b547e;
       color: #fff;
       padding: 1rem;
-      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     main {
@@ -71,7 +73,7 @@
       background: #ffb3b3;
     }
 
-    .parking-info {
+    .new-message {
       background-color: #ffcccc;
       padding: 1rem;
       margin-top: 2rem;
@@ -137,6 +139,10 @@
       100% { transform: translateX(-100%); }
     }
 
+    #clock {
+      font-size: 1rem;
+    }
+
     footer {
       text-align: center;
       background: #2b547e;
@@ -171,6 +177,7 @@
 <body>
   <header>
     <h1>Bella Mare Beachside Apartments</h1>
+    <span id="clock"></span>
   </header>
 
   <main>
@@ -186,9 +193,10 @@
       <a class="nav-button-red" href="checklists.html">Checklists</a>
     </div>
 
-    <div class="parking-info">
+    <div class="new-message">
+      <p><strong>New message:</strong></p>
       <p>It will probably be easier for them to park in our basement than to try to find a parking spot on the street around here, as it’s pretty crazy with all the building going on.</p>
-      <p>So get them to park at the entrance to our basement, which is on Boundary St when they arrive and ring me.</p>
+      <p>So get them to park at the entrance to our basement, which is on Boundary St when they arrive and ring me</p>
       <p>Use my WhatsApp number 0408638419. I’ll then meet them and show them where to park and I can show them around.</p>
     </div>
 
@@ -204,6 +212,7 @@
         <li>Black t-shirt will be your uniform</li>
         <li>Drink plenty of water, and carry a water bottle to stay hydrated</li>
         <li>We operate in QLD time!</li>
+        <li>Tools and equipment available in the HSK shed in the basement!</li>
       </ul>
     </div>
 
@@ -217,5 +226,15 @@
   <footer>
     © 2025 Bella Mare Beachside Apartments
   </footer>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const timeString = now.toLocaleString('en-AU', { timeZone: 'Australia/Brisbane', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      document.getElementById('clock').innerText = 'Brisbane Time: ' + timeString;
+    }
+    setInterval(updateClock, 1000);
+    updateClock(); // initial call
+  </script>
 </body>
 </html>
