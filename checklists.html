@@ -4,7 +4,196 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Housekeeping Checklist</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reset and General Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Main Content Styles */
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .area {
+            background: white;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .area:hover {
+            transform: translateY(-2px);
+        }
+
+        .area h2 {
+            cursor: pointer;
+            color: #007bff;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .indicator {
+            font-weight: bold;
+            color: #007bff;
+            margin-left: 10px;
+        }
+
+        .tasks {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .tasks label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .tasks input[type="checkbox"] {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .note {
+            color: #d9534f;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        .image-upload {
+            margin-top: 15px;
+        }
+
+        .image-upload label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .image-upload input[type="file"] {
+            margin-bottom: 10px;
+        }
+
+        .preview-img {
+            display: none;
+            max-width: 100px;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            margin: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            header, main, footer {
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 20px;
+            }
+
+            .form-group input {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .area h2 {
+                font-size: 18px;
+            }
+
+            .tasks label {
+                font-size: 13px;
+            }
+
+            button {
+                width: 100%;
+                padding: 12px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -27,7 +216,9 @@
     <main>
         <!-- Kitchen Section -->
         <section class="area" id="kitchen">
-            <h2 onclick="toggleSection('kitchen')">Kitchen</h2>
+            <h2 onclick="toggleSection('kitchen')" onkeydown="handleKeydown(event, 'kitchen')" role="button" aria-expanded="false" tabindex="0">
+                Kitchen <span class="indicator">+</span>
+            </h2>
             <div class="tasks">
                 <label><input type="checkbox"> Empty the dishwasher, wipe the top, and front, and clean out any food scraps from the filter.</label>
                 <label><input type="checkbox"> Clean inside and outside of fridge, freezer, and remove leftover food.</label>
@@ -46,7 +237,9 @@
 
         <!-- Bedrooms Section -->
         <section class="area" id="bedrooms">
-            <h2 onclick="toggleSection('bedrooms')">Bedrooms</h2>
+            <h2 onclick="toggleSection('bedrooms')" onkeydown="handleKeydown(event, 'bedrooms')" role="button" aria-expanded="false" tabindex="0">
+                Bedrooms <span class="indicator">+</span>
+            </h2>
             <div class="tasks">
                 <label><input type="checkbox"> Strip and make beds tight with blankets folded smooth, & cushions in place.</label>
                 <label><input type="checkbox"> Clean bedside tables and dust lamps.</label>
@@ -65,7 +258,9 @@
 
         <!-- Bathrooms Section -->
         <section class="area" id="bathrooms">
-            <h2 onclick="toggleSection('bathrooms')">Bathrooms</h2>
+            <h2 onclick="toggleSection('bathrooms')" onkeydown="handleKeydown(event, 'bathrooms')" role="button" aria-expanded="false" tabindex="0">
+                Bathrooms <span class="indicator">+</span>
+            </h2>
             <div class="tasks">
                 <label><input type="checkbox"> Clean and dry toilets (as applicable).</label>
                 <label><input type="checkbox"> Clean and dry shower, and hand basins. Use ‘Destroy’ mould spray on any mould, especially around hand basin plug holes & inside shower frame.</label>
@@ -83,7 +278,9 @@
 
         <!-- Laundry Section -->
         <section class="area" id="laundry">
-            <h2 onclick="toggleSection('laundry')">Laundry</h2>
+            <h2 onclick="toggleSection('laundry')" onkeydown="handleKeydown(event, 'laundry')" role="button" aria-expanded="false" tabindex="0">
+                Laundry <span class="indicator">+</span>
+            </h2>
             <div class="tasks">
                 <label><input type="checkbox"> Check washing machine, basin, and taps: Spray & wipe clean</label>
                 <label><input type="checkbox"> Clean filter inside dryer</label>
@@ -99,7 +296,9 @@
 
         <!-- Lounge and Dining Section -->
         <section class="area" id="lounge-dining">
-            <h2 onclick="toggleSection('lounge-dining')">Lounge and Dining</h2>
+            <h2 onclick="toggleSection('lounge-dining')" onkeydown="handleKeydown(event, 'lounge-dining')" role="button" aria-expanded="false" tabindex="0">
+                Lounge and Dining <span class="indicator">+</span>
+            </h2>
             <div class="tasks">
                 <label><input type="checkbox"> Clean and vacuum under sofa cushions and lounge suite cushions</label>
                 <label><input type="checkbox"> Clean sand and food off lounge and dining room chairs, TV units, side tables, and any other furniture</label>
@@ -115,7 +314,9 @@
 
         <!-- Patio/Balcony Section -->
         <section class="area" id="patio-balcony">
-            <h2 onclick="toggleSection('patio-balcony')">Patio/Balcony</h2>
+            <h2 onclick="toggleSection('patio-balcony')" onkeydown="handleKeydown(event, 'patio-balcony')" role="button" aria-expanded="false" tabindex="0">
+                Patio/Balcony <span class="indicator">+</span>
+            </h2>
             <div class="tasks">
                 <label><input type="checkbox"> Dust or vacuum spider webs</label>
                 <label><input type="checkbox"> Sweep of veranda balcony</label>
@@ -131,7 +332,9 @@
 
         <!-- General Section -->
         <section class="area" id="general">
-            <h2 onclick="toggleSection('general')">General</h2>
+            <h2 onclick="toggleSection('general')" onkeydown="handleKeydown(event, 'general')" role="button" aria-expanded="false" tabindex="0">
+                General <span class="indicator">+</span>
+            </h2>
             <div class="tasks">
                 <label><input type="checkbox"> Dust or wipe windowsills and stair rails (if villas)</label>
                 <label><input type="checkbox"> Check over ALL windows and clean if necessary</label>
@@ -157,6 +360,144 @@
         <button onclick="goBack()">Back</button>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js"></script>
+    <script>
+        // Initialize Supabase Client (replace with your own URL and key)
+        const supabase = window.supabase.createClient(
+            'https://your-supabase-url.supabase.co', // Replace with your Supabase URL
+            'your-anon-key' // Replace with your Supabase anon key
+        );
+
+        // Store image URLs
+        const imageUrls = {};
+
+        // Handle keyboard accessibility
+        function handleKeydown(event, area) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                toggleSection(area);
+                event.preventDefault();
+            }
+        }
+
+        // Toggle Section Visibility
+        function toggleSection(area) {
+            const section = document.getElementById(area);
+            const tasks = section.querySelector('.tasks');
+            const indicator = section.querySelector('.indicator');
+            const h2 = section.querySelector('h2');
+
+            if (tasks.style.display === 'block') {
+                tasks.style.display = 'none';
+                if (indicator) indicator.textContent = '+';
+                if (h2) h2.setAttribute('aria-expanded', 'false');
+            } else {
+                tasks.style.display = 'block';
+                if (indicator) indicator.textContent = '−';
+                if (h2) h2.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        // Handle Image Upload
+        async function handleImageUpload(input, area) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const roomNumber = document.getElementById('room-number').value.trim();
+            const date = document.getElementById('date').value;
+            if (!roomNumber || !date) {
+                alert('Please enter room number and date before uploading images.');
+                input.value = '';
+                return;
+            }
+
+            const fileName = `${roomNumber}/${date}/${area}.${file.name.split('.').pop()}`;
+            const { data, error } = await supabase.storage
+                .from('checklist-images')
+                .upload(fileName, file, { upsert: true });
+
+            if (error) {
+                console.error('Upload Error:', error);
+                alert('Failed to upload image.');
+                return;
+            }
+
+            const { data: urlData } = supabase.storage
+                .from('checklist-images')
+                .getPublicUrl(fileName);
+
+            const url = urlData.publicUrl;
+            imageUrls[area] = url;
+            const preview = document.getElementById(`${area}-preview`);
+            preview.src = url;
+            preview.style.display = 'block';
+        }
+
+        // Get Checklist Status
+        function getChecklistStatus() {
+            const status = {};
+            const areas = ['kitchen', 'bedrooms', 'bathrooms', 'laundry', 'lounge-dining', 'patio-balcony', 'general'];
+
+            areas.forEach(area => {
+                status[area] = { tasks: {} };
+                const tasks = document.querySelectorAll(`#${area} .tasks input[type="checkbox"]`);
+                tasks.forEach(task => {
+                    const taskName = task.parentElement.textContent.trim();
+                    status[area].tasks[taskName] = task.checked;
+                });
+            });
+
+            status['maintenance'] = {
+                notes: document.getElementById('maintenance-notes').value.trim()
+            };
+
+            return status;
+        }
+
+        // Submit Checklist to Supabase
+        async function submitChecklist() {
+            const roomNumber = document.getElementById('room-number').value.trim();
+            const housekeeperName = document.getElementById('housekeeper-name').value.trim();
+            const date = document.getElementById('date').value;
+
+            if (!roomNumber || !housekeeperName || !date) {
+                alert('Please fill in all required fields: Housekeeper Name, Date, and Room Number.');
+                return;
+            }
+
+            const checklistStatus = getChecklistStatus();
+            const images = { ...imageUrls };
+
+            const { data, error } = await supabase
+                .from('housekeeping_checklist')
+                .insert([{
+                    room_number: roomNumber,
+                    housekeeper_name: housekeeperName,
+                    date: date,
+                    checklist_status: checklistStatus,
+                    images: images
+                }]);
+
+            if (error) {
+                console.error('Submission Error:', error);
+                alert('Failed to submit checklist. Please try again.');
+            } else {
+                alert('Checklist submitted successfully!');
+                document.getElementById('checklist-form').reset();
+                document.querySelectorAll('.preview-img').forEach(img => img.style.display = 'none');
+                document.querySelectorAll('.tasks').forEach(tasks => tasks.style.display = 'none');
+                // Reset indicators and aria-expanded after submission
+                document.querySelectorAll('.area h2').forEach(h2 => {
+                    const indicator = h2.querySelector('.indicator');
+                    if (indicator) indicator.textContent = '+';
+                    h2.setAttribute('aria-expanded', 'false');
+                });
+                Object.keys(imageUrls).forEach(key => delete imageUrls[key]);
+            }
+        }
+
+        // Go Back
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </body>
 </html>
