@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housekeeping Checklist</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Housekeeping Checklist</h1>
+        <form id="checklist-form">
+            <div class="form-group">
+                <label for="housekeeper-name">Housekeeper Name:</label>
+                <input type="text" id="housekeeper-name" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" required>
+            </div>
+            <div class="form-group">
+                <label for="room-number">Room Number:</label>
+                <input type="text" id="room-number" required>
+            </div>
+        </form>
+    </header>
+    <main>
+        <!-- Kitchen Section -->
+        <section class="area" id="kitchen">
+            <h2 onclick="toggleSection('kitchen')">Kitchen</h2>
+            <div class="tasks">
+                <label><input type="checkbox"> Empty the dishwasher, wipe the top, and front, and clean out any food scraps from the filter.</label>
+                <label><input type="checkbox"> Clean inside and outside of fridge, freezer, and remove leftover food.</label>
+                <label><input type="checkbox"> Check oven is clean—line trays with tin foil. Clean the inside and outside of the microwave. Wipe over kitchen cupboards and tidy inside. Tidy all cutlery drawers.</label>
+                <label><input type="checkbox"> Clean the outside of the kettle and toaster and empty crumbs from the toaster.</label>
+                <label><input type="checkbox"> Clean and dry bench top, sink, and tiled walls.</label>
+                <label><input type="checkbox"> Empty the rubbish bin, wipe it out if required, and replace the liner. Wipe out recycling bin if required—no bin liner needed.</label>
+                <label><input type="checkbox"> Vacuum and mop the floor with a fresh microfibre mop head.</label>
+            </div>
+            <div class="image-upload">
+                <label>Upload Photo:</label>
+                <input type="file" accept="image/*" onchange="handleImageUpload(this, 'kitchen')">
+                <img id="kitchen-preview" src="" alt="Preview" class="preview-img">
+            </div>
+        </section>
+
+        <!-- Bedrooms Section -->
+        <section class="area" id="bedrooms">
+            <h2 onclick="toggleSection('bedrooms')">Bedrooms</h2>
+            <div class="tasks">
+                <label><input type="checkbox"> Strip and make beds tight with blankets folded smooth, & cushions in place.</label>
+                <label><input type="checkbox"> Clean bedside tables and dust lamps.</label>
+                <label><input type="checkbox"> Check bedside lamp bulbs work.</label>
+                <label><input type="checkbox"> Clean mirrors and windows with glass cleaner and dry cloths.</label>
+                <label><input type="checkbox"> Vacuum floors, under bed and in wardrobe (mop if wooden floors).</label>
+                <label><input type="checkbox"> Check bedside drawers.</label>
+                <label><input type="checkbox"> 8 x coat hangers, 2 towels rolled/folded on main bedroom bed, 1 towel rolled/folded on each single bed.</label>
+            </div>
+            <div class="image-upload">
+                <label>Upload Photo:</label>
+                <input type="file" accept="image/*" onchange="handleImageUpload(this, 'bedrooms')">
+                <img id="bedrooms-preview" src="" alt="Preview" class="preview-img">
+            </div>
+        </section>
+
+        <!-- Bathrooms Section -->
+        <section class="area" id="bathrooms">
+            <h2 onclick="toggleSection('bathrooms')">Bathrooms</h2>
+            <div class="tasks">
+                <label><input type="checkbox"> Clean and dry toilets (as applicable).</label>
+                <label><input type="checkbox"> Clean and dry shower, and hand basins. Use ‘Destroy’ mould spray on any mould, especially around hand basin plug holes & inside shower frame.</label>
+                <label><input type="checkbox"> Wipe inside and outside of bathroom cupboards.</label>
+                <label><input type="checkbox"> Use toilet cleaner gel. Clean, disinfect, and dry vanity, taps, basin, and toilet.</label>
+                <label><input type="checkbox"> Empty rubbish bin and replace bin liner. Clean mirrors with glass cleaner and dry cloths.</label>
+                <label><input type="checkbox"> Vacuum and mop floors.</label>
+            </div>
+            <div class="image-upload">
+                <label>Upload Photo:</label>
+                <input type="file" accept="image/*" onchange="handleImageUpload(this, 'bathrooms')">
+                <img id="bathrooms-preview" src="" alt="Preview" class="preview-img">
+            </div>
+        </section>
+
+        <!-- Laundry Section -->
+        <section class="area" id="laundry">
+            <h2 onclick="toggleSection('laundry')">Laundry</h2>
+            <div class="tasks">
+                <label><input type="checkbox"> Check washing machine, basin, and taps: Spray & wipe clean</label>
+                <label><input type="checkbox"> Clean filter inside dryer</label>
+                <label><input type="checkbox"> Vacuum and mop floors</label>
+                <label><input type="checkbox"> 2 x laundry powder</label>
+            </div>
+            <div class="image-upload">
+                <label>Upload Photo:</label>
+                <input type="file" accept="image/*" onchange="handleImageUpload(this, 'laundry')">
+                <img id="laundry-preview" src="" alt="Preview" class="preview-img">
+            </div>
+        </section>
+
+        <!-- Lounge and Dining Section -->
+        <section class="area" id="lounge-dining">
+            <h2 onclick="toggleSection('lounge-dining')">Lounge and Dining</h2>
+            <div class="tasks">
+                <label><input type="checkbox"> Clean and vacuum under sofa cushions and lounge suite cushions</label>
+                <label><input type="checkbox"> Clean sand and food off lounge and dining room chairs, TV units, side tables, and any other furniture</label>
+                <label><input type="checkbox"> Straighten lounge and dining room furniture, including cushions</label>
+                <label><input type="checkbox"> Vacuum and mop floors</label>
+            </div>
+            <div class="image-upload">
+                <label>Upload Photo:</label>
+                <input type="file" accept="image/*" onchange="handleImageUpload(this, 'lounge-dining')">
+                <img id="lounge-dining-preview" src="" alt="Preview" class="preview-img">
+            </div>
+        </section>
+
+        <!-- Patio/Balcony Section -->
+        <section class="area" id="patio-balcony">
+            <h2 onclick="toggleSection('patio-balcony')">Patio/Balcony</h2>
+            <div class="tasks">
+                <label><input type="checkbox"> Dust or vacuum spider webs</label>
+                <label><input type="checkbox"> Sweep of veranda balcony</label>
+                <label><input type="checkbox"> Fold and put away clothes airer</label>
+            </div>
+            <p class="note">Note: DON’T USE CHEMICAL SPRAY ON UNIT 30’S WINDOWS</p>
+            <div class="image-upload">
+                <label>Upload Photo:</label>
+                <input type="file" accept="image/*" onchange="handleImageUpload(this, 'patio-balcony')">
+                <img id="patio-balcony-preview" src="" alt="Preview" class="preview-img">
+            </div>
+        </section>
+
+        <!-- General Section -->
+        <section class="area" id="general">
+            <h2 onclick="toggleSection('general')">General</h2>
+            <div class="tasks">
+                <label><input type="checkbox"> Dust or wipe windowsills and stair rails (if villas)</label>
+                <label><input type="checkbox"> Check over ALL windows and clean if necessary</label>
+                <label><input type="checkbox"> Check entrance door mat and straighten</label>
+                <label><input type="checkbox"> Check maintenance work (blow and call through any urgent maintenance required to reception)</label>
+            </div>
+            <div class="image-upload">
+                <label>Upload Photo:</label>
+                <input type="file" accept="image/*" onchange="handleImageUpload(this, 'general')">
+                <img id="general-preview" src="" alt="Preview" class="preview-img">
+            </div>
+        </section>
+
+        <!-- Maintenance Required Section -->
+        <section class="area" id="maintenance">
+            <h2>Maintenance Required</h2>
+            <p>Turn off lights and fans. Please note any maintenance issues below:</p>
+            <textarea id="maintenance-notes" placeholder="Describe any maintenance required (e.g., light bulb blown in main bedroom, toilet roll holder needs fixing)"></textarea>
+        </section>
+    </main>
+    <footer>
+        <button onclick="submitChecklist()">Submit</button>
+        <button onclick="goBack()">Back</button>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+</body>
+</html>
