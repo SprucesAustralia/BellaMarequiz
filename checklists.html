@@ -5,16 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Housekeeping Checklist</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-      .instruction {
-        background-color: #ffcccc; /* Light red background */
-        padding: 10px;
-        margin-bottom: 20px;
-        text-align: center;
-        font-weight: bold;
-        font-size: 1.1em;
-      }
-    </style>
 </head>
 <body>
     <header>
@@ -35,9 +25,6 @@
         </form>
     </header>
     <main>
-        <div class="instruction">
-          Click on the area name to view the checklist for that area.
-        </div>
         <!-- Kitchen Section -->
         <section class="area" id="kitchen">
             <h2 onclick="toggleSection('kitchen')">Kitchen</h2>
@@ -56,6 +43,7 @@
                 <img id="kitchen-preview" src="" alt="Preview" class="preview-img">
             </div>
         </section>
+
         <!-- Bedrooms Section -->
         <section class="area" id="bedrooms">
             <h2 onclick="toggleSection('bedrooms')">Bedrooms</h2>
@@ -74,6 +62,7 @@
                 <img id="bedrooms-preview" src="" alt="Preview" class="preview-img">
             </div>
         </section>
+
         <!-- Bathrooms Section -->
         <section class="area" id="bathrooms">
             <h2 onclick="toggleSection('bathrooms')">Bathrooms</h2>
@@ -91,6 +80,7 @@
                 <img id="bathrooms-preview" src="" alt="Preview" class="preview-img">
             </div>
         </section>
+
         <!-- Laundry Section -->
         <section class="area" id="laundry">
             <h2 onclick="toggleSection('laundry')">Laundry</h2>
@@ -106,6 +96,7 @@
                 <img id="laundry-preview" src="" alt="Preview" class="preview-img">
             </div>
         </section>
+
         <!-- Lounge and Dining Section -->
         <section class="area" id="lounge-dining">
             <h2 onclick="toggleSection('lounge-dining')">Lounge and Dining</h2>
@@ -121,6 +112,7 @@
                 <img id="lounge-dining-preview" src="" alt="Preview" class="preview-img">
             </div>
         </section>
+
         <!-- Patio/Balcony Section -->
         <section class="area" id="patio-balcony">
             <h2 onclick="toggleSection('patio-balcony')">Patio/Balcony</h2>
@@ -136,6 +128,7 @@
                 <img id="patio-balcony-preview" src="" alt="Preview" class="preview-img">
             </div>
         </section>
+
         <!-- General Section -->
         <section class="area" id="general">
             <h2 onclick="toggleSection('general')">General</h2>
@@ -151,6 +144,7 @@
                 <img id="general-preview" src="" alt="Preview" class="preview-img">
             </div>
         </section>
+
         <!-- Maintenance Required Section -->
         <section class="area" id="maintenance">
             <h2>Maintenance Required</h2>
