@@ -4,189 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Housekeeping Checklist</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Reset and General Styles */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f4f8;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, #007bff, #0056b3);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        header h1 {
-            margin-bottom: 15px;
-            font-size: 24px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        /* Main Content Styles */
-        main {
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .area {
-            background: white;
-            margin-bottom: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-
-        .area:hover {
-            transform: translateY(-2px);
-        }
-
-        .area h2 {
-            cursor: pointer;
-            color: #007bff;
-            margin-bottom: 10px;
-            font-size: 20px;
-        }
-
-        .tasks {
-            display: none;
-            margin-top: 10px;
-        }
-
-        .tasks label {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-
-        .tasks input[type="checkbox"] {
-            margin-right: 10px;
-            width: 20px;
-            height: 20px;
-        }
-
-        .note {
-            color: #d9534f;
-            font-style: italic;
-            margin-top: 10px;
-        }
-
-        .image-upload {
-            margin-top: 15px;
-        }
-
-        .image-upload label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .image-upload input[type="file"] {
-            margin-bottom: 10px;
-        }
-
-        .preview-img {
-            display: none;
-            max-width: 100px;
-            border-radius: 5px;
-            margin-top: 5px;
-        }
-
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        /* Footer Styles */
-        footer {
-            text-align: center;
-            padding: 20px;
-        }
-
-        button {
-            padding: 12px 25px;
-            margin: 5px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 600px) {
-            header, main, footer {
-                padding: 15px;
-            }
-
-            header h1 {
-                font-size: 20px;
-            }
-
-            .form-group input {
-                padding: 8px;
-                font-size: 14px;
-            }
-
-            .area h2 {
-                font-size: 18px;
-            }
-
-            .tasks label {
-                font-size: 13px;
-            }
-
-            button {
-                width: 100%;
-                padding: 12px;
-                margin-bottom: 10px;
-            }
-        }
+      .instruction {
+        background-color: #ffcccc; /* Light red background */
+        padding: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.1em;
+      }
     </style>
 </head>
 <body>
@@ -208,6 +35,9 @@
         </form>
     </header>
     <main>
+        <div class="instruction">
+          Click on the area name to view the checklist for that area.
+        </div>
         <!-- Kitchen Section -->
         <section class="area" id="kitchen">
             <h2 onclick="toggleSection('kitchen')">Kitchen</h2>
@@ -226,7 +56,6 @@
                 <img id="kitchen-preview" src="" alt="Preview" class="preview-img">
             </div>
         </section>
-
         <!-- Bedrooms Section -->
         <section class="area" id="bedrooms">
             <h2 onclick="toggleSection('bedrooms')">Bedrooms</h2>
@@ -245,7 +74,6 @@
                 <img id="bedrooms-preview" src="" alt="Preview" class="preview-img">
             </div>
         </section>
-
         <!-- Bathrooms Section -->
         <section class="area" id="bathrooms">
             <h2 onclick="toggleSection('bathrooms')">Bathrooms</h2>
@@ -263,7 +91,6 @@
                 <img id="bathrooms-preview" src="" alt="Preview" class="preview-img">
             </div>
         </section>
-
         <!-- Laundry Section -->
         <section class="area" id="laundry">
             <h2 onclick="toggleSection('laundry')">Laundry</h2>
@@ -279,7 +106,6 @@
                 <img id="laundry-preview" src="" alt="Preview" class="preview-img">
             </div>
         </section>
-
         <!-- Lounge and Dining Section -->
         <section class="area" id="lounge-dining">
             <h2 onclick="toggleSection('lounge-dining')">Lounge and Dining</h2>
@@ -295,7 +121,6 @@
                 <img id="lounge-dining-preview" src="" alt="Preview" class="preview-img">
             </div>
         </section>
-
         <!-- Patio/Balcony Section -->
         <section class="area" id="patio-balcony">
             <h2 onclick="toggleSection('patio-balcony')">Patio/Balcony</h2>
@@ -311,7 +136,6 @@
                 <img id="patio-balcony-preview" src="" alt="Preview" class="preview-img">
             </div>
         </section>
-
         <!-- General Section -->
         <section class="area" id="general">
             <h2 onclick="toggleSection('general')">General</h2>
@@ -327,7 +151,6 @@
                 <img id="general-preview" src="" alt="Preview" class="preview-img">
             </div>
         </section>
-
         <!-- Maintenance Required Section -->
         <section class="area" id="maintenance">
             <h2>Maintenance Required</h2>
@@ -340,118 +163,6 @@
         <button onclick="goBack()">Back</button>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        // Initialize Supabase Client (replace with your own URL and key)
-        const supabase = window.supabase.createClient(
-            'https://your-supabase-url.supabase.co', // Replace with your Supabase URL
-            'your-anon-key' // Replace with your Supabase anon key
-        );
-
-        // Store image URLs
-        const imageUrls = {};
-
-        // Toggle Section Visibility
-        function toggleSection(area) {
-            const tasks = document.querySelector(`#${area} .tasks`);
-            tasks.style.display = tasks.style.display === 'block' ? 'none' : 'block';
-        }
-
-        // Handle Image Upload
-        async function handleImageUpload(input, area) {
-            const file = input.files[0];
-            if (!file) return;
-
-            const roomNumber = document.getElementById('room-number').value.trim();
-            const date = document.getElementById('date').value;
-            if (!roomNumber || !date) {
-                alert('Please enter room number and date before uploading images.');
-                input.value = '';
-                return;
-            }
-
-            const fileName = `${roomNumber}/${date}/${area}.${file.name.split('.').pop()}`;
-            const { data, error } = await supabase.storage
-                .from('checklist-images')
-                .upload(fileName, file, { upsert: true });
-
-            if (error) {
-                console.error('Upload Error:', error);
-                alert('Failed to upload image.');
-                return;
-            }
-
-            const { data: urlData } = supabase.storage
-                .from('checklist-images')
-                .getPublicUrl(fileName);
-
-            const url = urlData.publicUrl;
-            imageUrls[area] = url;
-            const preview = document.getElementById(`${area}-preview`);
-            preview.src = url;
-            preview.style.display = 'block';
-        }
-
-        // Get Checklist Status
-        function getChecklistStatus() {
-            const status = {};
-            const areas = ['kitchen', 'bedrooms', 'bathrooms', 'laundry', 'lounge-dining', 'patio-balcony', 'general'];
-
-            areas.forEach(area => {
-                status[area] = { tasks: {} };
-                const tasks = document.querySelectorAll(`#${area} .tasks input[type="checkbox"]`);
-                tasks.forEach(task => {
-                    const taskName = task.parentElement.textContent.trim();
-                    status[area].tasks[taskName] = task.checked;
-                });
-            });
-
-            status['maintenance'] = {
-                notes: document.getElementById('maintenance-notes').value.trim()
-            };
-
-            return status;
-        }
-
-        // Submit Checklist to Supabase
-        async function submitChecklist() {
-            const roomNumber = document.getElementById('room-number').value.trim();
-            const housekeeperName = document.getElementById('housekeeper-name').value.trim();
-            const date = document.getElementById('date').value;
-
-            if (!roomNumber || !housekeeperName || !date) {
-                alert('Please fill in all required fields: Housekeeper Name, Date, and Room Number.');
-                return;
-            }
-
-            const checklistStatus = getChecklistStatus();
-            const images = { ...imageUrls };
-
-            const { data, error } = await supabase
-                .from('housekeeping_checklist')
-                .insert([{
-                    room_number: roomNumber,
-                    housekeeper_name: housekeeperName,
-                    date: date,
-                    checklist_status: checklistStatus,
-                    images: images
-                }]);
-
-            if (error) {
-                console.error('Submission Error:', error);
-                alert('Failed to submit checklist. Please try again.');
-            } else {
-                alert('Checklist submitted successfully!');
-                document.getElementById('checklist-form').reset();
-                document.querySelectorAll('.preview-img').forEach(img => img.style.display = 'none');
-                document.querySelectorAll('.tasks').forEach(tasks => tasks.style.display = 'none');
-                Object.keys(imageUrls).forEach(key => delete imageUrls[key]);
-            }
-        }
-
-        // Go Back
-        function goBack() {
-            window.history.back();
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
