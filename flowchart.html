@@ -5,133 +5,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cleaner Onboarding Funnel</title>
     <style>
+        /* Embedded CSS */
         body {
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            background: #f5f5f5;
             margin: 0;
-            background: #f0f0f0;
+            flex-direction: column;
         }
-        #flowchart {
+
+        .funnel {
+            position: relative;
+            padding: 20px;
+            background: linear-gradient(to bottom, #e0f7fa, #b2ebf2);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            overflow: hidden;
+        }
+
+        .stage {
+            height: 80px;
+            margin: 20px auto;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.8);
             border: 1px solid #ccc;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .stage:hover {
+            transform: scale(1.05);
+        }
+
+        /* Funnel effect with decreasing widths */
+        .stage1 { width: 400px; }
+        .stage2 { width: 380px; }
+        .stage3 { width: 360px; }
+        .stage4 { width: 340px; }
+        .stage5 { width: 320px; }
+        .stage6 { width: 300px; }
+        .stage7 { width: 280px; }
+
+        .ball {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff5252;
+            border-radius: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            transition: top 1s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncing effect */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .daily {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 400px;
+            text-align: left;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .daily h3 {
+            margin: 0 0 10px;
+            color: #00796b;
+        }
+
+        .daily ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .daily li {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #555;
         }
     </style>
 </head>
 <body>
-    <svg id="flowchart" width="800" height="600">
-        <!-- Funnel Background -->
-        <path d="M200,50 L600,50 L500,600 L300,600 Z" fill="lightgrey" opacity="0.5" />
-
-        <!-- Flowchart Elements -->
-        <!-- Traffic Sources -->
-        <rect x="250" y="50" width="300" height="50" fill="lightblue" />
-        <text x="400" y="75" text-anchor="middle" font-size="16">Traffic Sources</text>
-
-        <!-- Apply via Quiz -->
-        <rect x="275" y="120" width="250" height="50" fill="lightblue" />
-        <text x="400" y="145" text-anchor="middle" font-size="16">Apply via Quiz</text>
-        <polygon points="375,190 425,190 450,230 350,230" fill="yellow" /> <!-- Decision -->
-        <text x="400" y="215" text-anchor="middle" font-size="14">Pass Quiz?</text>
-        <line x1="400" y1="230" x2="400" y2="270" stroke="black" stroke-width="2" /> <!-- Yes -->
-        <text x="410" y="250" font-size="12">Yes</text>
-        <path d="M425,210 C475,210 525,210 575,210" stroke="black" stroke-width="2" fill="none" /> <!-- No -->
-        <text x="500" y="200" font-size="12">No</text>
-        <rect x="575" y="190" width="100" height="40" fill="pink" />
-        <text x="625" y="215" text-anchor="middle" font-size="14">Rejected</text>
-
-        <!-- Complete Courses -->
-        <rect x="300" y="270" width="200" height="50" fill="lightblue" />
-        <text x="400" y="295" text-anchor="middle" font-size="16">Complete Courses</text>
-        <polygon points="375,330 425,330 450,370 350,370" fill="yellow" />
-        <text x="400" y="355" text-anchor="middle" font-size="14">Courses Completed?</text>
-        <line x1="400" y1="370" x2="400" y2="410" stroke="black" stroke-width="2" />
-        <text x="410" y="390" font-size="12">Yes</text>
-        <path d="M425,350 C475,350 525,350 575,350" stroke="black" stroke-width="2" fill="none" />
-        <text x="500" y="340" font-size="12">No</text>
-        <rect x="575" y="330" width="100" height="40" fill="pink" />
-        <text x="625" y="355" text-anchor="middle" font-size="14">Rejected</text>
-
-        <!-- Interview -->
-        <rect x="325" y="410" width="150" height="50" fill="lightblue" />
-        <text x="400" y="435" text-anchor="middle" font-size="16">Interview</text>
-        <polygon points="375,470 425,470 450,510 350,510" fill="yellow" />
-        <text x="400" y="495" text-anchor="middle" font-size="14">Pass Interview?</text>
-        <line x1="400" y1="510" x2="400" y2="550" stroke="black" stroke-width="2" />
-        <text x="410" y="530" font-size="12">Yes</text>
-        <path d="M425,490 C475,490 525,490 575,490" stroke="black" stroke-width="2" fill="none" />
-        <text x="500" y="480" font-size="12">No</text>
-        <rect x="575" y="470" width="100" height="40" fill="pink" />
-        <text x="625" y="495" text-anchor="middle" font-size="14">Rejected</text>
-
-        <!-- Info Page and Trial -->
-        <rect x="350" y="550" width="100" height="40" fill="lightblue" />
-        <text x="400" y="570" text-anchor="middle" font-size="14">Info Page & Trial</text>
-        <polygon points="375,600 425,600 450,640 350,640" fill="yellow" />
-        <text x="400" y="625" text-anchor="middle" font-size="14">Pass Trial?</text>
-        <line x1="400" y1="640" x2="400" y2="680" stroke="black" stroke-width="2" />
-        <text x="410" y="660" font-size="12">Yes</text>
-        <path d="M425,620 C475,620 525,620 575,620" stroke="black" stroke-width="2" fill="none" />
-        <text x="500" y="610" font-size="12">No</text>
-        <rect x="575" y="600" width="100" height="40" fill="pink" />
-        <text x="625" y="625" text-anchor="middle" font-size="14">Rejected</text>
-
-        <!-- Hired -->
-        <rect x="375" y="680" width="50" height="40" fill="lightgreen" />
-        <text x="400" y="705" text-anchor="middle" font-size="14">Hired</text>
-
-        <!-- Referral Path -->
-        <path d="M400,720 L700,720 Q750,720 750,600 L750,50 Q750,25 700,25 Z" stroke="purple" stroke-width="2" fill="none" />
-        <text x="725" y="300" font-size="14" text-anchor="middle">Referral Launcher</text>
-
-        <!-- Animation Paths -->
-        <path id="success_path" d="M400,75 L400,145 L400,210 L400,295 L400,435 L400,570 L400,705 L700,720 Q750,720 750,600 L750,50 Q750,25 700,25 L400,25" stroke="none" fill="none" />
-        <path id="reject_quiz" d="M400,75 L400,145 L400,210 C475,210 550,210 625,210" stroke="none" fill="none" />
-        <path id="reject_courses" d="M400,75 L400,145 L400,210 L400,295 L400,350 C475,350 550,350 625,350" stroke="none" fill="none" />
-        <path id="reject_interview" d="M400,75 L400,145 L400,210 L400,295 L400,435 L400,490 C475,490 550,490 625,490" stroke="none" fill="none" />
-        <path id="reject_trial" d="M400,75 L400,145 L400,210 L400,295 L400,435 L400,570 L400,620 C475,620 550,620 625,620" stroke="none" fill="none" />
-
-        <!-- Ball -->
-        <circle id="ball" cx="400" cy="75" r="10" fill="red" />
-    </svg>
+    <div class="funnel">
+        <div class="stage stage1">Traffic Sources: Indeed, Facebook, Airtasker, Existing Database</div>
+        <div class="stage stage2">Apply using Interactive Form/Quiz</div>
+        <div class="stage stage3">Complete 3 Online Courses</div>
+        <div class="stage stage4">Book and Attend Interview</div>
+        <div class="stage stage5">Access Information Page</div>
+        <div class="stage stage6">Trial with Trainer (2 hours, 1 room)</div>
+        <div class="stage stage7">Start Working Independently</div>
+        <div class="ball"></div>
+    </div>
+    <div class="daily">
+        <h3>Daily Operation</h3>
+        <ul>
+            <li>Receive list of departures</li>
+            <li>System allocates rooms using Tetrix method</li>
+            <li>Work on assigned rooms</li>
+            <li>Submit checklist</li>
+            <li>Invoicing: Pay cleaner & bill hotel</li>
+        </ul>
+    </div>
     <script>
         // Embedded JavaScript
-        const paths = ['success_path', 'reject_quiz', 'reject_courses', 'reject_interview', 'reject_trial'];
-        const ball = document.getElementById('ball');
-        const svgNS = 'http://www.w3.org/2000/svg';
+        document.addEventListener('DOMContentLoaded', () => {
+            const stages = document.querySelectorAll('.stage');
+            const ball = document.querySelector('.ball');
+            let delay = 0;
 
-        function startAnimation() {
-            // Remove any existing animation
-            while (ball.firstChild) {
-                ball.removeChild(ball.firstChild);
-            }
-
-            // Choose a random path
-            const pathId = paths[Math.floor(Math.random() * paths.length)];
-            const duration = pathId === 'success_path' ? '12s' : '6s'; // Longer for success path due to referral loop
-
-            // Create and configure the animation
-            const animateMotion = document.createElementNS(svgNS, 'animateMotion');
-            animateMotion.setAttribute('dur', duration);
-            animateMotion.setAttribute('repeatCount', '1');
-            animateMotion.setAttribute('fill', 'freeze');
-            const mpath = document.createElementNS(svgNS, 'mpath');
-            mpath.setAttribute('xlink:href', `#${pathId}`);
-            animateMotion.appendChild(mpath);
-            ball.appendChild(animateMotion);
-            animateMotion.beginElement();
-
-            // Handle animation end
-            animateMotion.addEventListener('endEvent', () => {
-                ball.removeChild(animateMotion);
-                ball.setAttribute('cx', '400');
-                ball.setAttribute('cy', '75');
-                setTimeout(startAnimation, 1000); // 1-second delay before next ball
+            stages.forEach((stage) => {
+                const center = stage.offsetTop + stage.offsetHeight / 2;
+                setTimeout(() => {
+                    ball.style.top = `${center}px`;
+                }, delay);
+                delay += 1500; // Move every 1.5 seconds
             });
-        }
-
-        // Start the animation
-        startAnimation();
+        });
     </script>
 </body>
 </html>
