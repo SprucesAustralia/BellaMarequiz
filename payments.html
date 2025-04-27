@@ -25,7 +25,7 @@
     }
 
     main {
-      max-width: 600px;
+      max-width: 700px; /* Increased width slightly for potentially wider tables/content */
       margin: 2rem auto;
       padding: 1rem;
       flex: 1;
@@ -39,6 +39,8 @@
     h3 {
       color: #2b547e;
       margin-top: 1.5rem;
+      border-bottom: 1px solid #ccc; /* Add a subtle separator for sections */
+      padding-bottom: 0.3rem;
     }
 
     .nav-button {
@@ -63,30 +65,57 @@
       background: #2b547e;
       color: white;
       padding: 0.5rem;
+      margin-top: 2rem; /* Ensure footer doesn't overlap content */
     }
 
     p {
       margin: 0.5rem 0;
+      line-height: 1.6; /* Improve readability */
     }
 
     ul {
       padding-left: 1.5rem;
-      margin: 0.5rem 0;
+      margin: 0.5rem 0 1rem 0; /* Add bottom margin */
+    }
+
+    li {
+        margin-bottom: 0.25rem; /* Space out list items */
     }
 
     .entry {
-      margin-bottom: 1rem;
-      padding: 0.5rem;
+      margin-bottom: 1.5rem; /* Increased spacing between entries */
+      padding: 1rem; /* Increased padding */
       background-color: #f1f1f1;
+      border: 1px solid #e0e0e0; /* Add subtle border */
       border-radius: 4px;
     }
 
     .entry p {
-      margin: 0.25rem 0;
+      margin: 0.35rem 0; /* Adjusted margin within entry */
     }
 
     .entry strong {
       margin-right: 0.5rem;
+      color: #2b547e; /* Make strong text match header color */
+    }
+
+    .rate-section {
+        margin-top: 0.75rem;
+        padding-top: 0.5rem;
+        border-top: 1px dashed #ccc; /* Separator for rate types */
+    }
+
+    .rate-section strong {
+        display: block; /* Make rate type headings stand out */
+        margin-bottom: 0.25rem;
+        color: #1f4363; /* Slightly darker blue */
+    }
+
+    .calculator-info p {
+        background-color: #e7f0fa; /* Light blue background for calculator info */
+        padding: 0.75rem;
+        border-left: 4px solid #2b547e;
+        border-radius: 4px;
     }
 
     /* Mobile adjustments */
@@ -111,6 +140,10 @@
       }
       main {
         padding: 0.5rem;
+        margin: 1rem auto; /* Reduced margin on mobile */
+      }
+      .entry {
+        padding: 0.75rem;
       }
     }
   </style>
@@ -122,52 +155,189 @@
 
   <main>
     <h2>Payments & Finance</h2>
-    <p>Below are the standard pay rates and average cleaning times (departure clean):</p>
+
+    <h3>Departure Cleans</h3>
+    <p>These are the standard rates for cleaning apartments after guest departure. Rates vary based on quality and day.</p>
 
     <div class="entry">
       <p><strong>Room Type:</strong> 2 Bed</p>
-      <p><strong>Pay Rate:</strong> $60</p>
       <p><strong>Average Time:</strong> ~1 hour 30 minutes</p>
-    </div>
-    <div class="entry">
-      <p><strong>Room Type:</strong> 2 Bed Split</p>
-      <p><strong>Pay Rate:</strong> $70</p>
-      <p><strong>Average Time:</strong> ~1 hour 45 minutes</p>
-    </div>
-    <div class="entry">
-      <p><strong>Room Type:</strong> 3 Bed</p>
-      <p><strong>Pay Rate:</strong> $85</p>
-      <p><strong>Average Time:</strong> ~2 hours</p>
+      <div class="rate-section">
+        <strong>Standard Weekday Rates:</strong>
+        <p>Base Rate: $60</p>
+        <p>No Fix Ups Rate (+ $3): $63</p>
+        <p>Fix Ups Required Rate (- $3): $57</p>
+      </div>
+      <div class="rate-section">
+        <strong>Sunday / Public Holiday Rates (+ $5):</strong>
+        <p>Base Rate (Sun/PH): $65</p>
+        <p>No Fix Ups Rate (Sun/PH): $68</p>
+        <p>Fix Ups Required Rate (Sun/PH): $62</p>
+      </div>
     </div>
 
-    <p><strong>Note:</strong> Actual cleaning time may vary depending on:</p>
+    <div class="entry">
+        <p><strong>Room Type:</strong> 2 Bed Split</p>
+        <p><strong>Average Time:</strong> ~1 hour 45 minutes</p>
+        <div class="rate-section">
+            <strong>Standard Weekday Rates:</strong>
+            <p>Base Rate: $70</p>
+            <p>No Fix Ups Rate (+ $3): $73</p>
+            <p>Fix Ups Required Rate (- $3): $67</p>
+        </div>
+        <div class="rate-section">
+            <strong>Sunday / Public Holiday Rates (+ $5):</strong>
+            <p>Base Rate (Sun/PH): $75</p>
+            <p>No Fix Ups Rate (Sun/PH): $78</p>
+            <p>Fix Ups Required Rate (Sun/PH): $72</p>
+        </div>
+    </div>
+
+    <div class="entry">
+      <p><strong>Room Type:</strong> 3 Bed</p>
+      <p><strong>Average Time:</strong> ~2 hours</p>
+      <div class="rate-section">
+        <strong>Standard Weekday Rates:</strong>
+        <p>Base Rate: $85</p>
+        <p>No Fix Ups Rate (+ $3): $88</p>
+        <p>Fix Ups Required Rate (- $3): $82</p>
+      </div>
+      <div class="rate-section">
+        <strong>Sunday / Public Holiday Rates (+ $5):</strong>
+        <p>Base Rate (Sun/PH): $90</p>
+        <p>No Fix Ups Rate (Sun/PH): $93</p>
+        <p>Fix Ups Required Rate (Sun/PH): $87</p>
+      </div>
+    </div>
+
+    <p><strong>Note on Times:</strong> Actual cleaning time may vary depending on unit size/layout, number of occupants, and the condition upon arrival.</p>
+    <p><strong>Note on Rates:</strong> 'No Fix Ups' rate applies when the clean meets all standards upon first inspection. 'Fix Ups Required' rate applies if standard items need re-cleaning (see criteria below).</p>
+
+    <h3>Weekly Service (Midstay Clean)</h3>
+    <p>A weekly service (refresh) takes place if a guest stays for over 10 days. Similar to departure cleans, rates vary based on quality and day.</p>
+
+    <div class="entry">
+      <p><strong>Room Type:</strong> 2 Bed</p>
+      <p><strong>Average Time:</strong> ~36 minutes</p>
+       <div class="rate-section">
+        <strong>Standard Weekday Rates:</strong>
+        <p>Base Rate: $24</p>
+        <p>No Fix Ups Rate (+ $3): $27</p>
+        <p>Fix Ups Required Rate (- $3): $21</p>
+      </div>
+      <div class="rate-section">
+        <strong>Sunday / Public Holiday Rates (+ $5):</strong>
+        <p>Base Rate (Sun/PH): $29</p>
+        <p>No Fix Ups Rate (Sun/PH): $32</p>
+        <p>Fix Ups Required Rate (Sun/PH): $26</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <p><strong>Room Type:</strong> 2 Bed Split</p>
+      <p><strong>Average Time:</strong> ~42 minutes</p>
+       <div class="rate-section">
+        <strong>Standard Weekday Rates:</strong>
+        <p>Base Rate: $28</p>
+        <p>No Fix Ups Rate (+ $3): $31</p>
+        <p>Fix Ups Required Rate (- $3): $25</p>
+      </div>
+      <div class="rate-section">
+        <strong>Sunday / Public Holiday Rates (+ $5):</strong>
+        <p>Base Rate (Sun/PH): $33</p>
+        <p>No Fix Ups Rate (Sun/PH): $36</p>
+        <p>Fix Ups Required Rate (Sun/PH): $30</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <p><strong>Room Type:</strong> 3 Bed</p>
+      <p><strong>Average Time:</strong> ~48 minutes</p>
+       <div class="rate-section">
+        <strong>Standard Weekday Rates:</strong>
+        <p>Base Rate: $34</p>
+        <p>No Fix Ups Rate (+ $3): $37</p>
+        <p>Fix Ups Required Rate (- $3): $31</p>
+      </div>
+      <div class="rate-section">
+        <strong>Sunday / Public Holiday Rates (+ $5):</strong>
+        <p>Base Rate (Sun/PH): $39</p>
+        <p>No Fix Ups Rate (Sun/PH): $42</p>
+        <p>Fix Ups Required Rate (Sun/PH): $36</p>
+      </div>
+    </div>
+
+    <h3>Deep Cleaning</h3>
+    <p>Deep cleans are more intensive and scheduled periodically or as needed. These are typically performed by a team of two, with the following total rates and estimated hours (total hours shown, split between cleaners):</p>
+
+     <div class="entry">
+      <p><strong>Room Type:</strong> 2 Bed</p>
+      <p><strong>Total Pay Rate:</strong> $224</p>
+      <p><strong>Estimated Total Time:</strong> ~7 hours (approx. 3.5 hours per cleaner if 2 assigned)</p>
+    </div>
+     <div class="entry">
+      <p><strong>Room Type:</strong> 2 Bed Villa</p>
+      <p><strong>Total Pay Rate:</strong> $240</p>
+      <p><strong>Estimated Total Time:</strong> ~7.5 hours (approx. 3.75 hours per cleaner if 2 assigned)</p>
+    </div>
+     <div class="entry">
+      <p><strong>Room Type:</strong> 3 Bed Villa</p>
+      <p><strong>Total Pay Rate:</strong> $272</p>
+      <p><strong>Estimated Total Time:</strong> ~8.5 hours (approx. 4.25 hours per cleaner if 2 assigned)</p>
+    </div>
+    <p><strong>Note:</strong> Deep cleaning involves tasks beyond standard departure/weekly cleans (e.g., wall marks, extensive window cleaning, detailed appliance cleaning). Fix-up deductions do not apply to deep cleans in the same way; quality expectations are inherent to the task.</p>
+
+    <h3>Training Pay Structure</h3>
+    <p>When a new cleaner is being trained, the pay for the <strong>first two rooms</strong> they clean together with their trainer is allocated as follows:</p>
     <ul>
-      <li>Size and layout of the unit</li>
-      <li>Number of occupants</li>
-      <li>Condition of the apartment upon arrival</li>
+      <li>The <strong>Trainer</strong> receives the <strong>full standard room rate</strong> for those two rooms.</li>
+      <li>The <strong>Trainee</strong> receives <strong>one-third (1/3)</strong> of the standard room rate for those two rooms.</li>
+    </ul>
+    <p>After the first two training rooms, pay is split according to the standard 'Splitting Pay' rules described below.</p>
+
+    <h3>Splitting Pay Between Cleaners</h3>
+    <p>Often, departure or deep cleans are assigned to teams of two or sometimes three cleaners to ensure efficiency.</p>
+    <ul>
+        <li>If <strong>two cleaners</strong> are assigned to a room, the total room rate (based on type, day, and fix-up status) is split evenly, with each cleaner receiving <strong>half (1/2)</strong> of the total rate.</li>
+        <li>If <strong>three cleaners</strong> are assigned to a room, the total room rate is split evenly, with each cleaner receiving <strong>one-third (1/3)</strong> of the total rate.</li>
+    </ul>
+    <p>While the pay *per room* is lower when splitting, working in a team allows cleaners to complete rooms faster, potentially cleaning more rooms within the same shift, thus balancing out the earnings potential.</p>
+
+    <h3>Earnings Calculator (Concept)</h3>
+    <div class="calculator-info">
+        <p>To help estimate potential earnings, you could use a calculator (if developed/provided separately) to simulate different scenarios. For example, you could input:</p>
+        <ul>
+            <li>Number of 2-bed rooms cleaned</li>
+            <li>Number of 3-bed rooms cleaned</li>
+            <li>Whether cleans were on weekdays or Sun/PH</li>
+            <li>Whether the 'No Fix Ups' or 'Fix Ups Required' rate applied</li>
+            <li>Whether you worked alone or split pay with 1 or 2 other cleaners</li>
+        </ul>
+        <p>This would allow you to see how different factors impact your total pay for a shift or week.</p>
+    </div>
+
+    <h3>Criteria for 'Fix Ups Required' Rate Reduction</h3>
+    <p>The $3 reduction ('Fix Ups Required' rate) applies to <strong>standard departure and weekly service cleans</strong> when specific, basic housekeeping tasks are missed or not completed to standard upon inspection, requiring a return or correction. This is focused on general clean quality, not deep cleaning issues. Examples include:</p>
+    <ul>
+        <li>Missed dusting on easily reachable surfaces (tables, sills, furniture)</li>
+        <li>Floors not properly vacuumed or mopped (visible debris, streaks)</li>
+        <li>Mirrors or glass surfaces left streaky</li>
+        <li>Bathroom details missed (toilet bowl not clean, soap scum on shower screen, vanity not wiped)</li>
+        <li>Kitchen surfaces not wiped down (benchtop crumbs, sink not clean)</li>
+        <li>Rubbish bins not emptied</li>
+        <li>Items not replaced correctly (e.g., towels folded improperly, amenities missing)</li>
+    </ul>
+    <p><strong>Exclusions:</strong> You will <strong>not</strong> be placed on the lower rate for call-backs related to deep cleaning tasks, such as:</p>
+    <ul>
+        <li>Removing stubborn wall marks or scuffs</li>
+        <li>Carpet stain removal</li>
+        <li>Air conditioner filter/vent cleaning</li>
+        <li>Oven or rangehood deep cleaning</li>
+        <li>Tasks typically associated with a bond clean</li>
     </ul>
 
-    <h3>Weekly Service</h3>
-    <p>A weekly service takes place if a guest has stayed for over 10 days. The rate for a weekly service is 40% of the standard departure clean. The time for a weekly service is also 40% of the departure cleaning time:</p>
-
-    <div class="entry">
-      <p><strong>Room Type:</strong> 2 Bed</p>
-      <p><strong>Weekly Service Rate:</strong> $24</p>
-      <p><strong>Average Time:</strong> ~36 minutes</p>
-    </div>
-    <div class="entry">
-      <p><strong>Room Type:</strong> 2 Bed Split</p>
-      <p><strong>Weekly Service Rate:</strong> $28</p>
-      <p><strong>Average Time:</strong> ~42 minutes</p>
-    </div>
-    <div class="entry">
-      <p><strong>Room Type:</strong> 3 Bed</p>
-      <p><strong>Weekly Service Rate:</strong> $34</p>
-      <p><strong>Average Time:</strong> ~48 minutes</p>
-    </div>
-
     <h3>Additional Work</h3>
-    <p>From time to time, we may request extra work. This will be paid in blocks of 15 minutes, each block paying <strong>$10 AUD</strong>.</p>
+    <p>From time to time, we may request extra work outside of standard cleans (e.g., spring cleaning tasks, specific small maintenance support). This will be paid in blocks of 15 minutes, each block paying <strong>$10 AUD</strong>.</p>
 
     <h3>Payment Method</h3>
     <p>Please note, we pay via ABN (Australian Business Number), not TFN (Tax File Number), as this work falls under legislation for contracted services.</p>
