@@ -25,7 +25,7 @@
     }
 
     main {
-      max-width: 700px;
+      max-width: 750px; /* Slightly wider for tables */
       margin: 2rem auto;
       padding: 1rem;
       flex: 1;
@@ -111,42 +111,54 @@
         color: #1f4363;
     }
 
-    /* Styles for specific rate paragraphs */
+    /* Styles for specific rate paragraphs/spans */
     .no-fix-ups-rate {
-        font-size: 1.1em; /* Slightly larger */
-        color: #28a745; /* Green color for positive/good rate */
-        font-weight: bold; /* Make it stand out more */
+        font-size: 1.1em;
+        color: #28a745; /* Green */
+        font-weight: bold;
+        display: inline-block; /* Needed for styling spans in tables */
     }
     .fix-ups-rate {
-        color: #dc3545; /* Red color for deduction */
-        /* Optional: font-weight: bold; if you want this bold too */
+        color: #dc3545; /* Red */
+        display: inline-block; /* Needed for styling spans in tables */
     }
 
     /* Table Styling */
-     .standards-table {
+     .standards-table, .rates-table {
         width: 100%;
         border-collapse: collapse;
         margin-top: 1rem;
-        margin-bottom: 1.5rem; /* Add space after table */
-        font-size: 0.95em; /* Slightly smaller text in table */
+        margin-bottom: 1.5rem;
+        font-size: 0.95em;
      }
-     .standards-table th, .standards-table td {
+     .standards-table th, .standards-table td,
+     .rates-table th, .rates-table td {
          border: 1px solid #ccc;
          padding: 0.75rem;
          text-align: left;
-         vertical-align: top; /* Align content to top */
+         vertical-align: top; /* Align content to top for standards */
      }
-     .standards-table th {
+     .rates-table td {
+         vertical-align: middle; /* Align rates vertically centered */
+     }
+     .standards-table th, .rates-table th {
          background-color: #e9ecef;
          color: #2b547e;
          font-weight: bold;
      }
-     .standards-table ul { /* Style lists within table cells */
+     .standards-table ul {
          margin: 0;
          padding-left: 1.2rem;
      }
      .standards-table li {
          margin-bottom: 0.3rem;
+     }
+     /* Center align time and rate columns in rates table */
+     .rates-table td:not(:first-child) {
+         text-align: center;
+     }
+     .rates-table th:not(:first-child) {
+         text-align: center;
      }
 
      .example {
@@ -159,6 +171,17 @@
      .example strong {
          color: #1f4363;
      }
+     .example .details {
+        margin-bottom: 0.25rem; /* Space out detail lines */
+     }
+
+     /* Responsive Table Wrapper */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        margin-bottom: 1rem; /* Add space below scrollable area */
+        padding-bottom: 5px; /* Ensure shadow/border isn't clipped */
+    }
 
 
     /* Mobile adjustments */
@@ -184,15 +207,17 @@
       main {
         padding: 0.5rem;
         margin: 1rem auto;
+        max-width: 100%; /* Allow full width on mobile */
       }
-      .entry {
+      .entry, .example {
         padding: 0.75rem;
       }
-      .standards-table {
-        font-size: 0.9em; /* Further reduce table font on mobile */
+      .standards-table, .rates-table {
+        font-size: 0.85em; /* Further reduce table font on mobile */
       }
-       .standards-table th, .standards-table td {
-           padding: 0.5rem;
+       .standards-table th, .standards-table td,
+       .rates-table th, .rates-table td {
+           padding: 0.5rem; /* Reduce padding in tables */
        }
     }
   </style>
@@ -208,69 +233,64 @@
     <h3>Departure Cleans</h3>
     <p>These are the standard rates for cleaning apartments after guest departure. Rates vary based on quality and day.</p>
 
-    <div class="entry">
-      <p><strong>Room Type:</strong> 2 Bed</p>
-      <p><strong>Average Time:</strong> ~1 hour 30 minutes</p>
-      <div class="rate-section">
-        <strong>Standard Weekday Rates:</strong>
-        <p class="no-fix-ups-rate">No Fix Ups Rate (+ $3): $63</p>
-        <p class="fix-ups-rate">Fix Ups Required Rate (- $3): $57</p>
-      </div>
-      <div class="rate-section">
-        <strong>Sunday / Public Holiday Rates (+ $5):</strong>
-        <p class="no-fix-ups-rate">No Fix Ups Rate (Sun/PH): $68</p>
-        <p class="fix-ups-rate">Fix Ups Required Rate (Sun/PH): $62</p>
-      </div>
+    <div class="table-responsive">
+      <table class="rates-table">
+        <thead>
+          <tr>
+            <th>Room Type</th>
+            <th>Average Time (Total)</th>
+            <th>Weekday<br>(No Fix Ups)</th>
+            <th>Weekday<br>(Fix Ups Req.)</th>
+            <th>Sun/PH<br>(No Fix Ups)</th>
+            <th>Sun/PH<br>(Fix Ups Req.)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>2 Bed</strong></td>
+            <td>~1 hr 30 min</td>
+            <td><span class="no-fix-ups-rate">$63</span></td>
+            <td><span class="fix-ups-rate">$57</span></td>
+            <td><span class="no-fix-ups-rate">$68</span></td>
+            <td><span class="fix-ups-rate">$62</span></td>
+          </tr>
+          <tr>
+            <td><strong>2 Bed Split</strong></td>
+            <td>~1 hr 45 min</td>
+            <td><span class="no-fix-ups-rate">$73</span></td>
+            <td><span class="fix-ups-rate">$67</span></td>
+            <td><span class="no-fix-ups-rate">$78</span></td>
+            <td><span class="fix-ups-rate">$72</span></td>
+          </tr>
+          <tr>
+            <td><strong>3 Bed</strong></td>
+            <td>~2 hrs</td>
+            <td><span class="no-fix-ups-rate">$88</span></td>
+            <td><span class="fix-ups-rate">$82</span></td>
+            <td><span class="no-fix-ups-rate">$93</span></td>
+            <td><span class="fix-ups-rate">$87</span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <div class="entry">
-        <p><strong>Room Type:</strong> 2 Bed Split</p>
-        <p><strong>Average Time:</strong> ~1 hour 45 minutes</p>
-        <div class="rate-section">
-            <strong>Standard Weekday Rates:</strong>
-            <p class="no-fix-ups-rate">No Fix Ups Rate (+ $3): $73</p>
-            <p class="fix-ups-rate">Fix Ups Required Rate (- $3): $67</p>
-        </div>
-        <div class="rate-section">
-            <strong>Sunday / Public Holiday Rates (+ $5):</strong>
-            <p class="no-fix-ups-rate">No Fix Ups Rate (Sun/PH): $78</p>
-            <p class="fix-ups-rate">Fix Ups Required Rate (Sun/PH): $72</p>
-        </div>
-    </div>
-
-    <div class="entry">
-      <p><strong>Room Type:</strong> 3 Bed</p>
-      <p><strong>Average Time:</strong> ~2 hours</p>
-      <div class="rate-section">
-        <strong>Standard Weekday Rates:</strong>
-        <p class="no-fix-ups-rate">No Fix Ups Rate (+ $3): $88</p>
-        <p class="fix-ups-rate">Fix Ups Required Rate (- $3): $82</p>
-      </div>
-      <div class="rate-section">
-        <strong>Sunday / Public Holiday Rates (+ $5):</strong>
-        <p class="no-fix-ups-rate">No Fix Ups Rate (Sun/PH): $93</p>
-        <p class="fix-ups-rate">Fix Ups Required Rate (Sun/PH): $87</p>
-      </div>
-    </div>
-
-    <p><strong>Note on Times:</strong> Actual cleaning time may vary depending on unit size/layout, number of occupants, and the condition upon arrival.</p>
+    <p><strong>Note on Times:</strong> Actual cleaning time may vary depending on unit size/layout, number of occupants, and the condition upon arrival. The times listed are estimates for one cleaner working alone.</p>
     <p><strong>Note on Rates:</strong> 'No Fix Ups' rate applies when the clean meets all standards upon first inspection. 'Fix Ups Required' rate applies if standard items need re-cleaning (see table below).</p>
 
     <h3>Weekly Service (Midstay Clean)</h3>
     <p>A weekly service (refresh) takes place if a guest stays for over 10 days. Similar to departure cleans, rates vary based on quality and day.</p>
-
     <div class="entry">
       <p><strong>Room Type:</strong> 2 Bed</p>
       <p><strong>Average Time:</strong> ~36 minutes</p>
        <div class="rate-section">
         <strong>Standard Weekday Rates:</strong>
-        <p class="no-fix-ups-rate">No Fix Ups Rate (+ $3): $27</p>
-        <p class="fix-ups-rate">Fix Ups Required Rate (- $3): $21</p>
+        <p><span class="no-fix-ups-rate">No Fix Ups Rate (+ $3): $27</span></p>
+        <p><span class="fix-ups-rate">Fix Ups Required Rate (- $3): $21</span></p>
       </div>
       <div class="rate-section">
         <strong>Sunday / Public Holiday Rates (+ $5):</strong>
-        <p class="no-fix-ups-rate">No Fix Ups Rate (Sun/PH): $32</p>
-        <p class="fix-ups-rate">Fix Ups Required Rate (Sun/PH): $26</p>
+        <p><span class="no-fix-ups-rate">No Fix Ups Rate (Sun/PH): $32</span></p>
+        <p><span class="fix-ups-rate">Fix Ups Required Rate (Sun/PH): $26</span></p>
       </div>
     </div>
 
@@ -279,13 +299,13 @@
       <p><strong>Average Time:</strong> ~42 minutes</p>
        <div class="rate-section">
         <strong>Standard Weekday Rates:</strong>
-        <p class="no-fix-ups-rate">No Fix Ups Rate (+ $3): $31</p>
-        <p class="fix-ups-rate">Fix Ups Required Rate (- $3): $25</p>
+        <p><span class="no-fix-ups-rate">No Fix Ups Rate (+ $3): $31</span></p>
+        <p><span class="fix-ups-rate">Fix Ups Required Rate (- $3): $25</span></p>
       </div>
       <div class="rate-section">
         <strong>Sunday / Public Holiday Rates (+ $5):</strong>
-        <p class="no-fix-ups-rate">No Fix Ups Rate (Sun/PH): $36</p>
-        <p class="fix-ups-rate">Fix Ups Required Rate (Sun/PH): $30</p>
+        <p><span class="no-fix-ups-rate">No Fix Ups Rate (Sun/PH): $36</span></p>
+        <p><span class="fix-ups-rate">Fix Ups Required Rate (Sun/PH): $30</span></p>
       </div>
     </div>
 
@@ -294,13 +314,13 @@
       <p><strong>Average Time:</strong> ~48 minutes</p>
        <div class="rate-section">
         <strong>Standard Weekday Rates:</strong>
-        <p class="no-fix-ups-rate">No Fix Ups Rate (+ $3): $37</p>
-        <p class="fix-ups-rate">Fix Ups Required Rate (- $3): $31</p>
+        <p><span class="no-fix-ups-rate">No Fix Ups Rate (+ $3): $37</span></p>
+        <p><span class="fix-ups-rate">Fix Ups Required Rate (- $3): $31</span></p>
       </div>
       <div class="rate-section">
         <strong>Sunday / Public Holiday Rates (+ $5):</strong>
-        <p class="no-fix-ups-rate">No Fix Ups Rate (Sun/PH): $42</p>
-        <p class="fix-ups-rate">Fix Ups Required Rate (Sun/PH): $36</p>
+        <p><span class="no-fix-ups-rate">No Fix Ups Rate (Sun/PH): $42</span></p>
+        <p><span class="fix-ups-rate">Fix Ups Required Rate (Sun/PH): $36</span></p>
       </div>
     </div>
 
@@ -322,6 +342,7 @@
       <p><strong>Total Pay Rate:</strong> $272</p>
       <p><strong>Estimated Total Time:</strong> ~8.5 hours (approx. 4.25 hours per cleaner if 2 assigned)</p>
     </div>
+
     <h3>Training Pay Structure</h3>
     <p>When a new cleaner is being trained, the pay for the <strong>first two rooms</strong> they clean together with their trainer is allocated as follows:</p>
     <ul>
@@ -333,82 +354,88 @@
     <h3>Splitting Pay Between Cleaners</h3>
     <p>Often, departure or deep cleans are assigned to teams of two or sometimes three cleaners to ensure efficiency.</p>
     <ul>
-        <li>If <strong>two cleaners</strong> are assigned to a room, the total room rate (based on type, day, and fix-up status for Departure/Weekly, or the fixed rate for Deep Cleans) is split evenly, with each cleaner receiving <strong>half (1/2)</strong> of the total rate.</li>
-        <li>If <strong>three cleaners</strong> are assigned to a room, the total room rate is split evenly, with each cleaner receiving <strong>one-third (1/3)</strong> of the total rate.</li>
+        <li>If <strong>two cleaners</strong> are assigned to a room, the total room rate (based on type, day, and fix-up status for Departure/Weekly, or the fixed rate for Deep Cleans) is split evenly, with each cleaner receiving <strong>half (1/2)</strong> of the total rate. The time spent per cleaner is also roughly halved.</li>
+        <li>If <strong>three cleaners</strong> are assigned to a room, the total room rate is split evenly, with each cleaner receiving <strong>one-third (1/3)</strong> of the total rate. The time spent per cleaner is also roughly divided by three.</li>
     </ul>
     <p>While the pay *per room* is lower when splitting, working in a team allows cleaners to complete rooms faster, potentially cleaning more rooms within the same shift, thus balancing out the earnings potential.</p>
 
 
     <h3>Quality Standards & Rate Adjustments (Departure/Weekly Cleans)</h3>
     <p>The $3 rate adjustment applies only to standard Departure and Weekly Service cleans based on inspection quality. Deep cleans have inherent quality expectations and are not subject to this specific $3 adjustment.</p>
-    <table class="standards-table">
-        <thead>
-            <tr>
-                <th>Triggers $3 Reduction ('Fix Ups Required' Rate)</th>
-                <th>Does NOT Trigger $3 Reduction (Considered Deep Clean / Non-Standard / External Factor)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <strong>Basic Housekeeping Issues:</strong>
-                    <ul>
-                        <li>Missed dusting on reachable surfaces (tables, sills)</li>
-                        <li>Floors not properly vacuumed/mopped (visible debris, streaks)</li>
-                        <li>Streaky mirrors or glass</li>
-                        <li>Bathroom details missed (toilet bowl, shower screen scum, vanity not wiped)</li>
-                        <li>Kitchen surfaces not wiped (benchtop crumbs, sink unclean)</li>
-                        <li>Rubbish bins not emptied</li>
-                        <li>Items not replaced correctly (towels, amenities)</li>
-                    </ul>
-                </td>
-                <td>
-                     <strong>Deep Clean / Maintenance Issues:</strong>
-                    <ul>
-                        <li>Stubborn wall marks or scuffs</li>
-                        <li>Carpet stain removal</li>
-                        <li>Air conditioner filter/vent cleaning</li>
-                        <li>Oven or rangehood deep cleaning</li>
-                        <li>Extensive window/track cleaning</li>
-                        <li>Mould removal (beyond minor surface spots)</li>
-                        <li>Tasks typically part of a bond clean</li>
-                        <li>Issues requiring maintenance personnel (e.g., blocked drain, blown bulb)</li>
-                        <li>Excessively dirty apartment beyond normal guest usage (may qualify for extra time/pay upon approval)</li>
-                    </ul>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="standards-table">
+            <thead>
+                <tr>
+                    <th>Triggers $3 Reduction ('Fix Ups Required' Rate)</th>
+                    <th>Does NOT Trigger $3 Reduction (Considered Deep Clean / Non-Standard / External Factor)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <strong>Basic Housekeeping Issues:</strong>
+                        <ul>
+                            <li>Missed dusting on reachable surfaces (tables, sills)</li>
+                            <li>Floors not properly vacuumed/mopped (visible debris, streaks)</li>
+                            <li>Streaky mirrors or glass</li>
+                            <li>Bathroom details missed (toilet bowl, shower screen scum, vanity not wiped)</li>
+                            <li>Kitchen surfaces not wiped (benchtop crumbs, sink unclean)</li>
+                            <li>Rubbish bins not emptied</li>
+                            <li>Items not replaced correctly (towels, amenities)</li>
+                        </ul>
+                    </td>
+                    <td>
+                         <strong>Deep Clean / Maintenance Issues:</strong>
+                        <ul>
+                            <li>Stubborn wall marks or scuffs</li>
+                            <li>Carpet stain removal</li>
+                            <li>Air conditioner filter/vent cleaning</li>
+                            <li>Oven or rangehood deep cleaning</li>
+                            <li>Extensive window/track cleaning</li>
+                            <li>Mould removal (beyond minor surface spots)</li>
+                            <li>Tasks typically part of a bond clean</li>
+                            <li>Issues requiring maintenance personnel (e.g., blocked drain, blown bulb)</li>
+                            <li>Excessively dirty apartment beyond normal guest usage (may qualify for extra time/pay upon approval)</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 
     <h3>Pay Calculation Examples</h3>
 
     <div class="example">
         <p><strong>Scenario 1: Standard Departure Clean</strong></p>
-        <p><strong>Details:</strong> 2 cleaners, 2 Bedroom apartment, Weekday, clean passed inspection (No Fix Ups).</p>
-        <p><strong>Rate Used:</strong> 2 Bed, No Fix Ups Rate = $63</p>
-        <p><strong>Calculation:</strong> $63 / 2 cleaners = <strong>$31.50 per cleaner</strong></p>
+        <p class="details"><strong>Details:</strong> 2 cleaners, 2 Bedroom apartment, Weekday, clean passed inspection (No Fix Ups).</p>
+        <p class="details"><strong>Rate Used:</strong> 2 Bed, No Fix Ups Rate = $63 (Total)</p>
+        <p class="details"><strong>Approx. Time per Cleaner:</strong> ~45 minutes (Total time ~1h 30m / 2)</p>
+        <p class="details"><strong>Calculation:</strong> $63 / 2 cleaners = <strong>$31.50 per cleaner</strong></p>
     </div>
 
     <div class="example">
         <p><strong>Scenario 2: Standard Departure Clean</strong></p>
-        <p><strong>Details:</strong> 3 cleaners, 3 Bedroom apartment, Weekday, clean required minor corrections (Fix Ups Required).</p>
-        <p><strong>Rate Used:</strong> 3 Bed, Fix Ups Required Rate = $82</p>
-        <p><strong>Calculation:</strong> $82 / 3 cleaners = <strong>$27.33 per cleaner</strong> (approx.)</p>
+        <p class="details"><strong>Details:</strong> 3 cleaners, 3 Bedroom apartment, Weekday, clean required minor corrections (Fix Ups Required).</p>
+        <p class="details"><strong>Rate Used:</strong> 3 Bed, Fix Ups Required Rate = $82 (Total)</p>
+        <p class="details"><strong>Approx. Time per Cleaner:</strong> ~40 minutes (Total time ~2h / 3)</p>
+        <p class="details"><strong>Calculation:</strong> $82 / 3 cleaners = <strong>$27.33 per cleaner</strong> (approx.)</p>
     </div>
 
      <div class="example">
         <p><strong>Scenario 3: Standard Departure Clean</strong></p>
-        <p><strong>Details:</strong> 1 cleaner, 2 Bed Split apartment, Sunday, clean required minor corrections (Fix Ups Required).</p>
-        <p><strong>Rate Used:</strong> 2 Bed Split, Fix Ups Required Rate (Sun/PH) = $72</p>
-        <p><strong>Calculation:</strong> $72 / 1 cleaner = <strong>$72 per cleaner</strong></p>
+        <p class="details"><strong>Details:</strong> 1 cleaner, 2 Bed Split apartment, Sunday, clean required minor corrections (Fix Ups Required).</p>
+        <p class="details"><strong>Rate Used:</strong> 2 Bed Split, Fix Ups Required Rate (Sun/PH) = $72 (Total)</p>
+        <p class="details"><strong>Approx. Time per Cleaner:</strong> ~1 hour 45 minutes (Total time)</p>
+        <p class="details"><strong>Calculation:</strong> $72 / 1 cleaner = <strong>$72 per cleaner</strong></p>
     </div>
 
     <div class="example">
         <p><strong>Scenario 4: Deep Clean</strong></p>
-        <p><strong>Details:</strong> 2 cleaners, 3 Bed Villa Deep Clean.</p>
-        <p><strong>Rate Used:</strong> Fixed Total Rate for 3 Bed Villa Deep Clean = $272</p>
-        <p><strong>Calculation:</strong> $272 / 2 cleaners = <strong>$136.00 per cleaner</strong></p>
+        <p class="details"><strong>Details:</strong> 2 cleaners, 3 Bed Villa Deep Clean.</p>
+        <p class="details"><strong>Rate Used:</strong> Fixed Total Rate for 3 Bed Villa Deep Clean = $272 (Total)</p>
+        <p class="details"><strong>Approx. Time per Cleaner:</strong> ~4 hours 15 minutes (Total time ~8.5h / 2)</p>
+        <p class="details"><strong>Calculation:</strong> $272 / 2 cleaners = <strong>$136.00 per cleaner</strong></p>
         <p><em>(Note: The $3 fix-up adjustment does not apply to deep clean rates)</em></p>
     </div>
 
