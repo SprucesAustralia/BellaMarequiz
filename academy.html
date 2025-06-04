@@ -117,9 +117,6 @@
     .section:last-child {
       border-bottom: none;
     }
-    .section h3 {
-      margin-top: 0;
-    }
     ul {
       padding-left: 20px;
     }
@@ -232,7 +229,6 @@
     <h1>Bella Mare Beachside Apartments</h1>
   </header>
 
-  <!-- Simple navigation menu -->
   <nav>
     <div>
       <a href="quiz.html">Cleaner's Quiz</a>
@@ -242,7 +238,6 @@
   <main>
     <h2>Bella Mare Beachside Academy</h2>
     
-    <!-- Main page tabs -->
     <div class="main-tab-container">
       <div class="main-tab-buttons">
         <button class="main-tab-button active" onclick="openMainTab(event, 'training-content')">Training Academy</button>
@@ -250,11 +245,31 @@
       </div>
     </div>
     
-    <!-- Training Academy Content -->
     <div id="training-content" class="main-tab-content active">
-      <p>Welcome to Bella Mare Beachside Academy! We're excited to have you on board. Below, you'll find our 9 essential training videos to help you understand our cleaning standards and procedures.</p>
+      <p>Welcome to Bella Mare Beachside Academy! We're excited to have you on board. Below, you'll find our essential training videos to help you understand our cleaning standards and procedures.</p>
 
-      <!-- Essential Videos -->
+      <h3>Introduction to Hotel Bellamare</h3>
+      
+      <div class="video-title">Introduction Video 1: Bella Mare Beachside Apartments in Brisbane offering a relaxing Accommodation</div>
+      <div class="video-container">
+        <iframe 
+          src="https://youtu.be/PUSaMUXqG2Ahttps://youtu.be/JTtMhVTzX2w"
+          title="Bella Mare Beachside Apartments in Brisbane offering a relaxing Accommodation"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+      
+      <div class="video-title">Introduction Video 2: (Please provide title)</div>
+      <div class="video-container">
+        <iframe 
+          src="YOUR_SECOND_VIDEO_URL_HERE" 
+          title="Your Second Video Title Here"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+
       <h3>9 Essential Training Videos</h3>
       
       <div class="video-title">Video 1: Linen Area Overview</div>
@@ -348,11 +363,9 @@
       </div>
     </div>
     
-    <!-- Cleaning Lists Content -->
     <div id="cleaning-lists" class="main-tab-content">
       <p>Welcome to the Bella Mare cleaning reference page. Here you'll find all the essential cleaning lists, notes, and reminders to ensure our high standards are maintained.</p>
 
-      <!-- Tab Navigation -->
       <div class="tab-container">
         <div class="tab-buttons">
           <button class="tab-button active" onclick="openTab(event, 'cleaning-checklist')">Cleaning Checklist</button>
@@ -360,7 +373,6 @@
           <button class="tab-button" onclick="openTab(event, 'fix-ups')">Fix-Ups List</button>
         </div>
 
-        <!-- Cleaning Checklist Tab -->
         <div id="cleaning-checklist" class="tab-content active">
           <h2>CLEANING CHECKLIST (Things to check)</h2>
           
@@ -444,7 +456,6 @@
           </div>
         </div>
 
-        <!-- Notes, Tips and Reminders Tab -->
         <div id="notes-tips" class="tab-content">
           <h2>NOTES, TIPS AND REMINDERS LIST</h2>
           
@@ -508,7 +519,6 @@
           </div>
         </div>
 
-        <!-- Fix-Ups List Tab -->
         <div id="fix-ups" class="tab-content">
           <h2>COMMON ISSUES OF FIX UPS LIST</h2>
           
