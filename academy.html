@@ -35,7 +35,7 @@
       margin: 1rem auto;
       padding: 1rem;
     }
-    h2, h3 {
+    h2, h3, h4 {
       color: #2b547e;
     }
     .video-container {
@@ -52,9 +52,11 @@
       width: 100%;
       height: 100%;
     }
-    .typeform-container {
-      margin: 2rem 0;
-      min-height: 400px; /* Default for larger screens */
+    .video-title {
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 5px;
+      color: #2b547e;
     }
     footer {
       text-align: center;
@@ -66,13 +68,161 @@
       width: 100%;
       margin-top: 1rem;
     }
+    
+    /* Tab styles */
+    .tab-container {
+      margin: 20px 0;
+    }
+    .tab-buttons {
+      display: flex;
+      overflow-x: auto;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+    .tab-button {
+      background-color: #eee;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 10px 15px;
+      margin-right: 5px;
+      border-radius: 5px 5px 0 0;
+      font-weight: bold;
+      color: #2b547e;
+      transition: 0.3s;
+    }
+    .tab-button:hover {
+      background-color: #ddd;
+    }
+    .tab-button.active {
+      background-color: #2b547e;
+      color: white;
+    }
+    .tab-content {
+      display: none;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-top: none;
+      border-radius: 0 0 5px 5px;
+      background-color: white;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .section {
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .section:last-child {
+      border-bottom: none;
+    }
+    .section h3 {
+      margin-top: 0;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 5px;
+    }
+    .fix-up-list {
+      list-style-type: decimal;
+      counter-reset: item;
+    }
+    .fix-up-category {
+      margin-bottom: 20px;
+      background-color: #f8f9fa;
+      border-radius: 5px;
+      padding: 15px;
+      border-left: 4px solid #2b547e;
+    }
+    .fix-up-category h4 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #2b547e;
+    }
+    .fix-up-list li {
+      counter-increment: item;
+      list-style-type: none;
+      position: relative;
+      padding-left: 25px;
+    }
+    .fix-up-list li:before {
+      content: counter(item) ".";
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+      color: #2b547e;
+    }
+    .reminder-box {
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+      font-weight: 500;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .rates-box {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+      font-weight: 500;
+      border: 1px solid #c3e6cb;
+    }
+    
+    /* Main page tabs */
+    .main-tab-container {
+      margin: 20px 0;
+    }
+    .main-tab-buttons {
+      display: flex;
+      overflow-x: auto;
+      margin-bottom: 15px;
+    }
+    .main-tab-button {
+      background-color: #2b547e;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 12px 20px;
+      margin-right: 5px;
+      border-radius: 5px;
+      font-weight: bold;
+      color: white;
+      transition: 0.3s;
+    }
+    .main-tab-button:hover {
+      background-color: #1e3c5c;
+    }
+    .main-tab-button.active {
+      background-color: #4d7eac;
+    }
+    .main-tab-content {
+      display: none;
+    }
+    .main-tab-content.active {
+      display: block;
+    }
+    
     /* Media Queries for Mobile Optimization */
     @media (max-width: 600px) {
       main {
         padding: 0.5rem; /* Reduce padding on mobile */
       }
-      .typeform-container {
-        min-height: 80vh; /* Larger vertical size on mobile */
+      .tab-buttons, .main-tab-buttons {
+        flex-direction: column;
+      }
+      .tab-button, .main-tab-button {
+        margin-bottom: 5px;
+        border-radius: 5px;
+        width: 100%;
       }
     }
   </style>
@@ -85,72 +235,403 @@
   <!-- Simple navigation menu -->
   <nav>
     <div>
-      <a href="quiz.html">Cleaner’s Quiz</a>
+      <a href="quiz.html">Cleaner's Quiz</a>
     </div>
   </nav>
 
   <main>
     <h2>Bella Mare Beachside Academy</h2>
-    <p>Welcome to Bella Mare Beachside Academy! We're excited to have you on board. Below, you'll find our training courses divided into compulsory and optional sections. Complete the compulsory courses to unlock a special bonus!</p>
-
-    <!-- Embedded Videos -->
-    <div class="video-container">
-      <iframe 
-        src="https://www.youtube.com/embed/PUSaMUXqG2A?start=9"
-        title="Bella Mare Training Video 1"
-        frameborder="0"
-        allowfullscreen>
-      </iframe>
+    
+    <!-- Main page tabs -->
+    <div class="main-tab-container">
+      <div class="main-tab-buttons">
+        <button class="main-tab-button active" onclick="openMainTab(event, 'training-content')">Training Academy</button>
+        <button class="main-tab-button" onclick="openMainTab(event, 'cleaning-lists')">Cleaning Lists</button>
+      </div>
     </div>
+    
+    <!-- Training Academy Content -->
+    <div id="training-content" class="main-tab-content active">
+      <p>Welcome to Bella Mare Beachside Academy! We're excited to have you on board. Below, you'll find our 9 essential training videos to help you understand our cleaning standards and procedures.</p>
 
-    <div class="video-container">
-      <iframe 
-        src="https://www.youtube.com/embed/JTtMhVTzX2w?start=10"
-        title="Bella Mare Training Video 2"
-        frameborder="0"
-        allowfullscreen>
-      </iframe>
+      <!-- Essential Videos -->
+      <h3>9 Essential Training Videos</h3>
+      
+      <div class="video-title">Video 1: Linen Area Overview</div>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/mCar8Vew6T0"
+          title="Linen Area Overview"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+      
+      <div class="video-title">Video 2: Basement Layout and 2 Bedroom Apartment Tour</div>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/C_K7Jy98VSk"
+          title="Basement Layout and 2 Bedroom Apartment Tour"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+      
+      <div class="video-title">Video 3: Kitchen Setup and Standards</div>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/M_BGt7dfLrw"
+          title="Kitchen Setup and Standards"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+      
+      <div class="video-title">Video 4: Living Room Instructions</div>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/JDQAwUeYFzA"
+          title="Living Room Instructions"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+      
+      <div class="video-title">Video 5: Apartment 2 Bedrooms Split Level Tour</div>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/WWBDTjWPs2Y"
+          title="Apartment 2 Bedrooms Split Level Tour"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+      
+      <div class="video-title">Video 6: Vacuum Cleaner Guidelines</div>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/0oFPOJC5Fbk"
+          title="Vacuum Cleaner Guidelines"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+      
+      <div class="video-title">Video 7: Iron and Ironing Board Placement</div>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/JKfA_4O_T5w"
+          title="Iron and Ironing Board Placement"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+      
+      <div class="video-title">Video 8: Bellamare Entrance and Basement</div>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/msGOOfOxs0E"
+          title="Bellamare Entrance and Basement"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+      
+      <div class="video-title">Video 9: Couch Maintenance</div>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/dgVW0WHDcww"
+          title="Couch Maintenance"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
     </div>
+    
+    <!-- Cleaning Lists Content -->
+    <div id="cleaning-lists" class="main-tab-content">
+      <p>Welcome to the Bella Mare cleaning reference page. Here you'll find all the essential cleaning lists, notes, and reminders to ensure our high standards are maintained.</p>
 
-    <!-- Compulsory Courses Section -->
-    <h3>Compulsory Courses</h3>
-    <p>Complete all of the compulsory courses below to receive a $30 bonus after your first week of cleaning!</p>
+      <!-- Tab Navigation -->
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-button active" onclick="openTab(event, 'cleaning-checklist')">Cleaning Checklist</button>
+          <button class="tab-button" onclick="openTab(event, 'notes-tips')">Notes, Tips & Reminders</button>
+          <button class="tab-button" onclick="openTab(event, 'fix-ups')">Fix-Ups List</button>
+        </div>
 
-    <div class="typeform-container">
-      <div data-tf-live="01JMNWXWAVACAFE577JHFTF6EM"></div>
-      <script src="//embed.typeform.com/next/embed.js"></script>
+        <!-- Cleaning Checklist Tab -->
+        <div id="cleaning-checklist" class="tab-content active">
+          <h2>CLEANING CHECKLIST (Things to check)</h2>
+          
+          <div class="section">
+            <h3>General Cleaning Tasks</h3>
+            <ul>
+              <li>Clean all surfaces, including side tables</li>
+              <li>Vacuum floors</li>
+              <li>Make beds properly</li>
+              <li>Check that all lights are functioning properly (especially bathroom lights)</li>
+              <li>Ensure sofas/cushions are completely dry after professional cleaning</li>
+              <li>Check that sliding doors to balconies open and close properly</li>
+            </ul>
+          </div>
+          
+          <div class="section">
+            <h3>Bedding and Linens</h3>
+            <ul>
+              <li>Ensure blankets stay on the beds unless instructed otherwise</li>
+              <li>Place towels in all bathrooms</li>
+              <li>Distribute bath towels appropriately across bathrooms, not all in one</li>
+              <li>Follow specific linen instructions for certain rooms</li>
+            </ul>
+          </div>
+          
+          <div class="section">
+            <h3>Kitchen and Appliances</h3>
+            <ul>
+              <li>Check and empty dishwashers if necessary</li>
+              <li>Stock milk in the fridge for specific rooms</li>
+              <li>Check that fridges and freezers are clean</li>
+              <li>Leave food in the fridge when specified</li>
+              <li>Ensure each kitchen box has 2 dishwasher sachets</li>
+              <li>Report full or broken dishwashers immediately</li>
+              <li>Ensure dishwashers are emptied when needed</li>
+            </ul>
+          </div>
+          
+          <div class="section">
+            <h3>Trash and Recycling</h3>
+            <ul>
+              <li>Place bin liners in all rubbish bins</li>
+              <li>Do not put bin liners in recycling bins</li>
+            </ul>
+          </div>
+          
+          <div class="section">
+            <h3>Restocking Supplies</h3>
+            <ul>
+              <li>Check and restock cleaning supplies</li>
+              <li>Ensure availability of toilet rolls</li>
+            </ul>
+          </div>
+          
+          <div class="section">
+            <h3>Windows and Fixtures</h3>
+            <ul>
+              <li>Clean windows when specified</li>
+              <li>Check that all lights are functioning</li>
+              <li>Report any maintenance issues with doors or windows</li>
+            </ul>
+          </div>
+          
+          <div class="section">
+            <h3>Room Specific Instructions</h3>
+            <ul>
+              <li>Follow any unique instructions for specific rooms</li>
+              <li>Follow specific instructions for rooms with owners' belongings</li>
+              <li>Leave food in the fridge when specifically instructed</li>
+              <li>Report any locked appliances (e.g., fridges) immediately</li>
+            </ul>
+          </div>
+          
+          <div class="section">
+            <h3>Keys and Access</h3>
+            <ul>
+              <li>Return keys to the black key drop box at the end of the day</li>
+              <li>Front gate lockbox code is 1925#</li>
+              <li>Linen room lockbox code is 1962</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Notes, Tips and Reminders Tab -->
+        <div id="notes-tips" class="tab-content">
+          <h2>NOTES, TIPS AND REMINDERS LIST</h2>
+          
+          <div class="section">
+            <h3>General Procedures</h3>
+            <ul>
+              <li>Clarify arrival/parking with management; front gate lockbox code will be provided#</li>
+              <li>Secure keys daily and always return to the office/dropbox; linen room lockbox will be provided</li>
+              <li>Report room start/finish times and any issues immediately via group chat or app</li>
+              <li>Always clean Back-to-Back (B2B) rooms first as new guests are arriving that day</li>
+              <li>Use a fresh mop head per room, no liners in recycling bins, and lock all doors upon exit</li>
+              <li>Manage linen bags correctly and dispose of all apartment rubbish in the main garbage area, not by the dryer</li>
+              <li>Immediately report and photograph exceptionally dirty rooms or any damages found</li>
+              <li>Constantly check the group chat/app for frequent schedule changes and updates from management</li>
+              <li>Wear a black t-shirt if possible; shorts are acceptable attire</li>
+              <li>"Service" cleans are for occupied rooms (10 am-3 pm); announce entry and focus on linen, towels, and a light clean</li>
+              <li>Use the cleaning app/tracker for all room status updates</li>
+              <li>Return keys to the black key drop box at the end of the day</li>
+              <li>Be aware of deep clean scheduling and requirements</li>
+            </ul>
+          </div>
+          
+          <div class="section">
+            <h3>Communication and Reporting</h3>
+            <ul>
+              <li>Report full/broken dishwashers; ensure they run and have two cleaning sachets</li>
+              <li>Report all maintenance issues found (e.g., leaks, broken items) with photos if possible</li>
+              <li>Immediately report any guest items found (lost and found) to management</li>
+              <li>Handle service clean entries politely if guests are present but unaware</li>
+              <li>Report when starting and finishing each room via the app</li>
+              <li>Notify management immediately if a room is exceptionally dirty with photos</li>
+              <li>Report any maintenance issues found (e.g., lights not working, doors not opening properly)</li>
+              <li>Check for special instructions regarding owners' belongings or food in fridges</li>
+            </ul>
+          </div>
+          
+          <div class="section">
+            <h3>Cleaning Standards and Supplies</h3>
+            <ul>
+              <li>Stock bathrooms with one full toilet roll and one spare only; check cupboards</li>
+              <li>Ensure correct towels, scourers, and cloths are present and tidy utensil drawers</li>
+              <li>Thoroughly clean floors (especially sandy ones), showers, all surfaces, ovens, and balconies</li>
+              <li>Use a maximum of 10ml of Bobby Dazzler in mop handles; rinse handles daily</li>
+              <li>Return dirty mop heads as instructed and don't leave supplies by the dryer</li>
+              <li>Allow sofa cushions to fully dry after professional cleaning</li>
+              <li>Use a fresh mop head per room and wash them after use</li>
+              <li>Verify all lights are functioning in each room</li>
+              <li>Check that sliding doors to balconies open and close properly</li>
+            </ul>
+          </div>
+          
+          <div class="section">
+            <h3>Inventory and Room Setup</h3>
+            <ul>
+              <li>Verify crockery/cutlery has sets of 6; report missing or remove excess to the office</li>
+              <li>Ensure furniture (e.g., coffee tables) is correctly positioned per room standards</li>
+              <li>Be prepared to assist colleagues with rooms if requested by management</li>
+              <li>Pay special attention to rooms after professional carpet/upholstery cleaning</li>
+              <li>Check dishwashers are emptied and running properly</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Fix-Ups List Tab -->
+        <div id="fix-ups" class="tab-content">
+          <h2>COMMON ISSUES OF FIX UPS LIST</h2>
+          
+          <div class="section">
+            <div class="rates-box">
+              <h4>PAYMENT BONUS INFORMATION</h4>
+              <p>A $10 bonus is added to your base rate when no fix ups are required. The 'No Fix Ups' rate includes this $10 bonus when quality standards are met upon first inspection. The 'Fix Ups Required' rate applies if any basic housekeeping issues listed below need correction.</p>
+            </div>
+            
+            <div class="fix-up-category">
+              <h4>Bathroom Issues</h4>
+              <ol class="fix-up-list">
+                <li>No bathmat in ensuite</li>
+                <li>Shower is mouldy and smells</li>
+                <li>Toilet needs a wipe/scrub</li>
+                <li>Floor needs a mop in bathroom</li>
+                <li>Incorrect bath mat used instead of hand towel</li>
+                <li>Shower has sand in the bottom</li>
+                <li>Missing hand towel in bathroom</li>
+                <li>Bathroom surfaces need scrubbing with green brush</li>
+                <li>Streaky mirrors or glass in bathroom</li>
+                <li>Shower screen scum not removed</li>
+                <li>Vanity not properly wiped</li>
+              </ol>
+            </div>
+            
+            <div class="fix-up-category">
+              <h4>Kitchen and Appliance Issues</h4>
+              <ol class="fix-up-list" start="12">
+                <li>Kitchen drawers need tidying</li>
+                <li>Oven needs tin foil on racks</li>
+                <li>Sink needs drying off</li>
+                <li>Recycling bin needs wiping out</li>
+                <li>Fridge needs a wipe inside and out</li>
+                <li>Missing green scourer in dish wash caddy</li>
+                <li>Missing dish wash powder/sachets</li>
+                <li>Missing cloth in kitchen caddy</li>
+                <li>Kitchen surfaces not wiped (benchtop crumbs)</li>
+                <li>Sink unclean</li>
+              </ol>
+            </div>
+            
+            <div class="fix-up-category">
+              <h4>Floor and Surface Issues</h4>
+              <ol class="fix-up-list" start="22">
+                <li>Floor hasn't been mopped properly in living area</li>
+                <li>Floors are sandy, need vacuuming and mopping again</li>
+                <li>Sand on dining table and side tables</li>
+                <li>Missed dusting on reachable surfaces (tables, sills)</li>
+                <li>Floors not properly vacuumed (visible debris)</li>
+                <li>Floors not properly mopped (streaks)</li>
+              </ol>
+            </div>
+            
+            <div class="fix-up-category">
+              <h4>Waste Management Issues</h4>
+              <ol class="fix-up-list" start="28">
+                <li>Rubbish bin lid needs a wipe over</li>
+                <li>Bin needs a liner</li>
+                <li>Recycling bin not emptied</li>
+                <li>Rubbish bins not emptied</li>
+              </ol>
+            </div>
+            
+            <div class="fix-up-category">
+              <h4>Item Placement Issues</h4>
+              <ol class="fix-up-list" start="32">
+                <li>Patio/balcony needs a tidy/clean</li>
+                <li>Items not replaced correctly (towels, amenities)</li>
+              </ol>
+            </div>
+            
+            <div class="reminder-box">
+              <strong>REMINDER:</strong> A $10 bonus is added to your base rate when no fix-up issues are found upon inspection. If any of the issues listed above are found, the room will need to be fixed and the bonus will not be applied to that room.
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="typeform-container">
-      <div data-tf-live="01JMEC89PCX3FYPHZZG8GHH421"></div>
-      <script src="//embed.typeform.com/next/embed.js"></script>
-    </div>
-
-    <div class="typeform-container">
-      <div data-tf-live="01JMECBW3M26DTZZW7ACJVG692"></div>
-      <script src="//embed.typeform.com/next/embed.js"></script>
-    </div>
-
-    <!-- Go Professional Section -->
-    <h3>Go Professional! (Optional)</h3>
-    <p>These courses are optional but highly recommended for those looking to advance their skills.</p>
-
-    <div class="typeform-container">
-      <div data-tf-live="01JMEC6XDXD3FGJV34VHMZQ6S6"></div>
-      <script src="//embed.typeform.com/next/embed.js"></script>
-    </div>
-
-    <div class="typeform-container">
-      <div data-tf-live="01JMEC9QG76ZZ81RAYKMX6MZ47"></div>
-      <script src="//embed.typeform.com/next/embed.js"></script>
-    </div>
-
-    <!-- Certificate Message -->
-    <p>Each course completion will generate a certificate, this will be issued within 48 hours, or you may contact hi@spruces.co to request your certificate sooner!</p>
   </main>
 
   <footer>
     © 2025 Bella Mare Beachside Apartments
   </footer>
+
+  <script>
+    // Tab functionality for cleaning lists
+    function openTab(evt, tabName) {
+      // Hide all tab content
+      var tabcontent = document.getElementsByClassName("tab-content");
+      for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].classList.remove("active");
+      }
+      
+      // Remove "active" class from all tab buttons
+      var tablinks = document.getElementsByClassName("tab-button");
+      for (var i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove("active");
+      }
+      
+      // Show the current tab and add "active" class to the button that opened the tab
+      document.getElementById(tabName).classList.add("active");
+      evt.currentTarget.classList.add("active");
+    }
+    
+    // Main page tab functionality
+    function openMainTab(evt, tabName) {
+      // Hide all main tab content
+      var tabcontent = document.getElementsByClassName("main-tab-content");
+      for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].classList.remove("active");
+      }
+      
+      // Remove "active" class from all main tab buttons
+      var tablinks = document.getElementsByClassName("main-tab-button");
+      for (var i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove("active");
+      }
+      
+      // Show the current tab and add "active" class to the button that opened the tab
+      document.getElementById(tabName).classList.add("active");
+      evt.currentTarget.classList.add("active");
+    }
+  </script>
 </body>
 </html>
