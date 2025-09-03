@@ -4,137 +4,188 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bella Mare Beachside Academy</title>
+  <!-- Added Google Fonts for a cleaner, more modern look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      /* Using Inter as the primary font with a standard fallback */
+      font-family: 'Inter', Arial, sans-serif;
       background-color: #f9f9f9;
       color: #333;
     }
+
     header {
       background-color: #2b547e;
       color: #fff;
-      padding: 1rem;
+      padding: 1.5rem 1rem;
       text-align: center;
     }
+
     nav {
-      background-color: #eee;
+      background-color: #f0f0f0;
       padding: 0.5rem 1rem;
       display: flex;
-      justify-content: space-between;
+      justify-content: center; /* Centered nav items for a cleaner look */
       align-items: center;
+      border-bottom: 1px solid #ddd;
     }
+
     nav a {
       text-decoration: none;
       color: #2b547e;
-      margin-right: 1rem;
+      margin: 0 1rem;
       font-weight: bold;
+      transition: color 0.3s;
     }
+
+    nav a:hover {
+        color: #4d7eac;
+    }
+
     main {
       max-width: 800px;
-      margin: 1rem auto;
+      margin: 2rem auto;
       padding: 1rem;
     }
-    h2, h3, h4 {
+
+    h1, h2, h3, h4 {
       color: #2b547e;
     }
+    
+    h3 {
+        margin-top: 2.5rem; /* Increased top margin for better separation */
+    }
+
     .video-container {
       position: relative;
       padding-bottom: 56.25%; /* 16:9 aspect ratio */
       height: 0;
       overflow: hidden;
       margin: 1rem 0;
-      border-radius: 8px; /* Rounded corners for video containers */
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
+
     .video-container iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      border-radius: 8px; /* Ensure iframe also has rounded corners */
+      border-radius: 8px;
+      /* IMPROVEMENT: Replaced obsolete `frameborder` attribute with CSS */
+      border: none;
     }
-    .video-title { /* Retained for existing videos, but new ones will follow user's simpler structure */
+
+    .video-title {
       font-weight: bold;
-      margin-top: 20px;
-      margin-bottom: 5px;
+      margin-top: 2rem; /* Adjusted for better spacing */
+      margin-bottom: 0.5rem;
       color: #2b547e;
     }
+
     footer {
       text-align: center;
       background: #2b547e;
       color: white;
-      padding: 0.5rem;
-      /* position: relative; */ /* Removed to avoid potential overlap issues, let it flow naturally */
-      bottom: 0;
+      padding: 1rem;
       width: 100%;
-      margin-top: 2rem; /* Increased margin for better spacing */
+      margin-top: 2rem;
     }
     
-    /* Tab styles */
+    /* --- REFACTORED TAB STYLES --- */
+    /* Combined styles for both tab systems to avoid repetition (DRY Principle) */
     .tab-container {
       margin: 20px 0;
     }
     .tab-buttons {
       display: flex;
-      flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+      flex-wrap: wrap; 
       margin-bottom: 15px;
-      border-bottom: 1px solid #ddd;
     }
-    .tab-button {
-      background-color: #eee;
+
+    /* Base button style */
+    .tab-button-base {
       border: none;
       outline: none;
       cursor: pointer;
-      padding: 10px 15px;
+      padding: 12px 20px;
       margin-right: 5px;
-      margin-bottom: 5px; /* Added for spacing when wrapped */
-      border-radius: 5px 5px 0 0;
+      margin-bottom: 5px;
+      border-radius: 5px;
       font-weight: bold;
-      color: #2b547e;
+      font-family: 'Inter', sans-serif;
       transition: background-color 0.3s, color 0.3s;
     }
-    .tab-button:hover {
-      background-color: #ddd;
-    }
-    .tab-button.active {
+
+    /* Main tab button specific styles */
+    .main-tab-button {
       background-color: #2b547e;
       color: white;
     }
+    .main-tab-button:hover {
+      background-color: #1e3c5c;
+    }
+    .main-tab-button.active {
+      background-color: #4d7eac;
+    }
+
+    /* Nested cleaning list tab button specific styles */
+    .nested-tab-button {
+        background-color: #eee;
+        color: #2b547e;
+        padding: 10px 15px;
+        border-radius: 5px 5px 0 0;
+    }
+    .nested-tab-button:hover {
+        background-color: #ddd;
+    }
+    .nested-tab-button.active {
+        background-color: #2b547e;
+        color: white;
+    }
+
+    /* Content styles */
     .tab-content {
       display: none;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-top: none;
-      border-radius: 0 0 5px 5px;
-      background-color: white;
     }
     .tab-content.active {
       display: block;
     }
+    
+    .nested-tab-content-container {
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+        background-color: white;
+    }
+    /* --- END REFACTORED TAB STYLES --- */
+
     .section {
       margin-bottom: 20px;
       padding-bottom: 10px;
       border-bottom: 1px solid #eee;
     }
+
     .section:last-child {
       border-bottom: none;
     }
+
     ul {
       padding-left: 20px;
     }
+
     li {
       margin-bottom: 8px;
       position: relative;
       padding-left: 5px;
     }
-    .fix-up-list {
-      list-style-type: decimal; /* Default to decimal for semantic correctness */
-      counter-reset: item;
-      padding-left: 0; /* Remove default padding for ol */
-    }
+    
     .fix-up-category {
       margin-bottom: 20px;
       background-color: #f8f9fa;
@@ -142,18 +193,27 @@
       padding: 15px;
       border-left: 4px solid #2b547e;
     }
+    
     .fix-up-category h4 {
       margin-top: 0;
       margin-bottom: 10px;
       color: #2b547e;
     }
+
+    .fix-up-list {
+      list-style-type: decimal;
+      counter-reset: item;
+      padding-left: 0;
+    }
+    
     .fix-up-list li {
       counter-increment: item;
-      list-style-type: none; /* Remove default list style */
+      list-style-type: none;
       position: relative;
-      padding-left: 30px; /* Increased padding for number */
-      margin-bottom: 10px; /* Spacing between list items */
+      padding-left: 30px;
+      margin-bottom: 10px;
     }
+    
     .fix-up-list li:before {
       content: counter(item) ".";
       position: absolute;
@@ -161,86 +221,99 @@
       font-weight: bold;
       color: #2b547e;
     }
-    .reminder-box {
-      background-color: #f8d7da;
-      color: #721c24;
+
+    .reminder-box, .rates-box {
       padding: 15px;
       border-radius: 5px;
       margin-top: 20px;
       font-weight: 500;
+    }
+
+    .reminder-box {
+      background-color: #f8d7da;
+      color: #721c24;
       border: 1px solid #f5c6cb;
     }
     
     .rates-box {
       background-color: #d4edda;
       color: #155724;
-      padding: 15px;
-      border-radius: 5px;
-      margin-top: 20px;
-      font-weight: 500;
       border: 1px solid #c3e6cb;
     }
-    
-    /* Main page tabs */
-    .main-tab-container {
-      margin: 20px 0;
+
+    /* --- NEW STYLES for Team Training Checklist --- */
+    #team-checklist strong {
+      color: #c0392b; /* A highlight color for important text */
     }
-    .main-tab-buttons {
-      display: flex;
-      flex-wrap: wrap; /* Allow buttons to wrap */
-      margin-bottom: 15px;
+    .training-grid {
+        display: grid;
+        grid-template-columns: 1fr; /* Default to single column */
+        gap: 2rem;
     }
-    .main-tab-button {
-      background-color: #2b547e;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      padding: 12px 20px;
-      margin-right: 5px;
-      margin-bottom: 5px; /* Added for spacing when wrapped */
-      border-radius: 5px;
-      font-weight: bold;
-      color: white;
-      transition: background-color 0.3s;
+    /* Use two columns on tablets and desktops */
+    @media (min-width: 768px) {
+        .training-grid {
+            grid-template-columns: 1fr 1fr;
+        }
     }
-    .main-tab-button:hover {
-      background-color: #1e3c5c;
+    .training-column .section {
+        margin-bottom: 20px;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        padding: 15px;
+        border-left: 4px solid #2b547e;
     }
-    .main-tab-button.active {
-      background-color: #4d7eac; /* A slightly lighter shade for active, or keep as is */
+     .training-column h3 {
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 1rem;
     }
-    .main-tab-content {
-      display: none;
+    .training-column h4 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        color: #2b547e;
     }
-    .main-tab-content.active {
-      display: block;
+    .training-column ul {
+        padding-left: 20px;
+        list-style-type: disc;
+        margin: 0;
     }
-    
+     .training-column ul li {
+        padding-left: 5px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+    }
+    .training-column .section:last-child {
+         margin-bottom: 0;
+    }
+    /* --- END NEW STYLES --- */
+
     /* Media Queries for Mobile Optimization */
-    @media (max-width: 768px) { /* Adjusted breakpoint for tablets and larger phones */
-        nav {
-            flex-direction: column;
-            align-items: center;
-        }
-        nav a {
-            margin-right: 0;
-            margin-bottom: 0.5rem;
-        }
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+      nav a {
+        margin: 0.5rem 0;
+      }
     }
 
     @media (max-width: 600px) {
       main {
-        padding: 0.5rem; /* Reduce padding on mobile */
+        padding: 0.5rem;
+        margin-top: 1rem;
       }
-      .tab-buttons, .main-tab-buttons {
-        flex-direction: column; /* Stack buttons vertically */
+      .tab-buttons {
+        flex-direction: column;
       }
-      .tab-button, .main-tab-button {
-        margin-right: 0; /* Remove right margin when stacked */
-        margin-bottom: 5px;
-        border-radius: 5px; /* Consistent border radius */
-        width: 100%; /* Make buttons full width */
-        text-align: center; /* Center text in buttons */
+      .tab-button-base {
+        margin-right: 0;
+        border-radius: 5px;
+        width: 100%;
+        text-align: center;
       }
     }
   </style>
@@ -250,159 +323,96 @@
     <h1>Bella Mare Beachside Apartments</h1>
   </header>
 
-  <!-- Simple navigation menu -->
   <nav>
-    <div>
-      <a href="quiz.html">Cleaner's Quiz</a>
-      <!-- Add more navigation links here if needed -->
-    </div>
+    <a href="quiz.html">Cleaner's Quiz</a>
+    <!-- Add more navigation links here if needed -->
   </nav>
 
   <main>
     <h2>Bella Mare Beachside Academy</h2>
     
-    <!-- Main page tabs -->
-    <div class="main-tab-container">
-      <div class="main-tab-buttons">
-        <button class="main-tab-button active" onclick="openMainTab(event, 'training-content')">Training Academy</button>
-        <button class="main-tab-button" onclick="openMainTab(event, 'cleaning-lists')">Cleaning Lists</button>
+    <div class="tab-container">
+      <div class="tab-buttons">
+        <button class="tab-button-base main-tab-button active" onclick="openTab(event, 'training-content', 'main-tab-content', 'main-tab-button')">Training Academy</button>
+        <button class="tab-button-base main-tab-button" onclick="openTab(event, 'cleaning-lists', 'main-tab-content', 'main-tab-button')">Cleaning Lists</button>
       </div>
     </div>
     
     <!-- Training Academy Content -->
-    <div id="training-content" class="main-tab-content active">
+    <div id="training-content" class="tab-content main-tab-content active">
       <p>Welcome to Bella Mare Beachside Academy! We're excited to have you on board. Below, you'll find our essential training videos to help you understand our cleaning standards and procedures.</p>
 
-      <!-- Introductory Videos - User's preferred structure -->
       <h3>Introduction to Hotel Bellamare</h3>
       <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/PUSaMUXqG2A?start=9"
-          title="Bella Mare Training Video 1" 
-          frameborder="0"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/PUSaMUXqG2A?start=9" title="Bella Mare Training Video 1" allowfullscreen></iframe>
       </div>
-
       <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/JTtMhVTzX2w?start=10"
-          title="Bella Mare Training Video 2"
-          frameborder="0"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/JTtMhVTzX2w?start=10" title="Bella Mare Training Video 2" allowfullscreen></iframe>
       </div>
 
-      <!-- Essential Videos -->
       <h3>9 Essential Training Videos</h3>
       
       <div class="video-title">Video 1: Linen Area Overview</div>
       <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/mCar8Vew6T0"
-          title="Linen Area Overview"
-          frameborder="0"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/mCar8Vew6T0" title="Linen Area Overview" allowfullscreen></iframe>
       </div>
       
       <div class="video-title">Video 2: Basement Layout and 2 Bedroom Apartment Tour</div>
       <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/C_K7Jy98VSk"
-          title="Basement Layout and 2 Bedroom Apartment Tour"
-          frameborder="0"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/C_K7Jy98VSk" title="Basement Layout and 2 Bedroom Apartment Tour" allowfullscreen></iframe>
       </div>
       
       <div class="video-title">Video 3: Kitchen Setup and Standards</div>
       <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/M_BGt7dfLrw"
-          title="Kitchen Setup and Standards"
-          frameborder="0"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/M_BGt7dfLrw" title="Kitchen Setup and Standards" allowfullscreen></iframe>
       </div>
       
       <div class="video-title">Video 4: Living Room Instructions</div>
       <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/JDQAwUeYFzA"
-          title="Living Room Instructions"
-          frameborder="0"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/JDQAwUeYFzA" title="Living Room Instructions" allowfullscreen></iframe>
       </div>
       
       <div class="video-title">Video 5: Apartment 2 Bedrooms Split Level Tour</div>
       <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/WWBDTjWPs2Y"
-          title="Apartment 2 Bedrooms Split Level Tour"
-          frameborder="0"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/WWBDTjWPs2Y" title="Apartment 2 Bedrooms Split Level Tour" allowfullscreen></iframe>
       </div>
       
       <div class="video-title">Video 6: Vacuum Cleaner Guidelines</div>
       <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/0oFPOJC5Fbk"
-          title="Vacuum Cleaner Guidelines"
-          frameborder="0"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/0oFPOJC5Fbk" title="Vacuum Cleaner Guidelines" allowfullscreen></iframe>
       </div>
       
       <div class="video-title">Video 7: Iron and Ironing Board Placement</div>
       <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/JKfA_4O_T5w"
-          title="Iron and Ironing Board Placement"
-          frameborder="0"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/JKfA_4O_T5w" title="Iron and Ironing Board Placement" allowfullscreen></iframe>
       </div>
       
       <div class="video-title">Video 8: Bellamare Entrance and Basement</div>
       <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/msGOOfOxs0E"
-          title="Bellamare Entrance and Basement"
-          frameborder="0"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/msGOOfOxs0E" title="Bellamare Entrance and Basement" allowfullscreen></iframe>
       </div>
       
       <div class="video-title">Video 9: Couch Maintenance</div>
       <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/dgVW0WHDcww"
-          title="Couch Maintenance"
-          frameborder="0"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/dgVW0WHDcww" title="Couch Maintenance" allowfullscreen></iframe>
       </div>
     </div>
     
     <!-- Cleaning Lists Content -->
-    <div id="cleaning-lists" class="main-tab-content">
+    <div id="cleaning-lists" class="tab-content main-tab-content">
       <p>Welcome to the Bella Mare cleaning reference page. Here you'll find all the essential cleaning lists, notes, and reminders to ensure our high standards are maintained.</p>
 
-      <!-- Tab Navigation -->
       <div class="tab-container">
         <div class="tab-buttons">
-          <button class="tab-button active" onclick="openTab(event, 'cleaning-checklist')">Cleaning Checklist</button>
-          <button class="tab-button" onclick="openTab(event, 'notes-tips')">Notes, Tips & Reminders</button>
-          <button class="tab-button" onclick="openTab(event, 'fix-ups')">Fix-Ups List</button>
+          <button class="tab-button-base nested-tab-button active" onclick="openTab(event, 'cleaning-checklist', 'nested-tab-content', 'nested-tab-button')">Cleaning Checklist</button>
+          <button class="tab-button-base nested-tab-button" onclick="openTab(event, 'notes-tips', 'nested-tab-content', 'nested-tab-button')">Notes, Tips & Reminders</button>
+          <button class="tab-button-base nested-tab-button" onclick="openTab(event, 'fix-ups', 'nested-tab-content', 'nested-tab-button')">Fix-Ups List</button>
+          <!-- NEW: Added button for the team training checklist -->
+          <button class="tab-button-base nested-tab-button" onclick="openTab(event, 'team-checklist', 'nested-tab-content', 'nested-tab-button')">Hotel Cleaning Team Checklist for TRAINING</button>
         </div>
 
-        <!-- Cleaning Checklist Tab -->
-        <div id="cleaning-checklist" class="tab-content active">
+        <div id="cleaning-checklist" class="tab-content nested-tab-content active nested-tab-content-container">
           <h2>CLEANING CHECKLIST (Things to check)</h2>
-          
           <div class="section">
             <h3>General Cleaning Tasks</h3>
             <ul>
@@ -414,7 +424,6 @@
               <li>Check that sliding doors to balconies open and close properly</li>
             </ul>
           </div>
-          
           <div class="section">
             <h3>Bedding and Linens</h3>
             <ul>
@@ -424,7 +433,6 @@
               <li>Follow specific linen instructions for certain rooms</li>
             </ul>
           </div>
-          
           <div class="section">
             <h3>Kitchen and Appliances</h3>
             <ul>
@@ -437,7 +445,6 @@
               <li>Ensure dishwashers are emptied when needed</li>
             </ul>
           </div>
-          
           <div class="section">
             <h3>Trash and Recycling</h3>
             <ul>
@@ -445,7 +452,6 @@
               <li>Do not put bin liners in recycling bins</li>
             </ul>
           </div>
-          
           <div class="section">
             <h3>Restocking Supplies</h3>
             <ul>
@@ -453,7 +459,6 @@
               <li>Ensure availability of toilet rolls</li>
             </ul>
           </div>
-          
           <div class="section">
             <h3>Windows and Fixtures</h3>
             <ul>
@@ -462,7 +467,6 @@
               <li>Report any maintenance issues with doors or windows</li>
             </ul>
           </div>
-          
           <div class="section">
             <h3>Room Specific Instructions</h3>
             <ul>
@@ -472,7 +476,6 @@
               <li>Report any locked appliances (e.g., fridges) immediately</li>
             </ul>
           </div>
-          
           <div class="section">
             <h3>Keys and Access</h3>
             <ul>
@@ -483,10 +486,8 @@
           </div>
         </div>
 
-        <!-- Notes, Tips and Reminders Tab -->
-        <div id="notes-tips" class="tab-content">
+        <div id="notes-tips" class="tab-content nested-tab-content nested-tab-content-container">
           <h2>NOTES, TIPS AND REMINDERS LIST</h2>
-          
           <div class="section">
             <h3>General Procedures</h3>
             <ul>
@@ -505,7 +506,6 @@
               <li>Be aware of deep clean scheduling and requirements</li>
             </ul>
           </div>
-          
           <div class="section">
             <h3>Communication and Reporting</h3>
             <ul>
@@ -519,7 +519,6 @@
               <li>Check for special instructions regarding owners' belongings or food in fridges</li>
             </ul>
           </div>
-          
           <div class="section">
             <h3>Cleaning Standards and Supplies</h3>
             <ul>
@@ -534,7 +533,6 @@
               <li>Check that sliding doors to balconies open and close properly</li>
             </ul>
           </div>
-          
           <div class="section">
             <h3>Inventory and Room Setup</h3>
             <ul>
@@ -547,16 +545,13 @@
           </div>
         </div>
 
-        <!-- Fix-Ups List Tab -->
-        <div id="fix-ups" class="tab-content">
+        <div id="fix-ups" class="tab-content nested-tab-content nested-tab-content-container">
           <h2>COMMON ISSUES OF FIX UPS LIST</h2>
-          
           <div class="section">
             <div class="rates-box">
               <h4>PAYMENT BONUS INFORMATION</h4>
               <p>A $10 bonus is added to your base rate when no fix ups are required. The 'No Fix Ups' rate includes this $10 bonus when quality standards are met upon first inspection. The 'Fix Ups Required' rate applies if any basic housekeeping issues listed below need correction.</p>
             </div>
-            
             <div class="fix-up-category">
               <h4>Bathroom Issues</h4>
               <ol class="fix-up-list">
@@ -573,7 +568,6 @@
                 <li>Vanity not properly wiped</li>
               </ol>
             </div>
-            
             <div class="fix-up-category">
               <h4>Kitchen and Appliance Issues</h4>
               <ol class="fix-up-list" start="12">
@@ -589,7 +583,6 @@
                 <li>Sink unclean</li>
               </ol>
             </div>
-            
             <div class="fix-up-category">
               <h4>Floor and Surface Issues</h4>
               <ol class="fix-up-list" start="22">
@@ -601,7 +594,6 @@
                 <li>Floors not properly mopped (streaks)</li>
               </ol>
             </div>
-            
             <div class="fix-up-category">
               <h4>Waste Management Issues</h4>
               <ol class="fix-up-list" start="28">
@@ -611,7 +603,6 @@
                 <li>Rubbish bins not emptied</li>
               </ol>
             </div>
-            
             <div class="fix-up-category">
               <h4>Item Placement Issues</h4>
               <ol class="fix-up-list" start="32">
@@ -619,12 +610,129 @@
                 <li>Items not replaced correctly (towels, amenities)</li>
               </ol>
             </div>
-            
-            <div class="reminder-box">
+             <div class="reminder-box">
               <strong>REMINDER:</strong> A $10 bonus is added to your base rate when no fix-up issues are found upon inspection. If any of the issues listed above are found, the room will need to be fixed and the bonus will not be applied to that room.
             </div>
           </div>
         </div>
+
+        <!-- NEW: Added content for the team training checklist -->
+        <div id="team-checklist" class="tab-content nested-tab-content nested-tab-content-container">
+            <h2>Hotel Cleaning Team Checklist for TRAINING</h2>
+            <p>Side-by-Side Tasks for Efficient Training. The Trainer focuses on quality and detail, while the Trainee handles the initial prep and general cleaning.</p>
+            
+            <div class="training-grid">
+                <!-- Trainer Column -->
+                <div class="training-column">
+                    <h3>Trainer Tasks (Lead & Quality)</h3>
+                    <div class="section">
+                        <h4>Part 1: The Daily Briefing</h4>
+                        <ul>
+                            <li>Explain the schedule, prioritizing <strong>Back-to-Back (B2B)</strong> rooms.</li>
+                            <li>Show how to use the group chat/app for communication.</li>
+                            <li>Explain key security and where to get fresh supplies.</li>
+                            <li>Set the expectation for a fast-paced, parallel workflow.</li>
+                        </ul>
+                    </div>
+                    <div class="section">
+                        <h4>Part 2: Entry & Room Prep</h4>
+                        <ul>
+                            <li>Enter and do a quick, expert scan for any <strong>damage, major issues, or lost property</strong>.</li>
+                            <li>Take photos of any problems and report them immediately.</li>
+                            <li>Head straight to the kitchen to begin complex tasks.</li>
+                        </ul>
+                    </div>
+                     <div class="section">
+                        <h4>Part 3: Kitchen</h4>
+                         <ul>
+                            <li>Clean the <strong>inside</strong> of the fridge, freezer, and microwave.</li>
+                            <li>Check and clean the oven.</li>
+                            <li>Check dishwasher filter, add <strong>2 sachets</strong>, and start the cycle.</li>
+                            <li>Clean and polish sink, taps, and benchtops to a high-shine standard.</li>
+                        </ul>
+                    </div>
+                    <div class="section">
+                        <h4>Part 4: Bathrooms</h4>
+                        <ul>
+                            <li>Clean the shower and mirrors, focusing on a <strong>streak-free finish</strong>.</li>
+                            <li>Apply specialized chemicals like ‘Destroy’ mould spray where needed.</li>
+                            <li>Do the final, detailed clean and polish of the vanity, basin, and taps.</li>
+                        </ul>
+                    </div>
+                    <div class="section">
+                        <h4>Part 5: Bedrooms & Lounge</h4>
+                        <ul>
+                            <li>Make all beds to the <strong>perfect hotel standard</strong>.</li>
+                            <li>Straighten all lounge furniture, fluff and arrange cushions.</li>
+                        </ul>
+                    </div>
+                    <div class="section">
+                        <h4>Part 6: Final Walkthrough & Exit</h4>
+                        <ul>
+                            <li>While Trainee mops, conduct a fast <strong>2-minute quality check</strong>.</li>
+                            <li>Flick every light switch, slide balcony door, check that taps shine.</li>
+                            <li>Report <strong>"Room [Number] Finished"</strong> on the app and lock all doors.</li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <!-- Trainee Column -->
+                <div class="training-column">
+                    <h3>Trainee Tasks (Learn & Execute)</h3>
+                     <div class="section">
+                        <h4>Part 1: The Daily Briefing</h4>
+                        <ul>
+                            <li>Listen, ask questions, and understand the day's priorities.</li>
+                            <li>Acknowledge understanding of key rules like B2B first, key security, and fresh mop heads.</li>
+                        </ul>
+                    </div>
+                    <div class="section">
+                        <h4>Part 2: Entry & Room Prep</h4>
+                        <ul>
+                            <li>Immediately strip all beds and gather all used towels.</li>
+                            <li>Collect all rubbish from every bin into one main bag.</li>
+                            <li>Place full linen and rubbish bags near the front door.</li>
+                        </ul>
+                    </div>
+                     <div class="section">
+                        <h4>Part 3: Kitchen</h4>
+                        <ul>
+                            <li>Wipe down the <strong>exterior</strong> of all appliances.</li>
+                            <li>Wipe down all kitchen cupboard fronts.</li>
+                            <li>Wipe rubbish bin (replace liner) and recycling bin (<strong>NO liner</strong>).</li>
+                            <li>Tidy the cutlery and utensil drawers.</li>
+                        </ul>
+                    </div>
+                    <div class="section">
+                        <h4>Part 4: Bathrooms</h4>
+                        <ul>
+                            <li>Clean the toilet thoroughly, including the base and behind.</li>
+                            <li>Wipe the inside and outside of all bathroom cupboards.</li>
+                            <li>Restock toilet paper: <strong>1 full roll on holder, 1 spare roll</strong>.</li>
+                            <li>Vacuum and mop the bathroom floor.</li>
+                        </ul>
+                    </div>
+                    <div class="section">
+                        <h4>Part 5: Bedrooms & Lounge</h4>
+                        <ul>
+                            <li>Dust all surfaces: tables, lamps, TV units, etc.</li>
+                            <li>Clean any windows or glass surfaces.</li>
+                            <li>Vacuum all floors, getting under beds and sofa cushions.</li>
+                            <li>Place correct number of towels on beds after they are made.</li>
+                        </ul>
+                    </div>
+                    <div class="section">
+                        <h4>Part 6: Final Walkthrough & Exit</h4>
+                        <ul>
+                            <li>Do the final mop of the main living area and kitchen floors.</li>
+                            <li>Take consolidated trash and linen bags to the main disposal area.</li>
+                            <li>Help with a final visual check as directed by the Trainer.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
       </div>
     </div>
   </main>
@@ -634,74 +742,34 @@
   </footer>
 
   <script>
-    // Tab functionality for cleaning lists
-    function openTab(evt, tabName) {
-      // Hide all tab content
-      var tabcontent = document.getElementsByClassName("tab-content");
-      for (var i = 0; i < tabcontent.length; i++) {
+    // REFACTORED JAVASCRIPT: A single, reusable function now handles all tab systems.
+    // It takes the class names for the content and buttons as arguments.
+    function openTab(evt, tabName, contentClassName, buttonClassName) {
+      // Hide all tab content for the specific tab system
+      const tabcontent = document.getElementsByClassName(contentClassName);
+      for (let i = 0; i < tabcontent.length; i++) {
         tabcontent[i].classList.remove("active");
       }
       
-      // Remove "active" class from all tab buttons
-      var tablinks = document.getElementsByClassName("tab-button");
-      for (var i = 0; i < tablinks.length; i++) {
+      // Remove "active" class from all tab buttons for the specific tab system
+      const tablinks = document.getElementsByClassName(buttonClassName);
+      for (let i = 0; i < tablinks.length; i++) {
         tablinks[i].classList.remove("active");
       }
       
-      // Show the current tab and add "active" class to the button that opened the tab
-      var currentTab = document.getElementById(tabName);
-      if (currentTab) { // Check if element exists
+      // Show the current tab and add "active" class to the button that opened it
+      const currentTab = document.getElementById(tabName);
+      if (currentTab) {
         currentTab.classList.add("active");
       }
-      if (evt && evt.currentTarget) { // Check if event and target exist
-         evt.currentTarget.classList.add("active");
-      }
-    }
-    
-    // Main page tab functionality
-    function openMainTab(evt, tabName) {
-      // Hide all main tab content
-      var tabcontent = document.getElementsByClassName("main-tab-content");
-      for (var i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].classList.remove("active");
-      }
-      
-      // Remove "active" class from all main tab buttons
-      var tablinks = document.getElementsByClassName("main-tab-button");
-      for (var i = 0; i < tablinks.length; i++) {
-        tablinks[i].classList.remove("active");
-      }
-      
-      // Show the current tab and add "active" class to the button that opened the tab
-      var currentMainTab = document.getElementById(tabName);
-      if (currentMainTab) { // Check if element exists
-        currentMainTab.classList.add("active");
-      }
-       if (evt && evt.currentTarget) { // Check if event and target exist
+      if (evt && evt.currentTarget) {
         evt.currentTarget.classList.add("active");
       }
     }
 
-    // Ensure the first tab is active on page load for both tab sets
-    document.addEventListener('DOMContentLoaded', function() {
-        // Activate first main tab
-        const firstMainTabButton = document.querySelector('.main-tab-button');
-        if (firstMainTabButton) {
-            openMainTab({ currentTarget: firstMainTabButton }, 'training-content');
-        }
-
-        // Activate first cleaning list tab (if cleaning lists tab is active)
-        // This needs to be conditional or handled when the cleaning-lists tab itself is shown.
-        // For simplicity, if you want the first sub-tab of cleaning-lists to be active by default
-        // when 'cleaning-lists' main tab is clicked, you can call openTab from within openMainTab
-        // or ensure the HTML has the 'active' class set correctly by default.
-        // The current HTML already has the first sub-tab as active, which is good.
-        const firstCleaningListTabButton = document.querySelector('#cleaning-lists .tab-button');
-         if (firstCleaningListTabButton && document.getElementById('cleaning-checklist')) {
-            // No explicit call needed here if HTML defaults are correct
-            // openTab({currentTarget: firstCleaningListTabButton}, 'cleaning-checklist');
-        }
-    });
+    // NOTE: The initial active state is now set directly in the HTML by adding the 'active' class.
+    // This removes the need for a 'DOMContentLoaded' event listener for this functionality, simplifying the code.
   </script>
 </body>
 </html>
+
