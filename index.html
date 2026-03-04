@@ -80,6 +80,20 @@
 
     <main class="flex-grow max-w-4xl mx-auto w-full px-4 py-8 space-y-8">
         
+        <!-- First Time Banner -->
+        <div id="first-time-banner" class="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl p-6 text-white shadow-xl text-center relative overflow-hidden">
+            <button onclick="document.getElementById('first-time-banner').style.display='none'; localStorage.setItem('bellamare-returning','true');" class="absolute top-3 right-4 text-white/70 hover:text-white text-xl">&times;</button>
+            <div class="text-3xl mb-2">ð</div>
+            <h2 class="text-xl sm:text-2xl font-bold mb-2">First Day Here?</h2>
+            <p class="text-emerald-100 text-sm mb-4 max-w-md mx-auto">If this is your first time, we've prepared a quick 2-minute guide with everything you need to get started.</p>
+            <a href="quickstart.html" class="inline-block bg-white text-emerald-700 font-bold px-6 py-3 rounded-xl shadow-lg hover:bg-emerald-50 transition transform hover:scale-105">
+                Yes, Show Me the Quick Start Guide &rarr;
+            </a>
+            <p class="text-emerald-200 text-xs mt-3 cursor-pointer" onclick="document.getElementById('first-time-banner').style.display='none'; localStorage.setItem('bellamare-returning','true');">
+                No thanks, I know my way around
+            </p>
+        </div>
+
         <!-- Hero Welcome -->
         <section class="text-center space-y-2">
             <h2 class="text-3xl md:text-4xl text-slate-800">Welcome Back</h2>
@@ -128,7 +142,7 @@
                 Important Notice: Parking & Access
             </h3>
             <div class="text-amber-800 space-y-3 text-sm md:text-base leading-relaxed">
-                <p>It will probably be easier for them to park in our basement than to try to find a parking spot on the street around here, as it’s pretty crazy with all the building going on.</p>
+                <p>It will probably be easier for them to park in our basement than to try to find a parking spot on the street around here, as itâs pretty crazy with all the building going on.</p>
                 <p>So get them to park at the entrance to our basement, which is on <strong>Boundary St</strong> when they arrive and ring me.</p>
                 <p class="font-semibold">WhatsApp: 0408 638 419</p>
             </div>
@@ -148,19 +162,19 @@
                 <div class="space-y-4">
                     <h3 class="text-xl font-bold border-b border-blue-700 pb-2">Operational Info</h3>
                     <ul class="space-y-3 text-blue-100 text-sm">
-                        <li class="flex items-start italic">• We operate in QLD time!</li>
-                        <li class="flex items-start">• Black t-shirt is the standard uniform.</li>
-                        <li class="flex items-start">• Tools & equipment in HSK shed (basement).</li>
-                        <li class="flex items-start">• Stay hydrated: always carry a water bottle.</li>
+                        <li class="flex items-start italic">â¢ We operate in QLD time!</li>
+                        <li class="flex items-start">â¢ Black t-shirt is the standard uniform.</li>
+                        <li class="flex items-start">â¢ Tools & equipment in HSK shed (basement).</li>
+                        <li class="flex items-start">â¢ Stay hydrated: always carry a water bottle.</li>
                     </ul>
                 </div>
                 <div class="space-y-4">
                     <h3 class="text-xl font-bold border-b border-blue-700 pb-2">Room Guide</h3>
                     <ul class="space-y-3 text-blue-100 text-sm">
-                        <li class="flex items-start">• Apartments 2–32: 2-bed layouts</li>
-                        <li class="flex items-start">• Villas 33–55: 2-bed options</li>
-                        <li class="flex items-start">• Villa 38: Exclusive 3-bed layout</li>
-                        <li class="flex items-start">• Allow 5-7 mins for arrival/parking.</li>
+                        <li class="flex items-start">â¢ Apartments 2â32: 2-bed layouts</li>
+                        <li class="flex items-start">â¢ Villas 33â55: 2-bed options</li>
+                        <li class="flex items-start">â¢ Villa 38: Exclusive 3-bed layout</li>
+                        <li class="flex items-start">â¢ Allow 5-7 mins for arrival/parking.</li>
                     </ul>
                 </div>
             </div>
@@ -175,11 +189,11 @@
     </main>
 
     <div class="sliding-banner-container">
-        <div class="sliding-text">Welcome to the team! 😊 • Bella Mare Beachside Apartments • Enjoy your shift! • 🌴</div>
+        <div class="sliding-text">Welcome to the team! ð â¢ Bella Mare Beachside Apartments â¢ Enjoy your shift! â¢ ð´</div>
     </div>
 
     <footer class="bg-white border-t border-slate-200 py-6 text-center text-slate-400 text-xs">
-        © 2025 Bella Mare Beachside Apartments. All Rights Reserved.
+        Â© 2025 Bella Mare Beachside Apartments. All Rights Reserved.
     </footer>
 
     <script>
@@ -197,6 +211,13 @@
         }
         setInterval(updateClock, 1000);
         updateClock();
+
+        // Hide first-time banner for returning users
+        if (localStorage.getItem('bellamare-returning') === 'true') {
+            const banner = document.getElementById('first-time-banner');
+            if (banner) banner.style.display = 'none';
+        }
     </script>
 </body>
 </html>
+
