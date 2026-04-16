@@ -3,14 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bella Mare - Payments & Finance</title>
-    <!-- Tailwind CSS -->
+    <title>Bella Mare - Payments &amp; Finance</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;700&amp;display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -24,9 +21,9 @@
                             50: '#f0f9ff',
                             100: '#e0f2fe',
                             500: '#0ea5e9',
-                            600: '#0284c7', // Primary Brand Blue
+                            600: '#0284c7',
                             800: '#075985',
-                            900: '#0c4a6e', // Darker text blue
+                            900: '#0c4a6e',
                         }
                     }
                 }
@@ -34,465 +31,655 @@
         }
     </script>
     <style>
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-        }
-        .table-stripe tr:nth-child(even) {
-            background-color: #f8fafc;
-        }
-        .hidden {
-            display: none;
-        }
-        .btn-toggle {
-            transition: all 0.2s ease-in-out;
-        }
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .table-stripe tr:nth-child(even) { background-color: #f8fafc; }
+        .hidden { display: none; }
+        .btn-toggle { transition: all 0.2s ease-in-out; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        .faq-answer.open { max-height: 500px; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-600 antialiased font-sans">
 
-    <!-- Header / Navbar -->
-    <header class="bg-brand-900 text-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center">
-            <h1 class="text-xl sm:text-2xl font-serif font-bold tracking-wide">Bella Mare <span class="text-brand-500 font-light text-base block sm:inline">Beachside Apartments</span></h1>
-            <nav class="mt-3 sm:mt-0">
-                <a href="#" class="text-brand-100 hover:text-white transition text-sm font-medium">Home</a>
-                <span class="mx-3 text-brand-600">|</span>
-                <a href="#" class="text-white font-medium border-b-2 border-brand-500 pb-1">Payments</a>
-            </nav>
-        </div>
-    </header>
+<!-- Header / Navbar -->
+<header class="bg-brand-900 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center">
+        <h1 class="text-xl sm:text-2xl font-serif font-bold tracking-wide">Bella Mare <span class="text-brand-500 font-light text-base block sm:inline">Beachside Apartments</span></h1>
+        <nav class="mt-3 sm:mt-0 flex flex-wrap gap-x-1 items-center text-sm font-medium">
+            <a href="index.html" class="text-brand-100 hover:text-white transition px-2">Home</a>
+            <span class="text-brand-600">|</span>
+            <a href="payments.html" class="text-white border-b-2 border-brand-500 pb-1 px-2">Payments</a>
+            <span class="text-brand-600">|</span>
+            <a href="deepclean.html" class="text-brand-100 hover:text-white transition px-2">Deep Cleaning</a>
+            <span class="text-brand-600">|</span>
+            <a href="quickstart.html" class="text-brand-100 hover:text-white transition px-2">Quick Start</a>
+        </nav>
+    </div>
+</header>
 
-    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+<main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
 
-        <!-- Intro -->
-        <div class="text-center max-w-2xl mx-auto mb-8">
-            <h2 class="text-3xl sm:text-4xl font-bold text-slate-800 mb-3">Finance & Payment Guide</h2>
-            <p class="text-base text-slate-500">Comprehensive breakdown of rates, standards, and payment structures.</p>
-        </div>
+    <!-- Intro -->
+    <div class="text-center max-w-2xl mx-auto mb-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-800 mb-3">Finance &amp; Payment Guide</h2>
+        <p class="text-base text-slate-500">Comprehensive breakdown of rates, standards, and payment structures.</p>
+    </div>
 
-        <!-- Section: Departure Cleans -->
-        <section class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
-            <!-- Header with Toggle -->
-            <div class="bg-brand-50 px-6 py-5 border-b border-brand-100 flex flex-col md:flex-row justify-between items-center gap-4">
-                <div>
-                    <h3 class="text-xl font-bold text-brand-900">Departure Cleans</h3>
-                    <p class="text-sm text-brand-800 mt-1">Select your contractor type to view applicable rates.</p>
-                </div>
-                
-                <!-- Toggle Switch -->
-                <div class="bg-white p-1 rounded-lg border border-brand-200 flex shadow-sm">
-                    <button id="btn-regular" onclick="toggleContractorType('regular')" class="btn-toggle px-4 py-2 rounded-md text-sm font-semibold bg-brand-600 text-white shadow-sm">
-                        Regular Contractor
-                    </button>
-                    <button id="btn-casual" onclick="toggleContractorType('casual')" class="btn-toggle px-4 py-2 rounded-md text-sm font-semibold text-brand-600 hover:bg-brand-50">
-                        Casual Contractor
-                    </button>
-                </div>
+    <!-- Section: Departure Cleans -->
+    <section class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+        <div class="bg-brand-50 px-6 py-5 border-b border-brand-100 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h3 class="text-xl font-bold text-brand-900">Departure Cleans</h3>
+                <p class="text-sm text-brand-800 mt-1">Select your contractor type to view applicable rates.</p>
             </div>
-
-            <!-- Casual Info Alert (Hidden by default) -->
-            <div id="casual-info" class="hidden bg-amber-50 border-b border-amber-100 px-6 py-3">
-                <div class="flex items-start gap-3">
-                    <svg class="w-5 h-5 text-amber-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <p class="text-sm text-amber-800 leading-relaxed">
-                        <strong>Casual Rate Notice:</strong> Casual contractors receive a higher flat rate regardless of the day (weekend or weekday). This increase accounts for the nature of last-minute calls, weekend availability, and travel requirements for potentially shorter shifts.
-                    </p>
-                </div>
+            <div class="bg-white p-1 rounded-lg border border-brand-200 flex shadow-sm">
+                <button id="btn-regular" onclick="toggleContractorType('regular')" class="btn-toggle px-4 py-2 rounded-md text-sm font-semibold bg-brand-600 text-white shadow-sm">
+                    Regular Contractor
+                </button>
+                <button id="btn-casual" onclick="toggleContractorType('casual')" class="btn-toggle px-4 py-2 rounded-md text-sm font-semibold text-brand-600 hover:bg-brand-50">
+                    Casual Contractor
+                </button>
             </div>
-            
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm text-left">
-                    <thead class="bg-slate-50 text-xs uppercase text-slate-500 border-b border-slate-200">
+        </div>
+
+        <div id="casual-info" class="hidden bg-amber-50 border-b border-amber-100 px-6 py-3">
+            <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-amber-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <p class="text-sm text-amber-800 leading-relaxed">
+                    <strong>Casual Rate Notice:</strong> Casual contractors receive a higher flat rate regardless of the day (weekend or weekday). This increase accounts for last-minute calls, weekend availability, and travel requirements.
+                </p>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+                <thead class="bg-slate-50 text-xs uppercase text-slate-500 border-b border-slate-200">
+                    <tr>
+                        <th class="px-6 py-4 font-semibold w-1/4">Room Type</th>
+                        <th class="px-6 py-4 font-semibold">Avg. Time</th>
+                        <th id="header-col-1" class="px-4 py-4 font-semibold text-center bg-slate-100/50">Mon-Fri<br><span class="text-xs text-green-600 normal-case">Bonus Earned</span></th>
+                        <th id="header-col-2" class="px-4 py-4 font-semibold text-center">Mon-Fri<br><span class="text-xs text-orange-500 normal-case">No Bonus</span></th>
+                        <th id="header-col-3" class="px-4 py-4 font-semibold text-center bg-slate-100/50">Sat/Sun<br><span class="text-xs text-green-600 normal-case">Bonus Earned</span></th>
+                        <th id="header-col-4" class="px-4 py-4 font-semibold text-center">Sat/Sun<br><span class="text-xs text-orange-500 normal-case">No Bonus</span></th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 table-stripe">
+                    <tr class="rate-row-regular hover:bg-brand-50/30 transition">
+                        <td class="px-6 py-4 font-medium text-slate-900">2 Bed</td>
+                        <td class="px-6 py-4 text-slate-500">~1 hr 30 min</td>
+                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$60</td>
+                        <td class="px-4 py-4 text-center font-medium text-slate-500">$50</td>
+                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$70</td>
+                        <td class="px-4 py-4 text-center font-medium text-slate-500">$60</td>
+                    </tr>
+                    <tr class="rate-row-regular hover:bg-brand-50/30 transition">
+                        <td class="px-6 py-4 font-medium text-slate-900">2 Bed Villa</td>
+                        <td class="px-6 py-4 text-slate-500">~1 hr 45 min</td>
+                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$70</td>
+                        <td class="px-4 py-4 text-center font-medium text-slate-500">$60</td>
+                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$80</td>
+                        <td class="px-4 py-4 text-center font-medium text-slate-500">$70</td>
+                    </tr>
+                    <tr class="rate-row-regular hover:bg-brand-50/30 transition">
+                        <td class="px-6 py-4 font-medium text-slate-900">3 Bed</td>
+                        <td class="px-6 py-4 text-slate-500">~2 hrs</td>
+                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$83</td>
+                        <td class="px-4 py-4 text-center font-medium text-slate-500">$73</td>
+                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$93</td>
+                        <td class="px-4 py-4 text-center font-medium text-slate-500">$83</td>
+                    </tr>
+                    <tr class="rate-row-casual hidden hover:bg-brand-50/30 transition">
+                        <td class="px-6 py-4 font-medium text-slate-900">2 Bed <span class="text-xs font-normal text-amber-600 block">(Casual)</span></td>
+                        <td class="px-6 py-4 text-slate-500">~1 hr 30 min</td>
+                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$70</td>
+                        <td class="px-4 py-4 text-center font-medium text-slate-500">$60</td>
+                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$70</td>
+                        <td class="px-4 py-4 text-center font-medium text-slate-500">$60</td>
+                    </tr>
+                    <tr class="rate-row-casual hidden hover:bg-brand-50/30 transition">
+                        <td class="px-6 py-4 font-medium text-slate-900">2 Bed Villa <span class="text-xs font-normal text-amber-600 block">(Casual)</span></td>
+                        <td class="px-6 py-4 text-slate-500">~1 hr 45 min</td>
+                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$80</td>
+                        <td class="px-4 py-4 text-center font-medium text-slate-500">$70</td>
+                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$80</td>
+                        <td class="px-4 py-4 text-center font-medium text-slate-500">$70</td>
+                    </tr>
+                    <tr class="rate-row-casual hidden hover:bg-brand-50/30 transition">
+                        <td class="px-6 py-4 font-medium text-slate-900">3 Bed <span class="text-xs font-normal text-amb-600 block">(Casual)</span></td>
+                        <td class="px-6 py-4 text-slate-500">~2 hrs</td>
+                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$93</td>
+                        <td class="px-4 py-4 text-center font-medium text-slate-500">$83</td>
+                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$93</td>
+                        <td class="px-4 py-4 text-center font-medium text-slate-500">$83</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 text-sm text-slate-500 space-y-2">
+            <p><strong>Note on Times:</strong> Estimates for one experienced cleaner. Actual time may vary based on condition.</p>
+            <p><strong>Note on Rates:</strong> The green column includes the $10 bonus (earned when room passes inspection). For Regular contractors, Weekends are $10 more per room. Casuals receive a flat rate (including the weekend premium) on all days.</p>
+        </div>
+    </section>
+
+    <!-- Grid for Secondary Info -->
+    <div class="grid md:grid-cols-2 gap-8">
+        <!-- Weekly Service -->
+        <section class="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
+            <h3 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
+                <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                Weekly Service (Refresh)
+            </h3>
+            <p class="text-xs text-slate-500 mb-3">Midstay clean for guests staying &gt;10 days.</p>
+            <div class="overflow-hidden rounded-lg border border-slate-200">
+                <table class="w-full text-sm">
+                    <thead class="bg-slate-50 text-xs text-slate-500 uppercase">
                         <tr>
-                            <th class="px-6 py-4 font-semibold w-1/4">Room Type</th>
-                            <th class="px-6 py-4 font-semibold">Avg. Time</th>
-                            <!-- Dynamic Headers -->
-                            <th id="header-col-1" class="px-4 py-4 font-semibold text-center bg-slate-100/50">Mon-Fri<br><span class="text-xs text-green-600 normal-case">No Fix Ups</span></th>
-                            <th id="header-col-2" class="px-4 py-4 font-semibold text-center">Mon-Fri<br><span class="text-xs text-orange-500 normal-case">Fix Ups Req.</span></th>
-                            <th id="header-col-3" class="px-4 py-4 font-semibold text-center bg-slate-100/50">Sat/Sun<br><span class="text-xs text-green-600 normal-case">No Fix Ups</span></th>
-                            <th id="header-col-4" class="px-4 py-4 font-semibold text-center">Sat/Sun<br><span class="text-xs text-orange-500 normal-case">Fix Ups Req.</span></th>
+                            <th class="px-3 py-2 text-left">Type</th>
+                            <th class="px-3 py-2 text-center">Weekday</th>
+                            <th class="px-3 py-2 text-center">Sun/PH</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-100 table-stripe">
-                        <!-- REGULAR ROWS -->
-                        <tr class="rate-row-regular hover:bg-brand-50/30 transition">
-                            <td class="px-6 py-4 font-medium text-slate-900">2 Bed</td>
-                            <td class="px-6 py-4 text-slate-500">~1 hr 30 min</td>
-                            <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$60</td>
-                            <td class="px-4 py-4 text-center font-medium text-slate-500">$50</td>
-                            <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$70</td>
-                            <td class="px-4 py-4 text-center font-medium text-slate-500">$60</td>
-                        </tr>
-                        <tr class="rate-row-regular hover:bg-brand-50/30 transition">
-                            <td class="px-6 py-4 font-medium text-slate-900">2 Bed Villa</td>
-                            <td class="px-6 py-4 text-slate-500">~1 hr 45 min</td>
-                            <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$70</td>
-                            <td class="px-4 py-4 text-center font-medium text-slate-500">$60</td>
-                            <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$80</td>
-                            <td class="px-4 py-4 text-center font-medium text-slate-500">$70</td>
-                        </tr>
-                        <tr class="rate-row-regular hover:bg-brand-50/30 transition">
-                            <td class="px-6 py-4 font-medium text-slate-900">3 Bed</td>
-                            <td class="px-6 py-4 text-slate-500">~2 hrs</td>
-                            <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$83</td>
-                            <td class="px-4 py-4 text-center font-medium text-slate-500">$73</td>
-                            <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$93</td>
-                            <td class="px-4 py-4 text-center font-medium text-slate-500">$83</td>
-                        </tr>
-
-                        <!-- CASUAL ROWS (Hidden by default) -->
-                        <tr class="rate-row-casual hidden hover:bg-brand-50/30 transition">
-                            <td class="px-6 py-4 font-medium text-slate-900">2 Bed <span class="text-xs font-normal text-amber-600 block">(Casual)</span></td>
-                            <td class="px-6 py-4 text-slate-500">~1 hr 30 min</td>
-                            <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$70</td>
-                            <td class="px-4 py-4 text-center font-medium text-slate-500">$60</td>
-                            <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg text-opacity-50">$70</td>
-                            <td class="px-4 py-4 text-center font-medium text-slate-500 text-opacity-50">$60</td>
-                        </tr>
-                        <tr class="rate-row-casual hidden hover:bg-brand-50/30 transition">
-                            <td class="px-6 py-4 font-medium text-slate-900">2 Bed Villa <span class="text-xs font-normal text-amber-600 block">(Casual)</span></td>
-                            <td class="px-6 py-4 text-slate-500">~1 hr 45 min</td>
-                            <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$80</td>
-                            <td class="px-4 py-4 text-center font-medium text-slate-500">$70</td>
-                            <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg text-opacity-50">$80</td>
-                            <td class="px-4 py-4 text-center font-medium text-slate-500 text-opacity-50">$70</td>
-                        </tr>
-                        <tr class="rate-row-casual hidden hover:bg-brand-50/30 transition">
-                            <td class="px-6 py-4 font-medium text-slate-900">3 Bed <span class="text-xs font-normal text-amber-600 block">(Casual)</span></td>
-                            <td class="px-6 py-4 text-slate-500">~2 hrs</td>
-                            <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$93</td>
-                            <td class="px-4 py-4 text-center font-medium text-slate-500">$83</td>
-                            <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg text-opacity-50">$93</td>
-                            <td class="px-4 py-4 text-center font-medium text-slate-500 text-opacity-50">$83</td>
-                        </tr>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr><td class="px-3 py-2 font-medium">2 Bed</td><td class="px-3 py-2 text-center">$25</td><td class="px-3 py-2 text-center text-brand-700 font-semibold">$30</td></tr>
+                        <tr><td class="px-3 py-2 font-medium">2 Bed Villa</td><td class="px-3 py-2 text-center">$29</td><td class="px-3 py-2 text-center text-brand-700 font-semibold">$34</td></tr>
+                        <tr><td class="px-3 py-2 font-medium">3 Bed</td><td class="px-3 py-2 text-center">$35</td><td class="px-3 py-2 text-center text-brand-700 font-semibold">$40</td></tr>
                     </tbody>
                 </table>
             </div>
-            <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 text-sm text-slate-500 space-y-2">
-                <p><strong>Note on Times:</strong> Estimates for one experienced cleaner. Actual time may vary based on condition.</p>
-                <p><strong>Note on Rates:</strong> Rates include base + $10 bonus (if no fix ups). For Regular contractors, Weekends are $10 more per room. Casuals receive a flat rate (including the weekend premium) on all days.</p>
-            </div>
         </section>
 
-        <!-- Grid for Secondary Info -->
-        <div class="grid md:grid-cols-2 gap-8">
-            
-            <!-- Weekly Service -->
-            <section class="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
-                <h3 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                    Weekly Service (Refresh)
-                </h3>
-                <p class="text-xs text-slate-500 mb-3">Midstay clean for guests staying >10 days.</p>
-                <div class="overflow-hidden rounded-lg border border-slate-200">
-                    <table class="w-full text-sm">
-                        <thead class="bg-slate-50 text-xs text-slate-500 uppercase">
-                            <tr>
-                                <th class="px-3 py-2 text-left">Type</th>
-                                <th class="px-3 py-2 text-center">Weekday</th>
-                                <th class="px-3 py-2 text-center">Sun/PH</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100">
-                            <tr>
-                                <td class="px-3 py-2 font-medium">2 Bed</td>
-                                <td class="px-3 py-2 text-center">$25</td>
-                                <td class="px-3 py-2 text-center text-brand-700 font-semibold">$30</td>
-                            </tr>
-                            <tr>
-                                <td class="px-3 py-2 font-medium">2 Bed Villa</td>
-                                <td class="px-3 py-2 text-center">$29</td>
-                                <td class="px-3 py-2 text-center text-brand-700 font-semibold">$34</td>
-                            </tr>
-                            <tr>
-                                <td class="px-3 py-2 font-medium">3 Bed</td>
-                                <td class="px-3 py-2 text-center">$35</td>
-                                <td class="px-3 py-2 text-center text-brand-700 font-semibold">$40</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Deep Cleaning -->
-            <section class="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
-                <h3 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
+        <!-- Deep Cleaning Link Card -->
+        <section class="bg-gradient-to-br from-brand-50 to-indigo-50 rounded-xl shadow-sm border border-brand-200 p-5 flex flex-col justify-between">
+            <div>
+                <h3 class="text-lg font-bold text-brand-900 mb-3 flex items-center gap-2">
                     <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-                    Deep Cleaning (Fixed Rates)
+                    Deep Cleaning
                 </h3>
-                <div class="space-y-2 text-sm">
-                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg border border-slate-200">
-                        <div><span class="font-semibold text-slate-800">2 Bed</span> <span class="text-xs text-slate-500 ml-1">~7 hrs total</span></div>
+                <p class="text-sm text-brand-800 mb-4">Deep cleans are a separate process with fixed rates, done in pairs over ~7&#8211;8.5 hours. Everything you need to know is on the dedicated page.</p>
+                <div class="space-y-2 text-sm mb-4">
+                    <div class="flex justify-between items-center p-2 bg-white/70 rounded-lg">
+                        <span class="font-semibold text-slate-700">2 Bed</span>
                         <span class="font-bold text-slate-700">$224</span>
                     </div>
-                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg border border-slate-200">
-                        <div><span class="font-semibold text-slate-800">2 Bed Villa</span> <span class="text-xs text-slate-500 ml-1">~7.5 hrs total</span></div>
+                    <div class="flex justify-between items-center p-2 bg-white/70 rounded-lg">
+                        <span class="font-semibold text-slate-700">2 Bed Villa</span>
                         <span class="font-bold text-slate-700">$240</span>
                     </div>
-                    <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg border border-slate-200">
-                        <div><span class="font-semibold text-slate-800">3 Bed Villa</span> <span class="text-xs text-slate-500 ml-1">~8.5 hrs total</span></div>
+                    <div class="flex justify-between items-center p-2 bg-white/70 rounded-lg">
+                        <span class="font-semibold text-slate-700">3 Bed Villa</span>
                         <span class="font-bold text-slate-700">$272</span>
                     </div>
                 </div>
-            </section>
+            </div>
+            <a href="deepclean.html" class="inline-block text-center bg-brand-600 text-white font-semibold px-5 py-3 rounded-lg hover:bg-brand-800 transition shadow-sm">
+                View Full Deep Cleaning Guide &#8594;
+            </a>
+        </section>
+    </div>
+
+    <!-- THE $10 BONUS - Completely rewritten -->
+    <section class="bg-white rounded-xl shadow-sm border border-emerald-200 overflow-hidden">
+        <div class="bg-emerald-50 px-6 py-5 border-b border-emerald-100">
+            <h3 class="text-xl font-bold text-emerald-900 flex items-center gap-2">
+                <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Understanding the $10 Bonus
+            </h3>
+            <p class="text-sm text-emerald-700 mt-1">This is the most important thing to understand about your pay.</p>
         </div>
 
-        <!-- Team & Pay Rules -->
-        <section class="grid md:grid-cols-2 gap-8">
-            <div class="bg-indigo-50 rounded-xl p-6 border border-indigo-100">
-                <h4 class="font-bold text-indigo-900 mb-2">Training Pay Structure</h4>
-                <p class="text-sm text-indigo-800 mb-2">For the first two rooms cleaned together:</p>
-                <ul class="list-disc list-inside text-sm text-indigo-700 space-y-1 ml-1">
-                    <li><strong>Trainer:</strong> Receives full standard room rate.</li>
-                    <li><strong>Trainee:</strong> Receives 1/3 of the standard room rate.</li>
-                </ul>
+        <div class="p-6 space-y-6">
+            <!-- Key Message -->
+            <div class="bg-emerald-50 rounded-xl p-5 border-2 border-emerald-300 text-center">
+                <p class="text-2xl font-bold text-emerald-800 mb-2">The $10 is a BONUS you EARN</p>
+                <p class="text-emerald-700">It is <strong>not</strong> a penalty or deduction. Your base rate is the lower amount. When the room passes inspection with no issues, you earn an <strong>extra $10 on top</strong> as a reward for perfect work.</p>
             </div>
-            <div class="bg-indigo-50 rounded-xl p-6 border border-indigo-100">
-                <h4 class="font-bold text-indigo-900 mb-2">Team Splits</h4>
-                <p class="text-sm text-indigo-800 mb-2">Total room rate is divided evenly by cleaners:</p>
-                <ul class="list-disc list-inside text-sm text-indigo-700 space-y-1 ml-1">
-                    <li><strong>2 Cleaners:</strong> 50% of rate each (Time is halved).</li>
-                    <li><strong>3 Cleaners:</strong> 33% of rate each (Time is 1/3).</li>
-                </ul>
-            </div>
-        </section>
 
-        <!-- Quality Standards -->
-        <section class="bg-white rounded-xl shadow-sm border border-slate-100 p-6 sm:p-8">
-            <h3 class="text-xl font-bold text-slate-800 mb-6">Quality Standards & The $10 Bonus</h3>
-            
-            <div class="grid md:grid-cols-2 gap-8">
+            <!-- How it works -->
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-slate-50 rounded-lg p-4 text-center border border-slate-200">
+                    <div class="text-3xl font-bold text-slate-400 mb-1">1</div>
+                    <p class="text-sm font-semibold text-slate-800">You clean the room</p>
+                    <p class="text-xs text-slate-500 mt-1">Following the checklist carefully</p>
+                </div>
+                <div class="bg-slate-50 rounded-lg p-4 text-center border border-slate-200">
+                    <div class="text-3xl font-bold text-slate-400 mb-1">2</div>
+                    <p class="text-sm font-semibold text-slate-800">Hotel inspects the room</p>
+                    <p class="text-xs text-slate-500 mt-1">They check for any issues</p>
+                </div>
+                <div class="bg-emerald-50 rounded-lg p-4 text-center border-2 border-emerald-300">
+                    <div class="text-3xl font-bold text-emerald-600 mb-1">3</div>
+                    <p class="text-sm font-semibold text-emerald-800">Room is perfect? +$10!</p>
+                    <p class="text-xs text-emerald-600 mt-1">Bonus added to your pay</p>
+                </div>
+            </div>
+
+            <!-- Example -->
+            <div class="bg-blue-50 rounded-lg p-5 border border-blue-200">
+                <h4 class="font-bold text-blue-900 mb-3">Example: 2 Bed Apartment, Weekday</h4>
+                <div class="grid sm:grid-cols-2 gap-4 text-sm">
+                    <div class="bg-white rounded-lg p-3 border border-blue-100">
+                        <p class="text-green-600 font-bold mb-1">&#10003; Room passes inspection</p>
+                        <p class="text-slate-600">Base $50 + $10 bonus = <strong class="text-green-700">$60 total</strong></p>
+                    </div>
+                    <div class="bg-white rounded-lg p-3 border border-blue-100">
+                        <p class="text-orange-500 font-bold mb-1">&#10005; Room needs a fix-up</p>
+                        <p class="text-slate-600">Base $50 + no bonus = <strong class="text-slate-700">$50 total</strong></p>
+                        <p class="text-xs text-slate-400 mt-1">You still get paid your base rate</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- What is a fix-up -->
+            <div class="bg-amber-50 rounded-lg p-5 border border-amber-200">
+                <h4 class="font-bold text-amber-900 mb-2">What is a &#8220;fix-up&#8221;?</h4>
+                <p class="text-sm text-amber-800 mb-3">A fix-up happens when the hotel inspects your room and finds something that needs to be corrected &#8211; for example, a missed spot, streaky glass, or an unclean area. Someone (often you, another cleaner, or hotel staff) has to go back and fix it.</p>
+                <p class="text-sm text-amber-800"><strong>Why does the bonus get removed?</strong> The bonus rewards rooms that are done right the first time. If someone has to go back, the room was not perfect &#8211; so the bonus is not earned. You still receive your full base rate.</p>
+            </div>
+
+            <!-- Quality Standards -->
+            <div class="grid md:grid-cols-2 gap-6">
                 <div>
                     <h4 class="font-semibold text-red-600 mb-3 flex items-center gap-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                        Basic Issues (Bonus Lost)
+                        Basic Issues (Bonus NOT Earned)
                     </h4>
+                    <p class="text-xs text-slate-500 mb-2">These are things within your control. If found, the $10 bonus is not earned for that room.</p>
                     <ul class="space-y-2 text-sm text-slate-600">
                         <li class="flex items-start gap-2"><span class="text-red-400 mt-1">&#9679;</span> Missed dusting on reachable surfaces</li>
                         <li class="flex items-start gap-2"><span class="text-red-400 mt-1">&#9679;</span> Floors not vacuumed/mopped properly</li>
                         <li class="flex items-start gap-2"><span class="text-red-400 mt-1">&#9679;</span> Streaky mirrors or glass</li>
-                        <li class="flex items-start gap-2"><span class="text-red-400 mt-1">&#9679;</span> Bathroom details (toilet, shower scum)</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400 mt-1">&#9679;</span> Bathroom details (toilet, soap scum)</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400 mt-1">&#9679;</span> <strong>Shower mould not cleaned</strong></li>
                         <li class="flex items-start gap-2"><span class="text-red-400 mt-1">&#9679;</span> Kitchen crumbs or unclean sink</li>
                         <li class="flex items-start gap-2"><span class="text-red-400 mt-1">&#9679;</span> Rubbish bins not emptied</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400 mt-1">&#9679;</span> Dishwasher not emptied / dishes not put away</li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-semibold text-green-600 mb-3 flex items-center gap-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        Acceptable Issues (Bonus Kept)
+                        Acceptable Issues (Bonus Still Earned)
                     </h4>
+                    <p class="text-xs text-slate-500 mb-2">These are outside your control or require specialist work. They will NOT affect your bonus.</p>
                     <ul class="space-y-2 text-sm text-slate-600">
                         <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#9679;</span> Stubborn wall marks or scuffs</li>
                         <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#9679;</span> Carpet stain removal</li>
                         <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#9679;</span> Deep oven/rangehood cleaning</li>
-                        <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#9679;</span> Extensive mould removal</li>
-                        <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#9679;</span> Maintenance issues (drains, bulbs)</li>
-                        <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#9679;</span> Excessively dirty (beyond normal use)</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#9679;</span> Structural mould (walls, ceilings &#8211; maintenance issue)</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#9679;</span> Maintenance issues (drains, bulbs, locks)</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400 mt-1">&#9679;</span> Excessively dirty rooms (beyond normal guest use)</li>
                     </ul>
                 </div>
             </div>
-        </section>
-
-        <!-- Examples -->
-        <section>
-            <h3 class="text-xl font-bold text-slate-800 mb-6">Pay Calculation Examples</h3>
-            <div class="grid sm:grid-cols-2 gap-4">
-                <!-- Example 1 -->
-                <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-brand-500">
-                    <div class="flex justify-between items-start mb-2">
-                        <h4 class="font-bold text-brand-900">Scenario 1: Standard Clean</h4>
-                        <span class="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded">No Fix Ups</span>
-                    </div>
-                    <p class="text-sm text-slate-600 mb-2">2 Cleaners, 2 Bed Apt, Weekday.</p>
-                    <div class="text-xs bg-slate-50 p-2 rounded text-slate-500 font-mono">
-                        $60 Total Rate / 2 Cleaners
-                    </div>
-                    <p class="text-right font-bold text-brand-600 mt-2">$30.00 <span class="text-xs font-normal text-slate-500">per cleaner</span></p>
-                </div>
-
-                <!-- Example 2 -->
-                <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-orange-400">
-                    <div class="flex justify-between items-start mb-2">
-                        <h4 class="font-bold text-brand-900">Scenario 2: 3-Person Team</h4>
-                        <span class="text-xs bg-orange-100 text-orange-800 px-2 py-0.5 rounded">Fix Ups Req.</span>
-                    </div>
-                    <p class="text-sm text-slate-600 mb-2">3 Cleaners, 3 Bed Apt, Weekday.</p>
-                    <div class="text-xs bg-slate-50 p-2 rounded text-slate-500 font-mono">
-                        $73 Total Rate / 3 Cleaners
-                    </div>
-                    <p class="text-right font-bold text-brand-600 mt-2">$24.33 <span class="text-xs font-normal text-slate-500">per cleaner</span></p>
-                </div>
-
-                 <!-- Example 3 -->
-                 <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-orange-400">
-                    <div class="flex justify-between items-start mb-2">
-                        <h4 class="font-bold text-brand-900">Scenario 3: Sunday Solo</h4>
-                        <span class="text-xs bg-orange-100 text-orange-800 px-2 py-0.5 rounded">Fix Ups Req.</span>
-                    </div>
-                    <p class="text-sm text-slate-600 mb-2">1 Cleaner, 2 Bed Villa, Sunday.</p>
-                    <div class="text-xs bg-slate-50 p-2 rounded text-slate-500 font-mono">
-                        $70 Total Rate / 1 Cleaner
-                    </div>
-                    <p class="text-right font-bold text-brand-600 mt-2">$70.00 <span class="text-xs font-normal text-slate-500">total</span></p>
-                </div>
-
-                <!-- Example 4 -->
-                 <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-slate-500">
-                    <div class="flex justify-between items-start mb-2">
-                        <h4 class="font-bold text-brand-900">Scenario 4: Deep Clean</h4>
-                        <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">Fixed Rate</span>
-                    </div>
-                    <p class="text-sm text-slate-600 mb-2">2 Cleaners, 3 Bed Villa.</p>
-                    <div class="text-xs bg-slate-50 p-2 rounded text-slate-500 font-mono">
-                        $272 Total Rate / 2 Cleaners
-                    </div>
-                    <p class="text-right font-bold text-brand-600 mt-2">$136.00 <span class="text-xs font-normal text-slate-500">per cleaner</span></p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer Info -->
-        <section class="bg-slate-800 rounded-xl p-8 text-slate-300 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-6">
-            <div>
-                <h4 class="text-white font-bold mb-1">Additional Work</h4>
-                <p class="text-sm mb-4 sm:mb-0">Extra tasks (spring clean, maintenance support) paid at <span class="text-white font-bold">$10 per 15 min block</span>.</p>
-            </div>
-            <div class="text-right">
-                <p class="text-xs uppercase tracking-widest text-slate-500 mb-1">Payment Method</p>
-                <p class="text-white font-medium">ABN Invoice Only <span class="text-slate-500 text-xs">(No TFN)</span></p>
-            </div>
-        </section>
-
-                <!-- Terms & Conditions -->
-        <section class="bg-white rounded-xl shadow-sm border border-red-200 overflow-hidden">
-            <div class="bg-red-50 px-6 py-5 border-b border-red-100">
-                <h3 class="text-xl font-bold text-red-900 flex items-center gap-2">
-                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                    Contractor Terms &amp; Conditions
-                </h3>
-                <p class="text-sm text-red-700 mt-1">Please read carefully &ndash; these terms apply to all contractors.</p>
-            </div>
-            <div class="p-6 space-y-4 text-sm text-slate-700 leading-relaxed">
-                <p>By accepting work as an independent contractor with Bella Mare Beachside Apartments, you acknowledge and agree to the following terms:</p>
-
-                <div class="bg-red-50 rounded-lg p-4 border border-red-100 space-y-3">
-                    <h4 class="font-bold text-red-900">Cost Recovery for Operational Disruptions</h4>
-                    <p>Where a contractor's actions or omissions result in <strong>additional costs to the company</strong>, those costs may be passed on to the responsible contractor. This includes, but is not limited to, situations arising from:</p>
-                    <ul class="space-y-2 ml-4">
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-1 font-bold">&#8226;</span>
-                            <span><strong>Poor performance or incomplete work</strong> requiring re-cleaning, additional inspections, or guest compensation.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-1 font-bold">&#8226;</span>
-                            <span><strong>Abandoning a shift or leaving a job incomplete</strong> without reasonable notice or approval.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-1 font-bold">&#8226;</span>
-                            <span><strong>Excessive roster changes within 48 hours of a scheduled shift</strong>, causing operational disruption.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-1 font-bold">&#8226;</span>
-                            <span><strong>Same-day cancellations or no-shows</strong>, which attract additional charges due to the urgency of finding replacement staff.</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-amber-50 rounded-lg p-4 border border-amber-100 space-y-3">
-                    <h4 class="font-bold text-amber-900">Recoverable Costs May Include:</h4>
-                    <ul class="space-y-2 ml-4">
-                        <li class="flex items-start gap-2">
-                            <span class="text-amber-500 mt-1 font-bold">&#8226;</span>
-                            <span><strong>Administration &amp; coordination costs</strong> &ndash; time spent reorganising schedules, contacting other contractors, and managing the disruption.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-amber-500 mt-1 font-bold">&#8226;</span>
-                            <span><strong>Recruitment &amp; hiring costs</strong> &ndash; expenses incurred to source, interview, and onboard replacement contractors at short notice.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-amber-500 mt-1 font-bold">&#8226;</span>
-                            <span><strong>Emergency incentive bonuses</strong> &ndash; additional payments offered to available cleaners to fill last-minute gaps and ensure guest-ready rooms.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-amber-500 mt-1 font-bold">&#8226;</span>
-                            <span><strong>Any other direct costs</strong> reasonably incurred as a result of the contractor's actions or failure to meet their commitments.</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
-                    <p class="text-slate-600"><strong>Note:</strong> We understand that emergencies happen. These terms are intended to address avoidable disruptions and protect the operational integrity of the business. If you have a genuine emergency, please communicate with us as early as possible and we will work with you.</p>
-                </div>
-
-                <p class="text-xs text-slate-400 mt-4">Last updated: March 2026. Bella Mare reserves the right to update these terms as needed. Continued acceptance of work constitutes agreement to the current terms.</p>
-            </div>
-        </section>
-
-
-        <div class="text-center pt-8">
-            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="text-brand-600 hover:text-brand-800 font-medium text-sm">
-                Back to Top
-            </button>
         </div>
+    </section>
 
-    </main>
+    <!-- FAQ Section -->
+    <section class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+        <div class="bg-slate-50 px-6 py-5 border-b border-slate-100">
+            <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                <svg class="w-6 h-6 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Frequently Asked Questions
+            </h3>
+        </div>
+        <div class="divide-y divide-slate-100">
 
-    <footer class="bg-slate-900 text-slate-500 py-8 text-center text-sm">
-        <p>&copy; 2025 Bella Mare Beachside Apartments. Internal Use Only.</p>
-    </footer>
+            <div class="faq-item">
+                <button onclick="toggleFaq(this)" class="w-full text-left px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition">
+                    <span class="font-semibold text-slate-800 text-sm">&#8220;If I go back and fix it myself, why do I still lose $10?&#8221;</span>
+                    <svg class="w-5 h-5 text-slate-400 faq-icon transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="faq-answer px-6 pb-4">
+                    <p class="text-sm text-slate-600">You are not &#8220;losing&#8221; $10 &#8211; you simply did not earn the bonus. The $10 is an <strong>extra reward</strong> for getting it right the first time. Your base pay stays the same regardless. Think of it this way: the base rate is your guaranteed pay, and the bonus is a thank-you for perfection.</p>
+                </div>
+            </div>
 
-    <script>
-        function toggleContractorType(type) {
-            const regularRows = document.querySelectorAll('.rate-row-regular');
-            const casualRows = document.querySelectorAll('.rate-row-casual');
-            const regularBtn = document.getElementById('btn-regular');
-            const casualBtn = document.getElementById('btn-casual');
-            const casualInfo = document.getElementById('casual-info');
+            <div class="faq-item">
+                <button onclick="toggleFaq(this)" class="w-full text-left px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition">
+                    <span class="font-semibold text-slate-800 text-sm">&#8220;How does training pay work? Do I get paid less when training someone?&#8221;</span>
+                    <svg class="w-5 h-5 text-slate-400 faq-icon transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="faq-answer px-6 pb-4">
+                    <p class="text-sm text-slate-600 mb-2"><strong>As the trainer:</strong> You get paid 100% of the room rate for the first 2 rooms. After that, you split with the trainee like any team.</p>
+                    <p class="text-sm text-slate-600 mb-2"><strong>As the trainee:</strong> You receive 1/3 of the rate for the first 2 rooms (while learning). After that, normal team splits apply.</p>
+                    <p class="text-sm text-slate-600"><strong>Example:</strong> 4 rooms on a training day with 2 people &#8211; Rooms 1 &amp; 2: trainer gets full rate, trainee gets 1/3. Rooms 3 &amp; 4: split 50/50 between both.</p>
+                </div>
+            </div>
 
-            // Headers
-            const h1 = document.getElementById('header-col-1');
-            const h2 = document.getElementById('header-col-2');
-            const h3 = document.getElementById('header-col-3');
-            const h4 = document.getElementById('header-col-4');
+            <div class="faq-item">
+                <button onclick="toggleFaq(this)" class="w-full text-left px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition">
+                    <span class="font-semibold text-slate-800 text-sm">&#8220;How does team splitting work? Is it fair if there are 3 of us?&#8221;</span>
+                    <svg class="w-5 h-5 text-slate-400 faq-icon transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="faq-answer px-6 pb-4">
+                    <p class="text-sm text-slate-600 mb-2">The total room rate is divided equally among all cleaners working that room. With more people, each room takes less time &#8211; so you can do more rooms in the same shift.</p>
+                    <p class="text-sm text-slate-600 mb-2"><strong>2 cleaners:</strong> 50% each &#8211; room takes half the time</p>
+                    <p class="text-sm text-slate-600 mb-2"><strong>3 cleaners:</strong> 33% each &#8211; room takes a third of the time</p>
+                    <p class="text-sm text-slate-600">Doing 2 rooms solo = same pay as 4 rooms with a partner. The hourly earning is similar either way.</p>
+                </div>
+            </div>
 
-            if (type === 'regular') {
-                regularRows.forEach(r => r.classList.remove('hidden'));
-                casualRows.forEach(r => r.classList.add('hidden'));
-                
-                regularBtn.classList.add('bg-brand-600', 'text-white');
-                regularBtn.classList.remove('text-brand-600', 'hover:bg-brand-50');
-                
-                casualBtn.classList.remove('bg-brand-600', 'text-white');
-                casualBtn.classList.add('text-brand-600', 'hover:bg-brand-50');
-                
-                casualInfo.classList.add('hidden');
-                
-                // Reset Headers for Regular
-                h1.innerHTML = 'Mon-Fri<br><span class="text-xs text-green-600 normal-case">No Fix Ups</span>';
-                h2.innerHTML = 'Mon-Fri<br><span class="text-xs text-orange-500 normal-case">Fix Ups Req.</span>';
-                h3.innerHTML = 'Sat/Sun<br><span class="text-xs text-green-600 normal-case">No Fix Ups</span>';
-                h4.innerHTML = 'Sat/Sun<br><span class="text-xs text-orange-500 normal-case">Fix Ups Req.</span>';
+            <div class="faq-item">
+                <button onclick="toggleFaq(this)" class="w-full text-left px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition">
+                    <span class="font-semibold text-slate-800 text-sm">&#8220;Can I book/assign rooms to myself in the app?&#8221;</span>
+                    <svg class="w-5 h-5 text-slate-400 faq-icon transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="faq-answer px-6 pb-4">
+                    <p class="text-sm text-slate-600 mb-2"><strong>No.</strong> Room allocation is done by management. Please do not self-assign rooms in the housekeeping page. If you book rooms yourself, they may be cancelled.</p>
+                    <p class="text-sm text-slate-600 mb-2">We have permanent cleaners who are allocated rooms first. Additional rooms are then assigned to other team members based on availability and need.</p>
+                    <p class="text-sm text-slate-600"><strong>What to do:</strong> Update your availability in the app, and wait for management to confirm your rooms. If you have questions, message in the group chat.</p>
+                </div>
+            </div>
 
-            } else {
-                regularRows.forEach(r => r.classList.add('hidden'));
-                casualRows.forEach(r => r.classList.remove('hidden'));
-                
-                casualBtn.classList.add('bg-brand-600', 'text-white');
-                casualBtn.classList.remove('text-brand-600', 'hover:bg-brand-50');
-                
-                regularBtn.classList.remove('bg-brand-600', 'text-white');
-                regularBtn.classList.add('text-brand-600', 'hover:bg-brand-50');
-                
-                casualInfo.classList.remove('hidden');
+            <div class="faq-item">
+                <button onclick="toggleFaq(this)" class="w-full text-left px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition">
+                    <span class="font-semibold text-slate-800 text-sm">&#8220;When and how do I get paid?&#8221;</span>
+                    <svg class="w-5 h-5 text-slate-400 faq-icon transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="faq-answer px-6 pb-4">
+                    <p class="text-sm text-slate-600 mb-2">Payment is processed weekly. You can check your billing details in the app under the billing page for each pay period.</p>
+                    <p class="text-sm text-slate-600 mb-2">If you think there is an error, submit it through the app (not via WhatsApp). Our bookkeeper handles payments &#8211; payment queries should go to <strong>hi@spruces.co</strong></p>
+                    <p class="text-sm text-slate-600"><strong>Payment method:</strong> ABN Invoice only (no TFN). You must have an ABN registered.</p>
+                </div>
+            </div>
 
-                // Update Headers for Casual
-                h1.innerHTML = 'Any Day<br><span class="text-xs text-green-600 normal-case">No Fix Ups</span>';
-                h2.innerHTML = 'Any Day<br><span class="text-xs text-orange-500 normal-case">Fix Ups Req.</span>';
-                h3.innerHTML = 'Any Day<br><span class="text-xs text-green-600 normal-case">No Fix Ups</span>';
-                h4.innerHTML = 'Any Day<br><span class="text-xs text-orange-500 normal-case">Fix Ups Req.</span>';
-            }
-        }
-    </script>
+            <div class="faq-item">
+                <button onclick="toggleFaq(this)" class="w-full text-left px-6 py-4 flex justify-between items-center hover:bg-slate-50 transition">
+                    <span class="font-semibold text-slate-800 text-sm">&#8220;What time should I start?&#8221;</span>
+                    <svg class="w-5 h-5 text-slate-400 faq-icon transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="faq-answer px-6 pb-4">
+                    <p class="text-sm text-slate-600 mb-2">Standard start time is <strong>9:00 AM</strong> unless told otherwise. Some days may start earlier (7&#8211;8 AM) when there are many rooms.</p>
+                    <p class="text-sm text-slate-600">Always check the app and group chat for your specific schedule. Do not assume you are working &#8211; wait for confirmation from management.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Team & Pay Rules -->
+    <section class="grid md:grid-cols-2 gap-8">
+        <div class="bg-indigo-50 rounded-xl p-6 border border-indigo-100">
+            <h4 class="font-bold text-indigo-900 mb-2">Training Pay Structure</h4>
+            <p class="text-sm text-indigo-800 mb-2">When training a new team member:</p>
+            <ul class="list-disc list-inside text-sm text-indigo-700 space-y-1 ml-1">
+                <li><strong>Trainer:</strong> Gets 100% rate for first 2 rooms.</li>
+                <li><strong>Trainee:</strong> Gets 1/3 rate for first 2 rooms.</li>
+                <li><strong>After room 2:</strong> Normal team split applies (50/50 for 2 people).</li>
+            </ul>
+            <p class="text-xs text-indigo-600 mt-3">Example: 7 rooms with 2 people &#8211; Rooms 1&#8211;2 trainer gets 100%, trainee gets 33%. Rooms 3&#8211;7 split 50/50.</p>
+        </div>
+        <div class="bg-indigo-50 rounded-xl p-6 border border-indigo-100">
+            <h4 class="font-bold text-indigo-900 mb-2">Team Splits</h4>
+            <p class="text-sm text-indigo-800 mb-2">Total room rate is divided evenly by cleaners:</p>
+            <ul class="list-disc list-inside text-sm text-indigo-700 space-y-1 ml-1">
+                <li><strong>Solo:</strong> 100% of rate &#8211; you keep everything.</li>
+                <li><strong>2 Cleaners:</strong> 50% each (room takes half the time).</li>
+                <li><strong>3 Cleaners:</strong> 33% each (room takes 1/3 the time).</li>
+            </ul>
+            <p class="text-xs text-indigo-600 mt-3">More people = faster rooms = more rooms per shift. Hourly earnings stay similar.</p>
+        </div>
+    </section>
+
+    <!-- Room Allocation -->
+    <section class="bg-amber-50 rounded-xl p-6 border border-amber-200">
+        <h4 class="font-bold text-amber-900 mb-3 flex items-center gap-2">
+            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+            How Room Allocation Works
+        </h4>
+        <div class="text-sm text-amber-800 space-y-2">
+            <p><strong>1.</strong> Permanent full-time cleaners are assigned rooms first (they have been with us the longest).</p>
+            <p><strong>2.</strong> If there are extra rooms, or days the permanent cleaners cannot work, we assign rooms to other available team members.</p>
+            <p><strong>3.</strong> <strong>Do NOT self-assign rooms in the app.</strong> If you do, they will be cancelled. Wait for management to allocate.</p>
+            <p><strong>4.</strong> Keep your availability updated in the app so we know when you can work.</p>
+            <p><strong>5.</strong> Check with management before assuming you are working on any given day.</p>
+        </div>
+    </section>
+
+    <!-- Pay Calculation Examples -->
+    <section>
+        <h3 class="text-xl font-bold text-slate-800 mb-6">Pay Calculation Examples</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+            <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-emerald-500">
+                <div class="flex justify-between items-start mb-2">
+                    <h4 class="font-bold text-brand-900">Scenario 1: Perfect Room</h4>
+                    <span class="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded">Bonus Earned</span>
+                </div>
+                <p class="text-sm text-slate-600 mb-2">Solo, 2 Bed Apt, Weekday. Room passes inspection.</p>
+                <div class="text-xs bg-slate-50 p-2 rounded text-slate-500 font-mono">
+                    Base $50 + $10 bonus = $60
+                </div>
+                <p class="text-right font-bold text-green-600 mt-2">$60.00 <span class="text-xs font-normal text-slate-500">total</span></p>
+            </div>
+
+            <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-orange-400">
+                <div class="flex justify-between items-start mb-2">
+                    <h4 class="font-bold text-brand-900">Scenario 2: Fix-Up Required</h4>
+                    <span class="text-xs bg-orange-100 text-orange-800 px-2 py-0.5 rounded">No Bonus</span>
+                </div>
+                <p class="text-sm text-slate-600 mb-2">Solo, 2 Bed Apt, Weekday. Room needs fix-up.</p>
+                <div class="text-xs bg-slate-50 p-2 rounded text-slate-500 font-mono">
+                    Base $50 + $0 bonus = $50
+                </div>
+                <p class="text-right font-bold text-slate-600 mt-2">$50.00 <span class="text-xs font-normal text-slate-500">total (base rate)</span></p>
+            </div>
+
+            <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-brand-500">
+                <div class="flex justify-between items-start mb-2">
+                    <h4 class="font-bold text-brand-900">Scenario 3: Team of 2</h4>
+                    <span class="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded">Bonus Earned</span>
+                </div>
+                <p class="text-sm text-slate-600 mb-2">2 Cleaners, 2 Bed Apt, Weekday. Room perfect.</p>
+                <div class="text-xs bg-slate-50 p-2 rounded text-slate-500 font-mono">
+                    $60 Total / 2 Cleaners = $30 each
+                </div>
+                <p class="text-right font-bold text-brand-600 mt-2">$30.00 <span class="text-xs font-normal text-slate-500">per cleaner</span></p>
+            </div>
+
+            <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-purple-400">
+                <div class="flex justify-between items-start mb-2">
+                    <h4 class="font-bold text-brand-900">Scenario 4: Weekend Solo</h4>
+                    <span class="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded">Bonus Earned</span>
+                </div>
+                <p class="text-sm text-slate-600 mb-2">Solo, 2 Bed Villa, Sunday. Room perfect.</p>
+                <div class="text-xs bg-slate-50 p-2 rounded text-slate-500 font-mono">
+                    Base $70 + $10 bonus = $80
+                </div>
+                <p class="text-right font-bold text-brand-600 mt-2">$80.00 <span class="text-xs font-normal text-slate-500">total</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Info -->
+    <section class="bg-slate-800 rounded-xl p-8 text-slate-300 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-6">
+        <div>
+            <h4 class="text-white font-bold mb-1">Additional Work</h4>
+            <p class="text-sm mb-4 sm:mb-0">Extra tasks (spring clean, maintenance support) paid at <span class="text-white font-bold">$10 per 15 min block</span>.</p>
+        </div>
+        <div class="text-right">
+            <p class="text-xs uppercase tracking-widest text-slate-500 mb-1">Payment Method</p>
+            <p class="text-white font-medium">ABN Invoice Only <span class="text-slate-500 text-xs">(No TFN)</span></p>
+        </div>
+    </section>
+
+    <!-- Terms & Conditions -->
+    <section class="bg-white rounded-xl shadow-sm border border-red-200 overflow-hidden">
+        <div class="bg-red-50 px-6 py-5 border-b border-red-100">
+            <h3 class="text-xl font-bold text-red-900 flex items-center gap-2">
+                <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                Contractor Terms &amp; Conditions
+            </h3>
+            <p class="text-sm text-red-700 mt-1">Please read carefully &#8211; these terms apply to all contractors.</p>
+        </div>
+        <div class="p-6 space-y-4 text-sm text-slate-700 leading-relaxed">
+            <p>By accepting work as an independent contractor with Bella Mare Beachside Apartments, you acknowledge and agree to the following terms:</p>
+
+            <div class="bg-red-50 rounded-lg p-4 border border-red-100 space-y-3">
+                <h4 class="font-bold text-red-900">Cost Recovery for Operational Disruptions</h4>
+                <p>Where a contractor&#8217;s actions or omissions result in <strong>additional costs to the company</strong>, those costs may be passed on to the responsible contractor. This includes, but is not limited to:</p>
+                <ul class="space-y-2 ml-4">
+                    <li class="flex items-start gap-2"><span class="text-red-400 mt-1 font-bold">&#8226;</span> <span><strong>Poor performance or incomplete work</strong> requiring re-cleaning, additional inspections, or guest compensation.</span></li>
+                    <li class="flex items-start gap-2"><span class="text-red-400 mt-1 font-bold">&#8226;</span> <span><strong>Abandoning a shift or leaving a job incomplete</strong> without reasonable notice or approval.</span></li>
+                    <li class="flex items-start gap-2"><span class="text-red-400 mt-1 font-bold">&#8226;</span> <span><strong>Excessive roster changes within 48 hours of a scheduled shift</strong>, causing operational disruption.</span></li>
+                    <li class="flex items-start gap-2"><span class="text-red-400 mt-1 font-bold">&#8226;</span> <span><strong>Same-day cancellations or no-shows</strong>, which attract additional charges due to the urgency of finding replacement staff.</span></li>
+                </ul>
+            </div>
+
+            <div class="bg-amber-50 rounded-lg p-4 border border-amber-100 space-y-3">
+                <h4 class="font-bold text-amber-900">Recoverable Costs May Include:</h4>
+                <ul class="space-y-2 ml-4">
+                    <li class="flex items-start gap-2"><span class="text-amber-500 mt-1 font-bold">&#8226;</span> <span><strong>Administration &amp; coordination costs</strong> &#8211; time spent reorganising schedules, contacting other contractors, and managing the disruption.</span></li>
+                    <li class="flex items-start gap-2"><span class="text-amber-500 mt-1 font-bold">&#8226;</span> <span><strong>Recruitment &amp; hiring costs</strong> &#8211; expenses incurred to source, interview, and onboard replacement contractors at short notice.</span></li>
+                    <li class="flex items-start gap-2"><span class="text-amber-500 mt-1 font-bold">&#8226;</span> <span><strong>Emergency incentive bonuses</strong> &#8211; additional payments offered to available cleaners to fill last-minute gaps.</span></li>
+                    <li class="flex items-start gap-2"><span class="text-amber-500 mt-1 font-bold">&#8226;</span> <span><strong>Any other direct costs</strong> reasonably incurred as a result of the contractor&#8217;s actions or failure to meet commitments.</span></li>
+                </ul>
+            </div>
+
+            <div class="bg-slate-50 rounded-lg p-4 border border-slate-200">
+                <p class="text-slate-600"><strong>Note:</strong> We understand that emergencies happen. These terms are intended to address avoidable disruptions. If you have a genuine emergency, please communicate with us as early as possible and we will work with you.</p>
+            </div>
+
+            <p class="text-xs text-slate-400 mt-4">Last updated: April 2026. Bella Mare reserves the right to update these terms as needed. Continued acceptance of work constitutes agreement to the current terms.</p>
+        </div>
+    </section>
+
+    <!-- Acknowledgment / Signing Section -->
+    <section id="sign-section" class="bg-white rounded-xl shadow-sm border-2 border-brand-300 overflow-hidden">
+        <div class="bg-brand-50 px-6 py-5 border-b border-brand-100">
+            <h3 class="text-xl font-bold text-brand-900 flex items-center gap-2">
+                <svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Acknowledge &amp; Sign
+            </h3>
+            <p class="text-sm text-brand-700 mt-1">Please confirm you have read and understood this page.</p>
+        </div>
+        <div class="p-6">
+            <div id="sign-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Your Full Name</label>
+                    <input type="text" id="sign-name" placeholder="Enter your full name" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none text-slate-800">
+                </div>
+                <div class="flex items-start gap-3">
+                    <input type="checkbox" id="sign-checkbox" class="mt-1 w-5 h-5 text-brand-600 border-slate-300 rounded focus:ring-brand-500">
+                    <label for="sign-checkbox" class="text-sm text-slate-700">I confirm that I have read and understood the payment rates, the $10 bonus system, quality standards, room allocation process, and the Contractor Terms &amp; Conditions on this page.</label>
+                </div>
+                <button onclick="submitAcknowledgment()" id="sign-btn" class="w-full bg-brand-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-brand-800 transition shadow-sm disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                    Sign &amp; Acknowledge
+                </button>
+                <p id="sign-error" class="text-red-500 text-sm hidden"></p>
+            </div>
+            <div id="sign-success" class="hidden text-center py-8">
+                <div class="text-5xl mb-3">&#10003;</div>
+                <p class="text-xl font-bold text-emerald-700 mb-2">Thank you!</p>
+                <p class="text-sm text-slate-600">Your acknowledgment has been recorded.</p>
+                <p id="sign-details" class="text-xs text-slate-400 mt-2"></p>
+            </div>
+        </div>
+    </section>
+
+    <div class="text-center pt-8">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="text-brand-600 hover:text-brand-800 font-medium text-sm">
+            Back to Top
+        </button>
+    </div>
+</main>
+
+<footer class="bg-slate-900 text-slate-500 py-8 text-center text-sm">
+    <p>&#169; 2025 Bella Mare Beachside Apartments. Internal Use Only.</p>
+</footer>
+
+<script>
+function toggleContractorType(type) {
+    var regularRows = document.querySelectorAll('.rate-row-regular');
+    var casualRows = document.querySelectorAll('.rate-row-casual');
+    var regularBtn = document.getElementById('btn-regular');
+    var casualBtn = document.getElementById('btn-casual');
+    var casualInfo = document.getElementById('casual-info');
+    var h1 = document.getElementById('header-col-1');
+    var h2 = document.getElementById('header-col-2');
+    var h3 = document.getElementById('header-col-3');
+    var h4 = document.getElementById('header-col-4');
+
+    if (type === 'regular') {
+        regularRows.forEach(function(r) { r.classList.remove('hidden'); });
+        casualRows.forEach(function(r) { r.classList.add('hidden'); });
+        regularBtn.classList.add('bg-brand-600', 'text-white');
+        regularBtn.classList.remove('text-brand-600', 'hover:bg-brand-50');
+        casualBtn.classList.remove('bg-brand-600', 'text-white');
+        casualBtn.classList.add('text-brand-600', 'hover:bg-brand-50');
+        casualInfo.classList.add('hidden');
+        h1.innerHTML = 'Mon-Fri<br><span class="text-xs text-green-600 normal-case">Bonus Earned</span>';
+        h2.innerHTML = 'Mon-Fri<br><span class="text-xs text-orange-500 normal-case">No Bonus</span>';
+        h3.innerHTML = 'Sat/Sun<br><span class="text-xs text-green-600 normal-case">Bonus Earned</span>';
+        h4.innerHTML = 'Sat/Sun<br><span class="text-xs text-orange-500 normal-case">No Bonus</span>';
+    } else {
+        regularRows.forEach(function(r) { r.classList.add('hidden'); });
+        casualRows.forEach(function(r) { r.classList.remove('hidden'); });
+        casualBtn.classList.add('bg-brand-600', 'text-white');
+        casualBtn.classList.remove('text-brand-600', 'hover:bg-brand-50');
+        regularBtn.classList.remove('bg-brand-600', 'text-white');
+        regularBtn.classList.add('text-brand-600', 'hover:bg-brand-50');
+        casualInfo.classList.remove('hidden');
+        h1.innerHTML = 'Any Day<br><span class="text-xs text-green-600 normal-case">Bonus Earned</span>';
+        h2.innerHTML = 'Any Day<br><span class="text-xs text-orange-500 normal-case">No Bonus</span>';
+        h3.innerHTML = 'Any Day<br><span class="text-xs text-green-600 normal-case">Bonus Earned</span>';
+        h4.innerHTML = 'Any Day<br><span class="text-xs text-orange-500 normal-case">No Bonus</span>';
+    }
+}
+
+function toggleFaq(btn) {
+    var answer = btn.nextElementSibling;
+    var icon = btn.querySelector('.faq-icon');
+    answer.classList.toggle('open');
+    if (answer.classList.contains('open')) {
+        icon.style.transform = 'rotate(180deg)';
+    } else {
+        icon.style.transform = 'rotate(0deg)';
+    }
+}
+
+// Signing functionality
+var signCheckbox = document.getElementById('sign-checkbox');
+var signBtn = document.getElementById('sign-btn');
+var signName = document.getElementById('sign-name');
+
+function updateSignBtn() {
+    signBtn.disabled = !(signCheckbox.checked && signName.value.trim().length > 1);
+}
+signCheckbox.addEventListener('change', updateSignBtn);
+signName.addEventListener('input', updateSignBtn);
+
+function submitAcknowledgment() {
+    var name = signName.value.trim();
+    if (!name || !signCheckbox.checked) return;
+
+    var now = new Date();
+    var dateStr = now.toLocaleDateString('en-AU', { timeZone: 'Australia/Brisbane', day: '2-digit', month: '2-digit', year: 'numeric' });
+    var timeStr = now.toLocaleTimeString('en-AU', { timeZone: 'Australia/Brisbane', hour: '2-digit', minute: '2-digit' });
+
+    // Post to Google Sheets via Apps Script
+    var SCRIPT_URL = 'GOOGLE_APPS_SCRIPT_URL_HERE';
+    var payload = { name: name, date: dateStr, time: timeStr, page: 'Payments & Finance' };
+
+    if (SCRIPT_URL !== 'GOOGLE_APPS_SCRIPT_URL_HERE') {
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        }).catch(function() {});
+    }
+
+    // Also store locally
+    try {
+        var sigs = JSON.parse(localStorage.getItem('bellamare-signatures') || '[]');
+        sigs.push(payload);
+        localStorage.setItem('bellamare-signatures', JSON.stringify(sigs));
+    } catch(e) {}
+
+    document.getElementById('sign-form').classList.add('hidden');
+    document.getElementById('sign-success').classList.remove('hidden');
+    document.getElementById('sign-details').textContent = 'Signed by ' + name + ' on ' + dateStr + ' at ' + timeStr;
+}
+</script>
 </body>
 </html>
