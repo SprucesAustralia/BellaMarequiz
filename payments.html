@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bella Mare - Payments &amp; Finance</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;700&amp;display=swap" rel="stylesheet">
@@ -576,6 +579,22 @@
         </div>
     </section>
 
+    <!-- Signed Contractors List (loaded from Firebase) -->
+    <section class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+        <div class="bg-slate-50 px-6 py-5 border-b border-slate-100">
+            <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                Signed Contractors
+            </h3>
+            <p class="text-sm text-slate-500 mt-1">Team members who have acknowledged this page.</p>
+        </div>
+        <div class="p-6">
+            <div id="signatures-loading" class="text-center py-4 text-slate-400 text-sm">Loading signatures...</div>
+            <div id="signatures-empty" class="hidden text-center py-4 text-slate-400 text-sm">No signatures yet.</div>
+            <div id="signatures-list" class="hidden divide-y divide-slate-100"></div>
+        </div>
+    </section>
+
     <div class="text-center pt-8">
         <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="text-brand-600 hover:text-brand-800 font-medium text-sm">
             Back to Top
@@ -588,6 +607,15 @@
 </footer>
 
 <script>
+// --- Firebase Init ---
+var firebaseConfig = {
+    databaseURL: "https://studio-844548902-d6b8f-default-rtdb.asia-southeast1.firebasedatabase.app"
+};
+firebase.initializeApp(firebaseConfig);
+var db = firebase.database();
+var signaturesRef = db.ref('onboarding-signatures');
+
+// --- Toggle Contractor Type ---
 function toggleContractorType(type) {
     var regularRows = document.querySelectorAll('.rate-row-regular');
     var casualRows = document.querySelectorAll('.rate-row-casual');
@@ -626,6 +654,7 @@ function toggleContractorType(type) {
     }
 }
 
+// --- FAQ Toggle ---
 function toggleFaq(btn) {
     var answer = btn.nextElementSibling;
     var icon = btn.querySelector('.faq-icon');
@@ -637,7 +666,7 @@ function toggleFaq(btn) {
     }
 }
 
-// Signing functionality
+// --- Signing Functionality ---
 var signCheckbox = document.getElementById('sign-checkbox');
 var signBtn = document.getElementById('sign-btn');
 var signName = document.getElementById('sign-name');
@@ -652,34 +681,87 @@ function submitAcknowledgment() {
     var name = signName.value.trim();
     if (!name || !signCheckbox.checked) return;
 
+    signBtn.disabled = true;
+    signBtn.textContent = 'Submitting...';
+
     var now = new Date();
     var dateStr = now.toLocaleDateString('en-AU', { timeZone: 'Australia/Brisbane', day: '2-digit', month: '2-digit', year: 'numeric' });
     var timeStr = now.toLocaleTimeString('en-AU', { timeZone: 'Australia/Brisbane', hour: '2-digit', minute: '2-digit' });
 
-    // Post to Google Sheets via Apps Script
-    var SCRIPT_URL = 'GOOGLE_APPS_SCRIPT_URL_HERE';
-    var payload = { name: name, date: dateStr, time: timeStr, page: 'Payments & Finance' };
+    var payload = {
+        name: name,
+        date: dateStr,
+        time: timeStr,
+        page: 'Payments & Finance',
+        timestamp: firebase.database.ServerValue.TIMESTAMP
+    };
 
-    if (SCRIPT_URL !== 'GOOGLE_APPS_SCRIPT_URL_HERE') {
-        fetch(SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        }).catch(function() {});
-    }
-
-    // Also store locally
-    try {
-        var sigs = JSON.parse(localStorage.getItem('bellamare-signatures') || '[]');
-        sigs.push(payload);
-        localStorage.setItem('bellamare-signatures', JSON.stringify(sigs));
-    } catch(e) {}
-
-    document.getElementById('sign-form').classList.add('hidden');
-    document.getElementById('sign-success').classList.remove('hidden');
-    document.getElementById('sign-details').textContent = 'Signed by ' + name + ' on ' + dateStr + ' at ' + timeStr;
+    signaturesRef.push(payload)
+        .then(function() {
+            document.getElementById('sign-form').classList.add('hidden');
+            document.getElementById('sign-success').classList.remove('hidden');
+            document.getElementById('sign-details').textContent = 'Signed by ' + name + ' on ' + dateStr + ' at ' + timeStr;
+        })
+        .catch(function(err) {
+            console.error('Firebase write failed:', err);
+            document.getElementById('sign-error').textContent = 'Error saving signature. Please try again.';
+            document.getElementById('sign-error').classList.remove('hidden');
+            signBtn.disabled = false;
+            signBtn.textContent = 'Sign & Acknowledge';
+        });
 }
+
+// --- Load & Display Signatures from Firebase ---
+function loadSignatures() {
+    var loadingEl = document.getElementById('signatures-loading');
+    var emptyEl = document.getElementById('signatures-empty');
+    var listEl = document.getElementById('signatures-list');
+
+    signaturesRef.orderByChild('timestamp').on('value', function(snapshot) {
+        loadingEl.classList.add('hidden');
+        listEl.innerHTML = '';
+
+        if (!snapshot.exists()) {
+            emptyEl.classList.remove('hidden');
+            listEl.classList.add('hidden');
+            return;
+        }
+
+        emptyEl.classList.add('hidden');
+        listEl.classList.remove('hidden');
+
+        var entries = [];
+        snapshot.forEach(function(child) {
+            entries.push(child.val());
+        });
+        entries.reverse();
+
+        entries.forEach(function(sig) {
+            var row = document.createElement('div');
+            row.className = 'flex items-center justify-between py-3';
+            row.innerHTML =
+                '<div class="flex items-center gap-3">' +
+                    '<div class="w-8 h-8 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center font-bold text-sm">' +
+                        sig.name.charAt(0).toUpperCase() +
+                    '</div>' +
+                    '<div>' +
+                        '<p class="font-medium text-slate-800 text-sm">' + sig.name + '</p>' +
+                        '<p class="text-xs text-slate-400">' + sig.page + '</p>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="text-right">' +
+                    '<p class="text-sm text-slate-600">' + sig.date + '</p>' +
+                    '<p class="text-xs text-slate-400">' + sig.time + '</p>' +
+                '</div>';
+            listEl.appendChild(row);
+        });
+    }, function(err) {
+        loadingEl.textContent = 'Could not load signatures.';
+        console.error('Firebase read failed:', err);
+    });
+}
+
+loadSignatures();
 </script>
 </body>
 </html>
