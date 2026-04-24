@@ -94,6 +94,30 @@
             </div>
         </div>
 
+        <!-- Regular vs Casual definition -->
+        <div class="bg-white border-b border-slate-100 px-6 py-5">
+            <h4 class="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wide">Am I a Regular or a Casual?</h4>
+            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                <div class="bg-brand-50 rounded-lg p-4 border border-brand-200">
+                    <p class="font-bold text-brand-900 mb-1">Regular Contractor</p>
+                    <ul class="text-brand-800 space-y-1 list-disc list-inside ml-1">
+                        <li>Works <strong>every week</strong></li>
+                        <li>Does <strong>3 or more days per week</strong></li>
+                        <li>i.e. 12+ shifts in the past 4 weeks</li>
+                    </ul>
+                </div>
+                <div class="bg-amber-50 rounded-lg p-4 border border-amber-200">
+                    <p class="font-bold text-amber-900 mb-1">Casual Contractor</p>
+                    <ul class="text-amber-800 space-y-1 list-disc list-inside ml-1">
+                        <li>Does <strong>not</strong> work every week, <em>or</em></li>
+                        <li>Averages <strong>fewer than 3 days per week</strong> over the past 4 weeks</li>
+                        <li>i.e. fewer than 12 shifts in the past 4 weeks</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-3">Your status is reviewed on a rolling 4-week basis. If your availability and shifts increase consistently, you move to Regular rates. If they drop, you move to Casual rates.</p>
+        </div>
+
         <div class="overflow-x-auto">
             <table class="w-full text-sm text-left">
                 <thead class="bg-slate-50 text-xs uppercase text-slate-500 border-b border-slate-200">
@@ -234,24 +258,30 @@
             <!-- Key Message -->
             <div class="bg-emerald-50 rounded-xl p-5 border-2 border-emerald-300 text-center">
                 <p class="text-2xl font-bold text-emerald-800 mb-2">The $10 is a BONUS you EARN</p>
-                <p class="text-emerald-700">It is <strong>not</strong> a penalty or deduction. Your base rate is the lower amount. When the room passes inspection with no issues, you earn an <strong>extra $10 on top</strong> as a reward for perfect work.</p>
+                <p class="text-emerald-700">It is <strong>not</strong> a penalty or deduction. Your base rate is the lower amount. When the room goes through with no issues flagged, you earn an <strong>extra $10 on top</strong> as a reward for perfect work.</p>
+            </div>
+
+            <!-- Important context: hotel shouldn't need to check -->
+            <div class="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-400">
+                <p class="text-sm text-blue-900"><strong>Important context:</strong> The hotel hired us to clean rooms <em>to their standard</em>. That means, in a normal day, hotel staff should <strong>not</strong> need to double-check our work &#8211; the expectation is that every room is ready for guests straight after we finish.</p>
+                <p class="text-sm text-blue-900 mt-2">If hotel staff <em>do</em> check a room and find something, it only happens because our standard wasn&#8217;t met. That&#8217;s the moment the bonus is no longer earned &#8211; not because they&#8217;re &#8220;inspecting&#8221; everyone, but because they had to step in and fix what should have been right.</p>
             </div>
 
             <!-- How it works -->
             <div class="grid md:grid-cols-3 gap-4">
                 <div class="bg-slate-50 rounded-lg p-4 text-center border border-slate-200">
                     <div class="text-3xl font-bold text-slate-400 mb-1">1</div>
-                    <p class="text-sm font-semibold text-slate-800">You clean the room</p>
+                    <p class="text-sm font-semibold text-slate-800">You clean the room to standard</p>
                     <p class="text-xs text-slate-500 mt-1">Following the checklist carefully</p>
                 </div>
                 <div class="bg-slate-50 rounded-lg p-4 text-center border border-slate-200">
                     <div class="text-3xl font-bold text-slate-400 mb-1">2</div>
-                    <p class="text-sm font-semibold text-slate-800">Hotel inspects the room</p>
-                    <p class="text-xs text-slate-500 mt-1">They check for any issues</p>
+                    <p class="text-sm font-semibold text-slate-800">Room goes to the guest</p>
+                    <p class="text-xs text-slate-500 mt-1">Hotel shouldn&#8217;t need to check &#8211; but sometimes they do</p>
                 </div>
                 <div class="bg-emerald-50 rounded-lg p-4 text-center border-2 border-emerald-300">
                     <div class="text-3xl font-bold text-emerald-600 mb-1">3</div>
-                    <p class="text-sm font-semibold text-emerald-800">Room is perfect? +$10!</p>
+                    <p class="text-sm font-semibold text-emerald-800">No issues flagged? +$10!</p>
                     <p class="text-xs text-emerald-600 mt-1">Bonus added to your pay</p>
                 </div>
             </div>
@@ -277,6 +307,15 @@
                 <h4 class="font-bold text-amber-900 mb-2">What is a &#8220;fix-up&#8221;?</h4>
                 <p class="text-sm text-amber-800 mb-3">A fix-up happens when the hotel inspects your room and finds something that needs to be corrected &#8211; for example, a missed spot, streaky glass, or an unclean area. Someone (often you, another cleaner, or hotel staff) has to go back and fix it.</p>
                 <p class="text-sm text-amber-800"><strong>Why does the bonus get removed?</strong> The bonus rewards rooms that are done right the first time. If someone has to go back, the room was not perfect &#8211; so the bonus is not earned. You still receive your full base rate.</p>
+            </div>
+
+            <!-- Why the $10 exists: short version with link -->
+            <div class="bg-rose-50 rounded-xl p-5 border border-rose-200 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
+                <div>
+                    <h4 class="font-bold text-rose-900 mb-1">Why does the $10 even exist?</h4>
+                    <p class="text-sm text-rose-800">Every fix-up triggers a chain of unpaid admin work (inspection, photos, review, comms, re-check). The $10 bonus rewards rooms done right the first time &#8211; because that&#8217;s what saves everyone the hassle.</p>
+                </div>
+                <a href="bonus-explained.html" class="shrink-0 inline-block bg-rose-600 text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-rose-700 transition shadow-sm text-sm whitespace-nowrap">Full explanation &#8594;</a>
             </div>
 
             <!-- Quality Standards -->
@@ -333,7 +372,8 @@
                     <svg class="w-5 h-5 text-slate-400 faq-icon transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
                 <div class="faq-answer px-6 pb-4">
-                    <p class="text-sm text-slate-600">You are not &#8220;losing&#8221; $10 &#8211; you simply did not earn the bonus. The $10 is an <strong>extra reward</strong> for getting it right the first time. Your base pay stays the same regardless. Think of it this way: the base rate is your guaranteed pay, and the bonus is a thank-you for perfection.</p>
+                    <p class="text-sm text-slate-600 mb-2">You are not &#8220;losing&#8221; $10 &#8211; you simply did not earn the bonus. The $10 is an <strong>extra reward</strong> for getting it right the first time. Your base pay stays the same regardless.</p>
+                    <p class="text-sm text-slate-600">Even if you go back and fix it, the hotel has already inspected, taken photos, flagged it to us, and we&#8217;ve had to review, log and communicate. That admin still happened &#8211; which is exactly the cost the $10 bonus is meant to avoid. So: no fix-up needed = bonus earned. Fix-up needed = base rate only.</p>
                 </div>
             </div>
 
