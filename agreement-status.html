@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Mare &ndash; Who has signed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;700&amp;display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: {
+            fontFamily: { sans: ['Inter','sans-serif'], serif: ['Playfair Display','serif'] },
+            colors: { brand: { 50:'#f0f9ff',100:'#e0f2fe',500:'#0ea5e9',600:'#0284c7',800:'#075985',900:'#0c4a6e' } } } } }
+    </script>
+    <style>.hidden{display:none}</style>
+</head>
+<body class="bg-slate-50 text-slate-600 font-sans antialiased">
+
+<header class="bg-brand-900 text-white shadow-lg">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+        <h1 class="text-xl font-serif font-bold">Bella Mare <span class="text-brand-500 font-light text-sm block sm:inline">Agreement status</span></h1>
+        <nav class="text-sm font-medium flex gap-3">
+            <a href="index.html" class="text-brand-100 hover:text-white">Home</a>
+            <a href="agreement.html" class="text-brand-100 hover:text-white">The agreement</a>
+        </nav>
+    </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-6">
+
+    <section id="gate" class="bg-white rounded-2xl border border-slate-200 p-6 max-w-sm mx-auto">
+        <h2 class="text-lg font-bold text-slate-800 mb-1">Admin only</h2>
+        <p class="text-sm text-slate-500 mb-4">Enter the admin passcode.</p>
+        <input id="pin" type="password" inputmode="numeric" placeholder="Passcode"
+               class="w-full px-4 py-3 border border-slate-300 rounded-lg mb-3 tracking-widest focus:ring-2 focus:ring-brand-500">
+        <p id="pin-err" class="hidden text-sm text-red-600 mb-2 font-medium">Wrong passcode.</p>
+        <button onclick="unlock()" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 rounded-lg">View</button>
+    </section>
+
+    <div id="panel" class="hidden space-y-6">
+        <div class="grid grid-cols-3 gap-3">
+            <div class="bg-white rounded-xl border border-slate-200 p-4 text-center">
+                <p id="n-signed" class="text-3xl font-bold text-emerald-600">&ndash;</p>
+                <p class="text-xs text-slate-500 mt-1 font-medium uppercase tracking-wide">Signed</p>
+            </div>
+            <div class="bg-white rounded-xl border border-slate-200 p-4 text-center">
+                <p id="n-pending" class="text-3xl font-bold text-amber-500">&ndash;</p>
+                <p class="text-xs text-slate-500 mt-1 font-medium uppercase tracking-wide">Within 7 days</p>
+            </div>
+            <div class="bg-white rounded-xl border border-slate-200 p-4 text-center">
+                <p id="n-overdue" class="text-3xl font-bold text-red-600">&ndash;</p>
+                <p class="text-xs text-slate-500 mt-1 font-medium uppercase tracking-wide">Overdue</p>
+            </div>
+        </div>
+
+        <div id="blocked-box" class="hidden bg-red-50 border-2 border-red-200 rounded-2xl p-5">
+            <h3 class="font-bold text-red-900 mb-2">Do not allocate rooms to these people</h3>
+            <p class="text-sm text-red-800 mb-3">Past the 7-day window with no signature on file.</p>
+            <ul id="blocked-list" class="space-y-1 text-sm text-red-900 font-medium"></ul>
+        </div>
+
+        <section class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+            <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
+                <h3 class="font-bold text-slate-800">Team</h3>
+                <button onclick="copyChaseList()" class="text-xs bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg font-medium text-slate-600">Copy unsigned list</button>
+            </div>
+            <div id="rows" class="divide-y divide-slate-100"></div>
+        </section>
+
+        <p class="text-xs text-slate-400 text-center">Live from the roster database. Refresh to update.</p>
+    </div>
+</main>
+
+<script>
+var SIGN_WINDOW_DAYS = 7;
+var AGREEMENT_LAUNCH = '2026-09-19T00:00:00+10:00';   // QLD midnight this went live
+function deadlineFor(rec) {
+    var joined = rec && rec.createdAt ? new Date(rec.createdAt).getTime() : 0;
+    var launch = new Date(AGREEMENT_LAUNCH).getTime();
+    return Math.max(joined, launch) + SIGN_WINDOW_DAYS * 86400000;
+}
+firebase.initializeApp({ databaseURL: "https://studio-844548902-d6b8f-default-rtdb.asia-southeast1.firebasedatabase.app" });
+var db = firebase.database();
+var unsignedNames = [];
+
+function unlock() {
+    var v = document.getElementById('pin').value.trim();
+    if (v !== '8888') { document.getElementById('pin-err').classList.remove('hidden'); return; }
+    document.getElementById('gate').classList.add('hidden');
+    document.getElementById('panel').classList.remove('hidden');
+    load();
+}
+document.getElementById('pin').addEventListener('keydown', function (e) { if (e.key === 'Enter') unlock(); });
+
+function load() {
+    db.ref('teamData').once('value')
+        .then(function (snap) {
+            var team = snap.val() || {};
+            var rows = [], signed = 0, pending = 0, overdue = 0, blocked = [];
+            unsignedNames = [];
+
+            Object.keys(team).forEach(function (id) {
+                var t = team[id];
+                if (!t || typeof t !== 'object') return;
+                if (!t.fullName && !t.name) return;
+                if (t.isArchived || t.isHidden) return;
+
+                var name = (t.fullName || t.name).trim();
+                var sig = t.agreement;
+                var daysLeft = Math.ceil((deadlineFor(t) - Date.now()) / 86400000);
+
+                var state;
+                if (sig && sig.signedAt) { state = 'signed'; signed++; }
+                else if (daysLeft <= 0) { state = 'overdue'; overdue++; blocked.push(name); unsignedNames.push(name); }
+                else { state = 'pending'; pending++; unsignedNames.push(name); }
+
+                rows.push({ id: id, name: name, type: t.employmentType || '', sig: sig, state: state, daysLeft: daysLeft });
+            });
+
+            rows.sort(function (a, b) {
+                var o = { overdue: 0, pending: 1, signed: 2 };
+                return o[a.state] - o[b.state] || a.name.localeCompare(b.name);
+            });
+
+            document.getElementById('n-signed').textContent = signed;
+            document.getElementById('n-pending').textContent = pending;
+            document.getElementById('n-overdue').textContent = overdue;
+
+            if (blocked.length) {
+                document.getElementById('blocked-box').classList.remove('hidden');
+                document.getElementById('blocked-list').innerHTML =
+                    blocked.map(function (n) { return '<li>&bull; ' + esc(n) + '</li>'; }).join('');
+            }
+
+            document.getElementById('rows').innerHTML = rows.map(function (r) {
+                var badge, sub;
+                if (r.state === 'signed') {
+                    badge = '<span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full whitespace-nowrap">&#10003; Signed</span>';
+                    sub = new Date(r.sig.signedAt).toLocaleDateString('en-AU', { timeZone: 'Australia/Brisbane', day: 'numeric', month: 'short', year: 'numeric' }) + ' &middot; ' + esc(r.sig.version || '');
+                } else if (r.state === 'overdue') {
+                    badge = '<span class="text-xs font-bold text-red-700 bg-red-100 px-2.5 py-1 rounded-full whitespace-nowrap">Overdue</span>';
+                    sub = 'No rooms until signed';
+                } else {
+                    badge = '<span class="text-xs font-bold text-amber-700 bg-amber-100 px-2.5 py-1 rounded-full whitespace-nowrap">' + (r.daysLeft + 'd left') + '</span>';
+                    sub = 'Not signed yet';
+                }
+                var link = 'agreement.html?staff=' + encodeURIComponent(r.id);
+                return '<div class="px-5 py-3.5 flex items-center justify-between gap-3">' +
+                    '<div class="min-w-0">' +
+                        '<p class="font-semibold text-slate-800 text-sm truncate">' + esc(r.name) +
+                            (r.type ? ' <span class="font-normal text-slate-400">&middot; ' + esc(r.type) + '</span>' : '') + '</p>' +
+                        '<p class="text-xs text-slate-400 mt-0.5">' + sub + '</p>' +
+                    '</div>' +
+                    '<div class="flex items-center gap-2 shrink-0">' + badge +
+                        (r.state === 'signed' ? '' : '<a href="' + link + '" class="text-xs text-brand-600 underline font-medium">link</a>') +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        })
+        .catch(function (e) {
+            document.getElementById('rows').innerHTML = '<p class="p-5 text-sm text-red-600">Could not load. ' + esc(e.message) + '</p>';
+        });
+}
+
+function copyChaseList() {
+    navigator.clipboard.writeText(unsignedNames.join('\n'));
+}
+
+function esc(s) { return String(s).replace(/[&<>"']/g, function (c) {
+    return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
+</script>
+</body>
+</html>

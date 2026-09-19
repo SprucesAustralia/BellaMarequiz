@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Mare &ndash; Team Agreement</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;700&amp;display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: { extend: {
+                fontFamily: { sans: ['Inter','sans-serif'], serif: ['Playfair Display','serif'] },
+                colors: { brand: { 50:'#f0f9ff',100:'#e0f2fe',200:'#bae6fd',300:'#7dd3fc',500:'#0ea5e9',600:'#0284c7',800:'#075985',900:'#0c4a6e' } }
+            } }
+        }
+    </script>
+    <style>
+        .hidden { display: none; }
+        #sigPad { touch-action: none; cursor: crosshair; }
+        .rule-card { scroll-margin-top: 90px; }
+        .rule-card.read { border-color: #6ee7b7; }
+        .rule-card.read .read-badge { display: inline-flex; }
+        .read-badge { display: none; }
+        .prog-bar { transition: width .35s ease; }
+        @media print { .no-print { display:none !important; } }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-600 antialiased font-sans">
+
+<header class="bg-brand-900 text-white shadow-lg sticky top-0 z-50 no-print">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-3">
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-2">
+            <h1 class="text-lg sm:text-xl font-serif font-bold tracking-wide">Bella Mare <span class="text-brand-500 font-light text-sm block sm:inline">Team Agreement</span></h1>
+            <nav class="flex flex-wrap gap-x-1 items-center text-sm font-medium">
+                <a href="index.html" class="text-brand-100 hover:text-white transition px-2">Home</a>
+                <span class="text-brand-600">|</span>
+                <a href="payments.html" class="text-brand-100 hover:text-white transition px-2">Payments</a>
+                <span class="text-brand-600">|</span>
+                <a href="checklists.html" class="text-brand-100 hover:text-white transition px-2">Checklists</a>
+            </nav>
+        </div>
+        <div id="prog-wrap" class="hidden mt-3">
+            <div class="flex justify-between text-xs text-brand-200 mb-1">
+                <span id="prog-label">0 of 12 sections read</span>
+                <span id="prog-name" class="font-semibold text-white"></span>
+            </div>
+            <div class="h-1.5 bg-brand-800 rounded-full overflow-hidden">
+                <div id="prog-bar" class="prog-bar h-full bg-emerald-400 rounded-full" style="width:0%"></div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-6">
+
+    <!-- ============ STEP 1: IDENTIFY ============ -->
+    <section id="gate" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 mb-2">Team Agreement &amp; Policies</h2>
+        <p class="text-slate-500 mb-6">Everything you agreed to when you joined, in one place. Read it, then sign at the bottom. It takes about five minutes.</p>
+
+        <div id="gate-loading" class="text-sm text-slate-400 py-4">Loading team list&hellip;</div>
+
+        <div id="gate-form" class="hidden space-y-4">
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1.5">Who are you?</label>
+                <select id="staff-select" class="w-full px-4 py-3 border border-slate-300 rounded-lg text-slate-800 bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+                    <option value="">Select your name&hellip;</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1.5">Your app passcode</label>
+                <input id="staff-pass" type="tel" inputmode="numeric" maxlength="8" autocomplete="off" placeholder="The same code you use in the roster app"
+                       class="w-full px-4 py-3 border border-slate-300 rounded-lg text-slate-800 tracking-widest focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+            </div>
+            <p id="gate-error" class="hidden text-sm text-red-600 font-medium"></p>
+            <button id="gate-btn" onclick="identify()" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 rounded-lg transition">Continue</button>
+            <p class="text-xs text-slate-400 text-center">Can&rsquo;t see your name? Message Leo on WhatsApp and he&rsquo;ll add you.</p>
+        </div>
+    </section>
+
+    <!-- ============ ALREADY SIGNED ============ -->
+    <section id="already" class="hidden bg-emerald-50 rounded-2xl border-2 border-emerald-200 p-6 sm:p-8 text-center">
+        <div class="w-14 h-14 mx-auto bg-emerald-500 text-white rounded-full flex items-center justify-center text-3xl mb-3">&#10003;</div>
+        <h2 class="text-2xl font-bold text-emerald-900 mb-1">You&rsquo;ve signed this agreement</h2>
+        <p id="already-detail" class="text-emerald-800 text-sm mb-5"></p>
+        <div id="already-sig" class="mb-5"></div>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <button onclick="showDoc(true)" class="px-5 py-2.5 bg-white border border-emerald-300 text-emerald-800 rounded-lg font-medium hover:bg-emerald-100 transition">Read it again</button>
+            <button onclick="window.print()" class="px-5 py-2.5 bg-emerald-600 text-white rounded-lg font-medium hover:bg-emerald-700 transition">Save a copy</button>
+        </div>
+    </section>
+
+    <!-- ============ THE DOCUMENT ============ -->
+    <div id="doc" class="hidden space-y-6">
+
+        <div id="deadline-banner" class="hidden rounded-2xl p-5 border-2"></div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+            <p class="text-slate-600 leading-relaxed">
+                This is the agreement between <strong class="text-slate-800">Spruces Co Pty Ltd</strong> (ABN 63 664 218 759) and you as an
+                <strong class="text-slate-800">independent contractor</strong> cleaning at Bella Mare Beachside Apartments, Coolangatta.
+                It sets out how rooms are allocated, how you get paid, and what we need from you.
+            </p>
+            <p class="mt-3 text-sm text-slate-500">
+                Scroll through each section below. A green tick appears once you&rsquo;ve read one. When all sections are ticked,
+                the signature box at the bottom unlocks.
+            </p>
+        </div>
+
+        <!-- 1. KEYS -->
+        <section data-rule="keys" class="rule-card bg-white rounded-2xl shadow-sm border-2 border-amber-200 overflow-hidden">
+            <div class="bg-amber-50 px-6 py-4 border-b border-amber-100 flex items-center justify-between gap-3">
+                <h3 class="text-lg font-bold text-amber-900 flex items-center gap-2">
+                    <span class="text-xl">&#128477;</span> 1. Keys, fobs and building access
+                </h3>
+                <span class="read-badge items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-1 rounded-full">&#10003; Read</span>
+            </div>
+            <div class="p-6 space-y-4 text-slate-600 leading-relaxed">
+                <div class="bg-amber-100 border-l-4 border-amber-500 p-4 rounded-r-lg">
+                    <p class="font-bold text-amber-900 mb-1">New rule &mdash; effective 19 September 2026</p>
+                    <p class="text-amber-900">Any key, fob or swipe card issued to you must be returned within
+                    <strong>3 business days</strong> of your last shift, of going away, or of us asking for it back.
+                    <strong>If it is not returned in that time, $30 per key is deducted from your next pay.</strong></p>
+                </div>
+                <ul class="space-y-2.5 text-sm sm:text-base">
+                    <li class="flex gap-2"><span class="text-amber-500 font-bold">&bull;</span><span>Keys and fobs stay the property of Bella Mare. You are holding them, not keeping them.</span></li>
+                    <li class="flex gap-2"><span class="text-amber-500 font-bold">&bull;</span><span><strong>Never hand your key to anyone else</strong> &mdash; not a friend, not another cleaner, not a partner. Whoever has it, it is still your name on it and still your deduction.</span></li>
+                    <li class="flex gap-2"><span class="text-amber-500 font-bold">&bull;</span><span>If a key is lost or damaged, tell us the same day. Bella Mare charges us for cut keys, and that cost is passed on.</span></li>
+                    <li class="flex gap-2"><span class="text-amber-500 font-bold">&bull;</span><span>The $30 is a flat deduction per key per pay run and keeps applying each pay run until the key is back.</span></li>
+                    <li class="flex gap-2"><span class="text-amber-500 font-bold">&bull;</span><span>Hand keys back to Leo or to the Bella Mare office and get it confirmed in writing (a WhatsApp message is fine). If you do not have confirmation, we have no record of it.</span></li>
+                    <li class="flex gap-2"><span class="text-amber-500 font-bold">&bull;</span><span>Business days are Monday to Friday, Queensland time, not counting public holidays.</span></li>
+                </ul>
+                <p class="text-sm text-slate-500 italic">Why this exists: an unreturned key has held up a pay run and cost us a re-cut. This rule makes the outcome predictable for everybody instead of a dispute each time.</p>
+            </div>
+        </section>
+
+        <!-- 2. FINISHING A ROOM -->
+        <section data-rule="finish" class="rule-card bg-white rounded-2xl shadow-sm border-2 border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center justify-between gap-3">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2"><span class="text-xl">&#128246;</span> 2. Finishing a room in the app</h3>
+                <span class="read-badge items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-1 rounded-full">&#10003; Read</span>
+            </div>
+            <div class="p-6 space-y-3 text-slate-600 leading-relaxed">
+                <ul class="space-y-2.5 text-sm sm:text-base">
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>Hit Finish in the app the moment you leave the room</strong> &mdash; on the day, not the next morning. A room that is never marked finished does not appear on your pay.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>Photos are required at Finish.</strong> The hotel checks the room against your photos. No photo means the hotel cannot sign it off, which can cost you the $10 bonus.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>If a photo will not upload &mdash; it happens, it is an app fault &mdash; post it in the team group the same day so it is on record.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Only mark a room finished if you actually cleaned it.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>If you clean a room that is not on your list, add it in the app and say so in the group. It gets paid once Leo approves it.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 3. WHO GETS PAID -->
+        <section data-rule="attribution" class="rule-card bg-white rounded-2xl shadow-sm border-2 border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center justify-between gap-3">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2"><span class="text-xl">&#128100;</span> 3. Who gets paid for a room</h3>
+                <span class="read-badge items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-1 rounded-full">&#10003; Read</span>
+            </div>
+            <div class="p-6 space-y-3 text-slate-600 leading-relaxed">
+                <ul class="space-y-2.5 text-sm sm:text-base">
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>The Finish screen decides the pay, not WhatsApp.</strong> Agreeing to a room in a chat is a plan; finishing it in the app is the fact.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>If you work as a pair, a room shows on both names. At Finish, say who actually did it. The money follows that answer.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>If you join the app part-way through a week, your earlier rooms may be sitting under your partner&rsquo;s name. Tell us and we will move them.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>We will never move or reduce your pay on someone else&rsquo;s word. We will always ask you first.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Training: the trainer takes two thirds of the room and the trainee one third, out of the same room rate.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 4. AVAILABILITY -->
+        <section data-rule="availability" class="rule-card bg-white rounded-2xl shadow-sm border-2 border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center justify-between gap-3">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2"><span class="text-xl">&#128197;</span> 4. Availability &mdash; keep it true</h3>
+                <span class="read-badge items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-1 rounded-full">&#10003; Read</span>
+            </div>
+            <div class="p-6 space-y-3 text-slate-600 leading-relaxed">
+                <ul class="space-y-2.5 text-sm sm:text-base">
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>Your availability in the app is what we roster from.</strong> Update it yourself, in advance. We do not assign anyone who has marked a day unavailable.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>A day left showing &ldquo;available&rdquo; that you cannot actually work is a no-show, even if you never said yes to a specific room.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>If you take a job somewhere else for a day, mark that day off here first.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>If you need to drop a day you had accepted, say so as early as you can, in the app and in the group. Early is fine. Silent is not.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Same-day cancellations and no-shows are the ones that cost money &mdash; see section 11.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 5. TIMING -->
+        <section data-rule="timing" class="rule-card bg-white rounded-2xl shadow-sm border-2 border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center justify-between gap-3">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2"><span class="text-xl">&#9200;</span> 5. Timing and back-to-back rooms</h3>
+                <span class="read-badge items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-1 rounded-full">&#10003; Read</span>
+            </div>
+            <div class="p-6 space-y-3 text-slate-600 leading-relaxed">
+                <ul class="space-y-2.5 text-sm sm:text-base">
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>We run on Queensland time.</strong> Every date and time in the app and in this agreement is QLD, whatever your phone says.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>A <strong>starred room</strong> is back-to-back: a guest checks in that same afternoon. It must be finished <strong>before 2pm</strong>.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>Do not start later than 10am</strong> on a day with starred rooms. If you cannot be there by 10am, tell us the night before.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Rough guide: 2-bed apartment 1.5 hrs &middot; 2-bed villa 1.75&ndash;2 hrs &middot; 3-bed 2 hrs &middot; service clean 30 min.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Allow 5&ndash;7 minutes for arrival and parking. Park in the basement, entrance on Boundary St.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 6. QUALITY -->
+        <section data-rule="quality" class="rule-card bg-white rounded-2xl shadow-sm border-2 border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center justify-between gap-3">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2"><span class="text-xl">&#10024;</span> 6. Quality, checks and fix-ups</h3>
+                <span class="read-badge items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-1 rounded-full">&#10003; Read</span>
+            </div>
+            <div class="p-6 space-y-3 text-slate-600 leading-relaxed">
+                <ul class="space-y-2.5 text-sm sm:text-base">
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>The hotel inspects rooms and rates them. That rating is what drives the $10 bonus.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>The checklist is the standard</strong>, not a suggestion. The things that come back most often: ovens, tinfoil on the drip trays, dishwashers left loaded, balcony glass.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>A fix-up means someone has to go back to a room you signed off. If it is yours, you go back, or the cost of whoever does comes out of that room.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Rushing is what shows up in the photos. A room finished fast and rated 4 earns less than one done properly.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>If something in a room is broken, stained or missing when you arrive, photograph it before you start and post it in the group. That protects you.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 7. PAY -->
+        <section data-rule="pay" class="rule-card bg-white rounded-2xl shadow-sm border-2 border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center justify-between gap-3">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2"><span class="text-xl">&#128176;</span> 7. How and when you get paid</h3>
+                <span class="read-badge items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-1 rounded-full">&#10003; Read</span>
+            </div>
+            <div class="p-6 space-y-3 text-slate-600 leading-relaxed">
+                <ul class="space-y-2.5 text-sm sm:text-base">
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>The pay week runs <strong>Monday to Sunday</strong>. It is paid the <strong>following Friday</strong>.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>You are paid per room, by room type and day &mdash; the full rate card is on the <a href="payments.html" class="text-brand-600 underline font-medium">Payments page</a>.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Only rooms that are <strong>finished in the app and approved by the hotel</strong> are paid.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>You are an independent contractor and invoice under your own <strong>ABN</strong>. No tax is withheld, no TFN is held. Your tax and super are yours.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Deductions that can appear on a pay run: unreturned keys ($30 each, section 1), a re-cut key at cost, and cost recovery under section 11. Anything deducted is itemised and explained before it is paid.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 8. BANK -->
+        <section data-rule="bank" class="rule-card bg-white rounded-2xl shadow-sm border-2 border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center justify-between gap-3">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2"><span class="text-xl">&#127974;</span> 8. Your bank details</h3>
+                <span class="read-badge items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-1 rounded-full">&#10003; Read</span>
+            </div>
+            <div class="p-6 space-y-3 text-slate-600 leading-relaxed">
+                <ul class="space-y-2.5 text-sm sm:text-base">
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Change your own bank details in the app. Do not send them to anyone in a message.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>Every change is checked with you before the next pay run.</strong> We will ask you to repeat the BSB and the last four digits. Expect that question &mdash; it is how we know the change was really you.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Your pay for that week is held until you confirm. Answer the same day and nothing is delayed.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>We will never ask you for a full account number, a password or a code over WhatsApp.</strong> If a message asks for that, it is not us. Screenshot it and send it to Leo.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>No bank details in the app means you cannot be included in a payment run.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 9. GUESTS AND PROPERTY -->
+        <section data-rule="guests" class="rule-card bg-white rounded-2xl shadow-sm border-2 border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center justify-between gap-3">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2"><span class="text-xl">&#128717;</span> 9. Guests, their property and privacy</h3>
+                <span class="read-badge items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-1 rounded-full">&#10003; Read</span>
+            </div>
+            <div class="p-6 space-y-3 text-slate-600 leading-relaxed">
+                <ul class="space-y-2.5 text-sm sm:text-base">
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>Anything left behind goes to the Bella Mare office the same day</strong> &mdash; cash, chargers, jewellery, clothes, food, all of it. Nothing goes home with you, however small, however likely it is to be thrown out.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Photograph anything valuable where you found it before you move it.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Photos are for room condition only. No photos of guests, of guests&rsquo; belongings, or of documents.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Do not post anything about a guest, a room or the building on social media.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>If a guest is still in a room you were told was vacant, leave, close the door and message the group.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 10. LEAVING -->
+        <section data-rule="leaving" class="rule-card bg-white rounded-2xl shadow-sm border-2 border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center justify-between gap-3">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2"><span class="text-xl">&#128682;</span> 10. Going away, or leaving the team</h3>
+                <span class="read-badge items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-1 rounded-full">&#10003; Read</span>
+            </div>
+            <div class="p-6 space-y-3 text-slate-600 leading-relaxed">
+                <ul class="space-y-2.5 text-sm sm:text-base">
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Travelling, moving on, or taking a break &mdash; all fine. <strong>Tell us as early as you can</strong>, and at the latest before your last rostered day, so the roster can be covered.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Mark your days off in the app as well as telling us, so nothing is assigned to you.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>Return your keys within 3 business days of your last shift</strong> (section 1). This is the one that most often holds up a final pay.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Make sure every room you did is finished in the app before you go. We cannot pay for a room that was never marked done.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Your final pay goes out on the normal Friday cycle once keys are back and your rooms are reconciled.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>If you come back later, your profile is still here.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 11. COST RECOVERY -->
+        <section data-rule="costs" class="rule-card bg-white rounded-2xl shadow-sm border-2 border-red-200 overflow-hidden">
+            <div class="bg-red-50 px-6 py-4 border-b border-red-100 flex items-center justify-between gap-3">
+                <h3 class="text-lg font-bold text-red-900 flex items-center gap-2"><span class="text-xl">&#9888;</span> 11. Cost recovery for operational disruption</h3>
+                <span class="read-badge items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-1 rounded-full">&#10003; Read</span>
+            </div>
+            <div class="p-6 space-y-4 text-slate-600 leading-relaxed">
+                <p>Where your actions or omissions cost the company money, those costs may be passed on to you. This includes, but is not limited to:</p>
+                <ul class="space-y-2 text-sm sm:text-base">
+                    <li class="flex gap-2"><span class="text-red-400 font-bold">&bull;</span><span>Poor or incomplete work needing a re-clean, another inspection, or compensation to a guest.</span></li>
+                    <li class="flex gap-2"><span class="text-red-400 font-bold">&bull;</span><span>Abandoning a shift or leaving a job unfinished without reasonable notice or approval.</span></li>
+                    <li class="flex gap-2"><span class="text-red-400 font-bold">&bull;</span><span>Repeated roster changes inside 48 hours of a shift.</span></li>
+                    <li class="flex gap-2"><span class="text-red-400 font-bold">&bull;</span><span>Same-day cancellations and no-shows, which cost the most because cover has to be found immediately.</span></li>
+                </ul>
+                <p class="font-semibold text-slate-700 pt-1">Recoverable costs may include:</p>
+                <ul class="space-y-2 text-sm sm:text-base">
+                    <li class="flex gap-2"><span class="text-red-400 font-bold">&bull;</span><span>Administration and coordination &mdash; re-doing the roster, ringing round, managing the fallout.</span></li>
+                    <li class="flex gap-2"><span class="text-red-400 font-bold">&bull;</span><span>Recruitment &mdash; sourcing and onboarding a replacement at short notice.</span></li>
+                    <li class="flex gap-2"><span class="text-red-400 font-bold">&bull;</span><span>Emergency incentives paid to someone else to fill the gap.</span></li>
+                    <li class="flex gap-2"><span class="text-red-400 font-bold">&bull;</span><span>Any other direct cost reasonably incurred because of it.</span></li>
+                </ul>
+                <div class="bg-slate-50 border-l-4 border-slate-300 p-4 rounded-r-lg">
+                    <p class="text-sm"><strong>We understand that emergencies happen.</strong> This section is about avoidable disruption, not about a genuine emergency. If something goes wrong, tell us as early as you can and we will work it out with you.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. STATUS AND COMMUNICATION -->
+        <section data-rule="status" class="rule-card bg-white rounded-2xl shadow-sm border-2 border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center justify-between gap-3">
+                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2"><span class="text-xl">&#128172;</span> 12. Your status, and how we talk</h3>
+                <span class="read-badge items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-1 rounded-full">&#10003; Read</span>
+            </div>
+            <div class="p-6 space-y-3 text-slate-600 leading-relaxed">
+                <ul class="space-y-2.5 text-sm sm:text-base">
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>You are an <strong>independent contractor</strong>, not an employee. You are free to work elsewhere, you supply your own ABN, and you decide which days you make yourself available.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>There is no guaranteed number of rooms. Work depends on what the hotel has.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Rooms, availability and pay all live in the <strong>roster app</strong>. WhatsApp is for the day&rsquo;s chat; the app is the record.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Standard uniform is a <strong>black t-shirt</strong>. Tools and equipment are in the HSK shed in the basement. Carry water.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Something wrong with your pay? Message Leo directly with the room number and the date. Do not wait for the next pay run.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>These terms can be updated. If they change materially you will be asked to sign again, and you will see it in the app.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ============ SIGNATURE ============ -->
+        <section id="sign-section" class="bg-white rounded-2xl shadow-md border-2 border-brand-300 overflow-hidden no-print">
+            <div class="bg-brand-50 px-6 py-4 border-b border-brand-100">
+                <h3 class="text-xl font-bold text-brand-900 flex items-center gap-2"><span>&#9997;</span> Sign the agreement</h3>
+                <p class="text-sm text-brand-800 mt-1">This is your electronic signature and is as binding as one on paper.</p>
+            </div>
+
+            <div id="sign-locked" class="p-6 bg-slate-50 text-center">
+                <p class="text-slate-500 font-medium mb-1">Keep scrolling to unlock</p>
+                <p id="sign-locked-detail" class="text-sm text-slate-400">You still have sections to read.</p>
+            </div>
+
+            <div id="sign-form" class="hidden p-6 space-y-5">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Your full legal name</label>
+                    <input id="sign-name" type="text" placeholder="Type your full name"
+                           class="w-full px-4 py-3 border border-slate-300 rounded-lg text-slate-800 focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Draw your signature</label>
+                    <div class="border-2 border-dashed border-slate-300 rounded-lg bg-slate-50 relative">
+                        <canvas id="sigPad" class="w-full rounded-lg" height="160"></canvas>
+                        <span id="sig-hint" class="absolute inset-0 flex items-center justify-center text-slate-300 text-sm pointer-events-none">Sign here with your finger or mouse</span>
+                    </div>
+                    <button type="button" onclick="clearSig()" class="mt-2 text-sm text-slate-500 hover:text-slate-700 underline">Clear and start again</button>
+                </div>
+
+                <label class="flex items-start gap-3 cursor-pointer p-4 bg-brand-50 rounded-lg border border-brand-100">
+                    <input id="sign-checkbox" type="checkbox" class="mt-1 w-5 h-5 rounded border-slate-300 text-brand-600 focus:ring-brand-500 shrink-0">
+                    <span class="text-sm text-slate-700 leading-relaxed">
+                        I have read and understood all 12 sections of this agreement, including the
+                        <strong>$30 deduction for a key not returned within 3 business days</strong>, the photo and Finish requirements,
+                        the pay rates and deductions, and the cost-recovery terms. I agree to them, and I am signing this myself.
+                    </span>
+                </label>
+
+                <p id="sign-error" class="hidden text-sm text-red-600 font-medium"></p>
+
+                <button id="sign-btn" onclick="submitSignature()" disabled
+                        class="w-full bg-brand-600 hover:bg-brand-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-semibold py-4 rounded-lg transition text-lg">
+                    Sign the agreement
+                </button>
+                <p class="text-xs text-slate-400 text-center">Signing saves your name, signature, the date and time, and the agreement version to your roster profile.</p>
+            </div>
+
+            <div id="sign-success" class="hidden p-8 text-center bg-emerald-50">
+                <div class="w-14 h-14 mx-auto bg-emerald-500 text-white rounded-full flex items-center justify-center text-3xl mb-3">&#10003;</div>
+                <p class="text-xl font-bold text-emerald-900 mb-1">Signed. Thank you.</p>
+                <p id="sign-details" class="text-emerald-800 text-sm mb-4"></p>
+                <p class="text-sm text-emerald-700">Your roster profile has been updated &mdash; the reminder will be gone next time you open the app.</p>
+            </div>
+        </section>
+
+        <p class="text-center text-xs text-slate-400 pb-4">
+            Agreement version <span id="ver-label"></span> &middot; Spruces Co Pty Ltd, ABN 63 664 218 759 &middot; Bella Mare Beachside Apartments, Coolangatta QLD
+        </p>
+    </div>
+</main>
+
+<footer class="bg-slate-900 text-slate-500 py-8 text-center text-sm no-print">
+    <p>&copy; 2026 Bella Mare Beachside Apartments &middot; Spruces Co Pty Ltd</p>
+</footer>
+
+<script>
+/* =========================================================================
+   Bella Mare Team Agreement — e-signature
+   Writes to the SAME Firebase Realtime Database the RosterEase app uses,
+   so a signature immediately shows on the cleaner's profile in the app.
+
+   Data contract
+   -------------
+   teamData/{staffId}/agreement          full signed record (incl. drawn signature)
+   teamData/{staffId}/agreementSigned    boolean  — the flag the app profile reads
+   teamData/{staffId}/agreementSignedAt  ISO date
+   teamData/{staffId}/agreementVersion   string
+
+   Everything lives under teamData because the database rules only permit
+   writes under the app's existing top-level keys. A new top-level key such as
+   `agreements` is rejected with PERMISSION_DENIED — which is exactly why the
+   old sign box on payments.html (writing to `onboarding-signatures`) never
+   recorded a single signature.
+   ========================================================================= */
+
+var AGREEMENT_VERSION = 'v1.0-2026-09-19';
+var SIGN_WINDOW_DAYS  = 7;          // days to sign, from joining or from launch
+var AGREEMENT_LAUNCH  = '2026-09-19T00:00:00+10:00';   // QLD midnight this went live
+var TOTAL_SECTIONS    = 12;
+
+firebase.initializeApp({
+    databaseURL: "https://studio-844548902-d6b8f-default-rtdb.asia-southeast1.firebasedatabase.app"
+});
+var db = firebase.database();
+
+var STAFF = {};          // id -> record
+var me = null;           // {id, name, record}
+var readSections = {};
+var sigHasInk = false;
+
+document.getElementById('ver-label').textContent = AGREEMENT_VERSION;
+
+/* ---------------- identity ---------------- */
+
+function activeStaff(rec) {
+    if (!rec || typeof rec !== 'object') return false;
+    if (!rec.fullName && !rec.name) return false;
+    if (rec.isArchived || rec.isHidden) return false;
+    return true;
+}
+
+function loadStaff() {
+    db.ref('teamData').once('value').then(function (snap) {
+        var data = snap.val() || {};
+        var sel = document.getElementById('staff-select');
+        var names = [];
+        Object.keys(data).forEach(function (id) {
+            var rec = data[id];
+            if (!activeStaff(rec)) return;
+            STAFF[id] = rec;
+            names.push({ id: id, name: (rec.fullName || rec.name || '').trim() });
+        });
+        names.sort(function (a, b) { return a.name.localeCompare(b.name); });
+        names.forEach(function (n) {
+            var o = document.createElement('option');
+            o.value = n.id; o.textContent = n.name;
+            sel.appendChild(o);
+        });
+
+        document.getElementById('gate-loading').classList.add('hidden');
+        document.getElementById('gate-form').classList.remove('hidden');
+
+        // Deep link from the app:  agreement.html?staff=<id>
+        var qs = new URLSearchParams(location.search);
+        var deep = qs.get('staff') || qs.get('id');
+        if (deep && STAFF[deep]) {
+            sel.value = deep;
+            if (qs.get('t')) { enter(deep); }            // token-free trusted hop from the app
+            else { document.getElementById('staff-pass').focus(); }
+        }
+    }).catch(function (e) {
+        document.getElementById('gate-loading').textContent =
+            'Could not reach the roster database. Check your connection and reload.';
+        console.error(e);
+    });
+}
+
+function identify() {
+    var id = document.getElementById('staff-select').value;
+    var pass = document.getElementById('staff-pass').value.trim();
+    var err = document.getElementById('gate-error');
+    err.classList.add('hidden');
+
+    if (!id) { err.textContent = 'Select your name first.'; err.classList.remove('hidden'); return; }
+    var rec = STAFF[id];
+    var expected = String(rec.passcode == null ? '0000' : rec.passcode);
+    if (pass !== expected) {
+        err.textContent = 'That passcode does not match. It is the same one you use to open the roster app.';
+        err.classList.remove('hidden');
+        return;
+    }
+    enter(id);
+}
+
+function enter(id) {
+    me = { id: id, record: STAFF[id], name: (STAFF[id].fullName || STAFF[id].name || '').trim() };
+    document.getElementById('gate').classList.add('hidden');
+    document.getElementById('prog-name').textContent = me.name;
+
+    db.ref('teamData/' + id + '/agreement').once('value').then(function (snap) {
+        var existing = snap.val();
+        if (existing && existing.signedAt && existing.version === AGREEMENT_VERSION) {
+            showAlreadySigned(existing);
+        } else {
+            showDoc(false);
+        }
+    }).catch(function () { showDoc(false); });
+}
+
+function showAlreadySigned(rec) {
+    document.getElementById('doc').classList.add('hidden');
+    var sec = document.getElementById('already');
+    sec.classList.remove('hidden');
+    var d = new Date(rec.signedAt);
+    document.getElementById('already-detail').textContent =
+        rec.fullName + ' — signed ' + d.toLocaleString('en-AU', {
+            timeZone: 'Australia/Brisbane', day: 'numeric', month: 'long', year: 'numeric',
+            hour: '2-digit', minute: '2-digit'
+        }) + ' (QLD) · version ' + rec.version;
+    if (rec.signatureImage) {
+        document.getElementById('already-sig').innerHTML =
+            '<img src="' + rec.signatureImage + '" alt="signature" class="mx-auto h-20 bg-white rounded-lg border border-emerald-200 p-2">';
+    }
+}
+
+/* ---------------- the document ---------------- */
+
+function showDoc(reReadOnly) {
+    document.getElementById('already').classList.add('hidden');
+    document.getElementById('doc').classList.remove('hidden');
+    document.getElementById('prog-wrap').classList.remove('hidden');
+    if (reReadOnly) {
+        document.getElementById('sign-section').classList.add('hidden');
+    }
+    renderDeadline();
+    observeSections();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// The clock starts when you joined, or when this agreement went live —
+// whichever is later. Someone already on the team is never instantly overdue.
+function deadlineFor(rec) {
+    var joined = rec && rec.createdAt ? new Date(rec.createdAt).getTime() : 0;
+    var launch = new Date(AGREEMENT_LAUNCH).getTime();
+    var from = Math.max(joined, launch);
+    return from + SIGN_WINDOW_DAYS * 86400000;
+}
+
+function renderDeadline() {
+    var banner = document.getElementById('deadline-banner');
+    var deadline = deadlineFor(me.record);
+    var daysLeft = Math.ceil((deadline - Date.now()) / 86400000);
+    var overdue = daysLeft <= 0;
+    banner.className = 'rounded-2xl p-5 border-2 ' +
+        (overdue ? 'bg-red-50 border-red-300' : daysLeft <= 2 ? 'bg-amber-50 border-amber-300' : 'bg-brand-50 border-brand-200');
+    banner.innerHTML =
+        '<p class="font-bold mb-1 ' + (overdue ? 'text-red-900' : daysLeft <= 2 ? 'text-amber-900' : 'text-brand-900') + '">' +
+            (overdue ? 'This is overdue' : 'You have ' + daysLeft + ' day' + (daysLeft === 1 ? '' : 's') + ' left to sign') + '</p>' +
+        '<p class="text-sm ' + (overdue ? 'text-red-800' : daysLeft <= 2 ? 'text-amber-800' : 'text-brand-800') + '">' +
+            'New team members have ' + SIGN_WINDOW_DAYS + ' days from joining to sign this agreement. ' +
+            'Until it is signed, rooms cannot be allocated to you.</p>';
+    banner.classList.remove('hidden');
+}
+
+function observeSections() {
+    var cards = document.querySelectorAll('.rule-card');
+    var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            var key = e.target.getAttribute('data-rule');
+            if (readSections[key]) return;
+            readSections[key] = true;
+            e.target.classList.add('read');
+            updateProgress();
+        });
+    }, { threshold: 0.35 });
+    cards.forEach(function (c) { io.observe(c); });
+    updateProgress();
+}
+
+function updateProgress() {
+    var n = Object.keys(readSections).length;
+    document.getElementById('prog-label').textContent = n + ' of ' + TOTAL_SECTIONS + ' sections read';
+    document.getElementById('prog-bar').style.width = Math.round(n / TOTAL_SECTIONS * 100) + '%';
+    if (n >= TOTAL_SECTIONS) {
+        document.getElementById('sign-locked').classList.add('hidden');
+        document.getElementById('sign-form').classList.remove('hidden');
+        initSigPad();                 // only now does the canvas have a real width
+    } else {
+        document.getElementById('sign-locked-detail').textContent =
+            (TOTAL_SECTIONS - n) + ' section' + (TOTAL_SECTIONS - n === 1 ? '' : 's') + ' still to read.';
+    }
+}
+
+/* ---------------- signature pad ---------------- */
+
+var ctx, pad, drawing = false, last = null, padWired = false, padW = 0;
+
+function sizePad() {
+    var ratio = window.devicePixelRatio || 1;
+    var w = pad.clientWidth;
+    if (!w) return false;                       // still hidden / not laid out
+    padW = w;
+    pad.width = Math.round(w * ratio);
+    pad.height = Math.round(160 * ratio);
+    pad.style.height = '160px';
+    ctx = pad.getContext('2d');
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    ctx.lineWidth = 2.2; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#0f172a';
+    return true;
+}
+
+function initSigPad() {
+    pad = document.getElementById('sigPad');
+    if (!pad) return;
+    if (!sizePad()) {                            // not laid out yet — try again next frame
+        requestAnimationFrame(initSigPad);
+        return;
+    }
+    if (padWired) return;
+    padWired = true;
+
+    function pos(e) {
+        var r = pad.getBoundingClientRect();
+        var p = e.touches ? e.touches[0] : e;
+        return { x: p.clientX - r.left, y: p.clientY - r.top };
+    }
+    function start(e) { e.preventDefault(); drawing = true; last = pos(e); }
+    function move(e) {
+        if (!drawing) return;
+        e.preventDefault();
+        var p = pos(e);
+        ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(p.x, p.y); ctx.stroke();
+        last = p;
+        if (!sigHasInk) { sigHasInk = true; document.getElementById('sig-hint').style.display = 'none'; updateSignBtn(); }
+    }
+    function end() { drawing = false; }
+
+    pad.addEventListener('mousedown', start); pad.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', end);
+    pad.addEventListener('touchstart', start, { passive: false });
+    pad.addEventListener('touchmove', move, { passive: false });
+    pad.addEventListener('touchend', end);
+    window.addEventListener('resize', function () {
+        if (!pad.clientWidth || pad.clientWidth === padW) return;
+        var prev = sigHasInk ? pad.toDataURL('image/png') : null;
+        if (!sizePad()) return;
+        if (prev) { var img = new Image(); img.onload = function () { ctx.drawImage(img, 0, 0, padW, 160); }; img.src = prev; }
+    });
+
+    document.getElementById('sign-name').addEventListener('input', updateSignBtn);
+    document.getElementById('sign-checkbox').addEventListener('change', updateSignBtn);
+    document.getElementById('sign-name').value = me.name;
+    updateSignBtn();
+}
+
+function clearSig() {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, padW, 160);
+    sigHasInk = false;
+    document.getElementById('sig-hint').style.display = 'flex';
+    updateSignBtn();
+}
+
+function updateSignBtn() {
+    var ok = sigHasInk &&
+        document.getElementById('sign-checkbox').checked &&
+        document.getElementById('sign-name').value.trim().length > 2;
+    document.getElementById('sign-btn').disabled = !ok;
+}
+
+/* ---------------- submit ---------------- */
+
+function submitSignature() {
+    var btn = document.getElementById('sign-btn');
+    var err = document.getElementById('sign-error');
+    err.classList.add('hidden');
+    btn.disabled = true;
+    btn.textContent = 'Saving…';
+
+    var now = new Date();
+    var iso = now.toISOString();
+    var qld = now.toLocaleString('en-AU', {
+        timeZone: 'Australia/Brisbane', day: '2-digit', month: '2-digit', year: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+    });
+
+    var record = {
+        staffId:        me.id,
+        fullName:       document.getElementById('sign-name').value.trim(),
+        rosterName:     me.name,
+        employmentType: me.record.employmentType || null,
+        version:        AGREEMENT_VERSION,
+        signedAt:       iso,
+        signedAtQld:    qld,
+        signedAtMs:     firebase.database.ServerValue.TIMESTAMP,
+        signatureImage: pad.toDataURL('image/png'),
+        sectionsRead:   Object.keys(readSections),
+        userAgent:      navigator.userAgent.substring(0, 200),
+        source:         'agreement.html',
+        acknowledged: {
+            keyReturn3Days30Dollars: true,
+            photosAndFinish:         true,
+            attributionAtFinish:     true,
+            availabilityAccurate:    true,
+            timingAndB2B:            true,
+            qualityAndFixUps:        true,
+            payAndDeductions:        true,
+            bankVerification:        true,
+            guestPropertyAndPrivacy: true,
+            noticeOnLeaving:         true,
+            costRecovery:            true,
+            contractorStatus:        true
+        }
+    };
+
+    // One update scoped to this cleaner's own profile node.
+    // (Root-level multi-path updates are rejected by the database rules.)
+    var updates = {
+        agreement:         record,      // the full signed record
+        agreementSigned:   true,        // the flag the app profile reads
+        agreementSignedAt: iso,
+        agreementVersion:  AGREEMENT_VERSION,
+        agreementName:     record.fullName,
+        // legacy acknowledgement flags the app already understands
+        ackPayment:    true,
+        ackVariable:   true,
+        ackContractor: true,
+        ackTimezone:   true
+    };
+
+    db.ref('teamData/' + me.id).update(updates).then(function () {
+        document.getElementById('sign-form').classList.add('hidden');
+        document.getElementById('sign-success').classList.remove('hidden');
+        document.getElementById('sign-details').textContent =
+            'Signed by ' + record.fullName + ' on ' + qld + ' (Queensland time)';
+        document.getElementById('sign-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }).catch(function (e) {
+        console.error('Signature save failed', e);
+        err.textContent = 'Could not save your signature. Check your connection and try again.';
+        err.classList.remove('hidden');
+        btn.disabled = false;
+        btn.textContent = 'Sign the agreement';
+    });
+}
+
+function esc(s) { return String(s).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+loadStaff();
+</script>
+</body>
+</html>
