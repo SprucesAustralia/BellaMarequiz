@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bella Mare &ndash; Team Agreement</title>
+    <title>Spruces &ndash; Team Agreement</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
@@ -34,7 +34,7 @@
 <header class="bg-brand-900 text-white shadow-lg sticky top-0 z-50 no-print">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 py-3">
         <div class="flex flex-col sm:flex-row justify-between items-center gap-2">
-            <h1 class="text-lg sm:text-xl font-serif font-bold tracking-wide">Bella Mare <span class="text-brand-500 font-light text-sm block sm:inline">Team Agreement</span></h1>
+            <h1 class="text-lg sm:text-xl font-serif font-bold tracking-wide">Spruces <span class="text-brand-500 font-light text-sm block sm:inline">Team Agreement</span></h1>
             <nav class="flex flex-wrap gap-x-1 items-center text-sm font-medium">
                 <a href="index.html" class="text-brand-100 hover:text-white transition px-2">Home</a>
                 <span class="text-brand-600">|</span>
@@ -102,7 +102,7 @@
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
             <p class="text-slate-600 leading-relaxed">
                 This is the agreement between <strong class="text-slate-800">Spruces Co Pty Ltd</strong> (ABN 63 664 218 759) and you as an
-                <strong class="text-slate-800">independent contractor</strong> cleaning at Bella Mare Beachside Apartments, Coolangatta.
+                <strong class="text-slate-800">independent contractor</strong> cleaning at the hotels we look after in Coolangatta &mdash; Bella Mare Beachside Apartments, Rainbow Bay Resort, and any hotel added later. The app tells you which hotel each room is at.
                 It sets out how rooms are allocated, how you get paid, and what we need from you.
             </p>
             <p class="mt-3 text-sm text-slate-500">
@@ -212,13 +212,30 @@
                 <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2"><span class="text-xl">&#10024;</span> 6. Quality, checks and fix-ups</h3>
                 <span class="read-badge items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-1 rounded-full">&#10003; Read</span>
             </div>
-            <div class="p-6 space-y-3 text-slate-600 leading-relaxed">
+            <div class="p-6 space-y-4 text-slate-600 leading-relaxed">
+                <p class="text-sm sm:text-base">Our promise to the hotel is that they do not need to check behind us. Nobody supervises you &mdash; the hotel&rsquo;s rating of each room does, and it decides the money. Every departure already carries a <strong>$10 &ldquo;perfect&rdquo; bonus</strong> inside your rate.</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm border border-slate-200 rounded-xl overflow-hidden">
+                        <thead class="bg-slate-50 text-slate-700">
+                            <tr><th class="text-left px-3 py-2 font-bold">Hotel&rsquo;s rating</th><th class="text-left px-3 py-2 font-bold">What it means</th><th class="text-left px-3 py-2 font-bold">You</th><th class="text-left px-3 py-2 font-bold">Hotel</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="bg-emerald-50/60"><td class="px-3 py-2 font-bold text-emerald-800">5&#9733; Perfect</td><td class="px-3 py-2">Good clean</td><td class="px-3 py-2 font-bold text-emerald-800">$10 bonus stays</td><td class="px-3 py-2">&mdash;</td></tr>
+                            <tr class="bg-amber-50/60"><td class="px-3 py-2 font-bold text-amber-800">4&#9733; Fix-up</td><td class="px-3 py-2">One thing to go back for</td><td class="px-3 py-2 font-bold text-amber-800">&minus;$10 (the bonus)</td><td class="px-3 py-2">$3 off</td></tr>
+                            <tr class="bg-rose-50/60"><td class="px-3 py-2 font-bold text-rose-800">1&ndash;3&#9733; Redo</td><td class="px-3 py-2">Not to standard</td><td class="px-3 py-2 font-bold text-rose-800">&minus;$15</td><td class="px-3 py-2">$10 off</td></tr>
+                        </tbody>
+                    </table>
+                </div>
                 <ul class="space-y-2.5 text-sm sm:text-base">
-                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>The hotel inspects rooms and rates them. That rating is what drives the $10 bonus.</span></li>
-                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>The checklist is the standard</strong>, not a suggestion. The things that come back most often: ovens, tinfoil on the drip trays, dishwashers left loaded, balcony glass.</span></li>
-                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>A fix-up means someone has to go back to a room you signed off. If it is yours, you go back, or the cost of whoever does comes out of that room.</span></li>
-                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Rushing is what shows up in the photos. A room finished fast and rated 4 earns less than one done properly.</span></li>
-                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>If something in a room is broken, stained or missing when you arrive, photograph it before you start and post it in the group. That protects you.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>You go back and fix it, the same day.</strong> The fix-up appears on your room card in the app with exactly what was missed; fix it and tap <strong>Fixed &#10003;</strong>. The hotel sees that you did.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>If you do not go back</strong> &mdash; the hotel fixes it, or nobody has by the end of the day &mdash; <strong>the amounts double</strong>: &minus;$20 for a fix-up, &minus;$30 for a redo (and the hotel&rsquo;s credit doubles too, for their time). The doubling is automatic at the end of the day.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>One freebie, once in your time with us:</strong> your first-ever fix-up or redo costs you nothing, provided you go back and fix it. It is meant for someone new. Anyone who already had fix-ups before 22 September 2026 has used theirs.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>Streak bonus:</strong> every <strong>25 perfect departures in a row</strong> (counted from 22 September 2026) pays an extra <strong>$25</strong> on the 25th room. A fix-up or redo restarts the count. Your progress is on <em>My pay &rsaquo; My quality</em>.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>Not checked within 24 hours = perfect.</strong> If the hotel has not checked a room within 24 hours of your Finish, the app approves it 5&#9733; and you keep the bonus.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>Wrong rating?</strong> Ratings can be changed by the hotel until the pay run. Tap <em>Ask the hotel to look again</em> on the room in the app and say why &mdash; do not argue it on WhatsApp. When a rating changes, the money follows it.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span><strong>The checklist is the standard</strong>, not a suggestion. The things that come back most often: ovens, tinfoil on the drip trays, dishwashers left loaded, balcony glass. Rushing is what shows up in the photos.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>If something in a room is broken, stained or missing when you arrive, photograph it before you start (<em>Report condition</em> in the app). That protects you.</span></li>
+                    <li class="flex gap-2"><span class="text-brand-500 font-bold">&bull;</span><span>Where two people clean a room together, the room&rsquo;s deduction is shared in the same proportion as the pay, and the freebie applies only if both still have theirs.</span></li>
                 </ul>
             </div>
         </section>
@@ -392,13 +409,13 @@
         </section>
 
         <p class="text-center text-xs text-slate-400 pb-4">
-            Agreement version <span id="ver-label"></span> &middot; Spruces Co Pty Ltd, ABN 63 664 218 759 &middot; Bella Mare Beachside Apartments, Coolangatta QLD
+            Agreement version <span id="ver-label"></span> &middot; Spruces Co Pty Ltd, ABN 63 664 218 759 &middot; Coolangatta QLD
         </p>
     </div>
 </main>
 
 <footer class="bg-slate-900 text-slate-500 py-8 text-center text-sm no-print">
-    <p>&copy; 2026 Bella Mare Beachside Apartments &middot; Spruces Co Pty Ltd</p>
+    <p>&copy; 2026 Spruces Co Pty Ltd &middot; Coolangatta QLD</p>
 </footer>
 
 <script>
@@ -421,7 +438,7 @@
    recorded a single signature.
    ========================================================================= */
 
-var AGREEMENT_VERSION = 'v1.0-2026-09-19';
+var AGREEMENT_VERSION = 'v1.1-2026-09-22';
 var SIGN_WINDOW_DAYS  = 7;          // days to sign, from joining or from launch
 var AGREEMENT_LAUNCH  = '2026-09-19T00:00:00+10:00';   // QLD midnight this went live
 var TOTAL_SECTIONS    = 12;
