@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;700&amp;display=swap" rel="stylesheet">
     <script>
         tailwind.config = { theme: { extend: {
@@ -80,16 +81,24 @@ function deadlineFor(rec) {
     var launch = new Date(AGREEMENT_LAUNCH).getTime();
     return Math.max(joined, launch) + SIGN_WINDOW_DAYS * 86400000;
 }
-firebase.initializeApp({ databaseURL: "https://studio-844548902-d6b8f-default-rtdb.asia-southeast1.firebasedatabase.app" });
+// 23 Sep 2026: admin login is checked by the auth function (the old 8888 was public) — this page then reads with that login.
+firebase.initializeApp({ apiKey: "AIzaSyBhJ-Gfu6PyidwjFMug7ore9hWg85fQa2g", authDomain: "studio-844548902-d6b8f.firebaseapp.com", projectId: "studio-844548902-d6b8f", databaseURL: "https://studio-844548902-d6b8f-default-rtdb.asia-southeast1.firebasedatabase.app" });
 var db = firebase.database();
 var unsignedNames = [];
 
 function unlock() {
     var v = document.getElementById('pin').value.trim();
-    if (v !== '8888') { document.getElementById('pin-err').classList.remove('hidden'); return; }
-    document.getElementById('gate').classList.add('hidden');
-    document.getElementById('panel').classList.remove('hidden');
-    load();
+    fetch('https://auth-ofz5ev47fq-ts.a.run.app', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'login', name: 'Admin', code: v }) })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+            if (!j.token || j.role !== 'admin') { document.getElementById('pin-err').classList.remove('hidden'); return; }
+            return firebase.auth().signInWithCustomToken(j.token).then(function () {
+                document.getElementById('gate').classList.add('hidden');
+                document.getElementById('panel').classList.remove('hidden');
+                load();
+            });
+        })
+        .catch(function () { document.getElementById('pin-err').classList.remove('hidden'); });
 }
 document.getElementById('pin').addEventListener('keydown', function (e) { if (e.key === 'Enter') unlock(); });
 
