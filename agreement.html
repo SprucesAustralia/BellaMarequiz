@@ -77,7 +77,7 @@
             </div>
             <p id="gate-error" class="hidden text-sm text-red-600 font-medium"></p>
             <button id="gate-btn" onclick="identify()" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 rounded-lg transition">Continue</button>
-            <p class="text-xs text-slate-400 text-center">Forgot your passcode? Message Leo on WhatsApp.</p>
+            <p class="text-xs text-slate-400 text-center">Forgot your passcode, or never set one? In the <a href="https://bellamareclean.web.app" class="underline">RosterEase app</a> tap &ldquo;Forgot passcode &mdash; or never set one?&rdquo; &mdash; you get a code by email.</p>
         </div>
     </section>
 
@@ -493,7 +493,7 @@ function identify() {
         .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
         .then(function (res) {
             if (!res.ok) return fail(res.j.error || 'That passcode does not match. It is the same one you use to open the roster app.');
-            if (res.j.needsNewCode) return fail('Open the RosterEase app first — it will ask you to choose your own passcode. Then come back here and use the new one.');
+            if (res.j.needsNewCode) return fail('Open the RosterEase app first and tap “Forgot passcode — or never set one?” — you choose your own passcode there. Then come back here and use it.');
             if (res.j.role !== 'staff') return fail('This page is for cleaners — log in with your own name.');
             return firebase.auth().signInWithCustomToken(res.j.token).then(function (cred) {
                 var uid = cred.user.uid;
