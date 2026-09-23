@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;700&amp;display=swap" rel="stylesheet">
@@ -62,14 +63,12 @@
         <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 mb-2">Team Agreement &amp; Policies</h2>
         <p class="text-slate-500 mb-6">Everything you agreed to when you joined, in one place. Read it, then sign at the bottom. It takes about five minutes.</p>
 
-        <div id="gate-loading" class="text-sm text-slate-400 py-4">Loading team list&hellip;</div>
 
-        <div id="gate-form" class="hidden space-y-4">
-            <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">Who are you?</label>
-                <select id="staff-select" class="w-full px-4 py-3 border border-slate-300 rounded-lg text-slate-800 bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
-                    <option value="">Select your name&hellip;</option>
-                </select>
+        <div id="gate-form" class="space-y-4">
+            <div id="name-row">
+                <label class="block text-sm font-semibold text-slate-700 mb-1.5">Your name in the roster app</label>
+                <input id="staff-name" type="text" autocomplete="username" placeholder="The name you log in with"
+                       class="w-full px-4 py-3 border border-slate-300 rounded-lg text-slate-800 focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
             </div>
             <div>
                 <label class="block text-sm font-semibold text-slate-700 mb-1.5">Your app passcode</label>
@@ -78,7 +77,7 @@
             </div>
             <p id="gate-error" class="hidden text-sm text-red-600 font-medium"></p>
             <button id="gate-btn" onclick="identify()" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 rounded-lg transition">Continue</button>
-            <p class="text-xs text-slate-400 text-center">Can&rsquo;t see your name? Message Leo on WhatsApp and he&rsquo;ll add you.</p>
+            <p class="text-xs text-slate-400 text-center">Forgot your passcode? Message Leo on WhatsApp.</p>
         </div>
     </section>
 
@@ -443,10 +442,16 @@ var SIGN_WINDOW_DAYS  = 7;          // days to sign, from joining or from launch
 var AGREEMENT_LAUNCH  = '2026-09-19T00:00:00+10:00';   // QLD midnight this went live
 var TOTAL_SECTIONS    = 12;
 
+// 23 Sep 2026: the roster database needs a real login now. The passcode is checked by the auth function (never in
+// this page), which returns a sign-in token; with it this page may read and write only YOUR record.
 firebase.initializeApp({
+    apiKey: "AIzaSyBhJ-Gfu6PyidwjFMug7ore9hWg85fQa2g",
+    authDomain: "studio-844548902-d6b8f.firebaseapp.com",
+    projectId: "studio-844548902-d6b8f",
     databaseURL: "https://studio-844548902-d6b8f-default-rtdb.asia-southeast1.firebasedatabase.app"
 });
 var db = firebase.database();
+var AUTH_URL = 'https://auth-ofz5ev47fq-ts.a.run.app';
 
 var STAFF = {};          // id -> record
 var me = null;           // {id, name, record}
@@ -465,56 +470,40 @@ function activeStaff(rec) {
 }
 
 function loadStaff() {
-    db.ref('teamData').once('value').then(function (snap) {
-        var data = snap.val() || {};
-        var sel = document.getElementById('staff-select');
-        var names = [];
-        Object.keys(data).forEach(function (id) {
-            var rec = data[id];
-            if (!activeStaff(rec)) return;
-            STAFF[id] = rec;
-            names.push({ id: id, name: (rec.fullName || rec.name || '').trim() });
-        });
-        names.sort(function (a, b) { return a.name.localeCompare(b.name); });
-        names.forEach(function (n) {
-            var o = document.createElement('option');
-            o.value = n.id; o.textContent = n.name;
-            sel.appendChild(o);
-        });
-
-        document.getElementById('gate-loading').classList.add('hidden');
-        document.getElementById('gate-form').classList.remove('hidden');
-
-        // Deep link from the app:  agreement.html?staff=<id>
-        var qs = new URLSearchParams(location.search);
-        var deep = qs.get('staff') || qs.get('id');
-        if (deep && STAFF[deep]) {
-            sel.value = deep;
-            if (qs.get('t')) { enter(deep); }            // token-free trusted hop from the app
-            else { document.getElementById('staff-pass').focus(); }
-        }
-    }).catch(function (e) {
-        document.getElementById('gate-loading').textContent =
-            'Could not reach the roster database. Check your connection and reload.';
-        console.error(e);
-    });
+    // Deep link from the app:  agreement.html?staff=<id>  → only the passcode is asked.
+    var qs = new URLSearchParams(location.search);
+    var deep = qs.get('staff') || qs.get('id');
+    if (deep) { DEEP_ID = deep; document.getElementById('name-row').classList.add('hidden'); }
+    document.getElementById(deep ? 'staff-pass' : 'staff-name').focus();
 }
+var DEEP_ID = null;
 
 function identify() {
-    var id = document.getElementById('staff-select').value;
+    var name = (document.getElementById('staff-name').value || '').trim();
     var pass = document.getElementById('staff-pass').value.trim();
     var err = document.getElementById('gate-error');
+    var btn = document.getElementById('gate-btn');
     err.classList.add('hidden');
-
-    if (!id) { err.textContent = 'Select your name first.'; err.classList.remove('hidden'); return; }
-    var rec = STAFF[id];
-    var expected = String(rec.passcode == null ? '0000' : rec.passcode);
-    if (pass !== expected) {
-        err.textContent = 'That passcode does not match. It is the same one you use to open the roster app.';
-        err.classList.remove('hidden');
-        return;
-    }
-    enter(id);
+    function fail(msg) { err.textContent = msg; err.classList.remove('hidden'); btn.disabled = false; btn.textContent = 'Continue'; }
+    if (!DEEP_ID && !name) return fail('Type your name first.');
+    if (!pass) return fail('Type your passcode.');
+    btn.disabled = true; btn.textContent = 'Checking…';
+    fetch(AUTH_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(DEEP_ID ? { action: 'login', memberId: DEEP_ID, code: pass } : { action: 'login', name: name, code: pass }) })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+            if (!res.ok) return fail(res.j.error || 'That passcode does not match. It is the same one you use to open the roster app.');
+            if (res.j.needsNewCode) return fail('Open the RosterEase app first — it will ask you to choose your own passcode. Then come back here and use the new one.');
+            if (res.j.role !== 'staff') return fail('This page is for cleaners — log in with your own name.');
+            return firebase.auth().signInWithCustomToken(res.j.token).then(function (cred) {
+                var uid = cred.user.uid;
+                return db.ref('teamData/' + uid).once('value').then(function (snap) {
+                    STAFF[uid] = snap.val() || {};
+                    enter(uid);
+                });
+            });
+        })
+        .catch(function (e) { console.error(e); fail('Could not reach the roster app. Check your connection and try again.'); });
 }
 
 function enter(id) {
