@@ -1,0 +1,86 @@
+# SHIP TO LIVE (26 Sep 2026) — Claude Code puts its policies-site work live by itself.
+#   Push a commit whose message contains [ship] to a claude/* branch (or run it by hand: Actions → Ship to live) →
+#   main is merged in (a conflict stops it) → the branch goes onto main → GitHub Pages rebuilds
+#   https://sprucesaustralia.github.io/BellaMarequiz/ → the result is written to the ship-status branch (STATUS.md).
+#   Read it:  git fetch origin ship-status && git show FETCH_HEAD:STATUS.md
+name: Ship to live
+on:
+  push:
+    branches: ['claude/**']
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to ship (claude/…)'
+        required: true
+concurrency:
+  group: ship-to-live
+  cancel-in-progress: false
+permissions:
+  contents: write
+  pages: write
+jobs:
+  ship:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[ship]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      BRANCH: ${{ inputs.branch || github.ref_name }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch || github.ref }}
+          fetch-depth: 0
+      - name: Merge main in and put it on main
+        run: |
+          set -eo pipefail
+          echo "STEP=merge + push to main" >> "$GITHUB_ENV"
+          case "$BRANCH" in main|ship-status) echo "::error::ship a working branch, not $BRANCH"; exit 1;; esac
+          git config user.name "Ship to live"; git config user.email "ljpo1991@gmail.com"
+          BASE=$(git rev-parse origin/main); echo "BASE=$BASE" >> "$GITHUB_ENV"; echo "REQ_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          echo "REQ_MSG=$(git log -1 --format=%s | tr -d '\r' | cut -c1-120)" >> "$GITHUB_ENV"
+          if ! git merge --no-edit origin/main; then git merge --abort || true; echo "::error::$BRANCH conflicts with main — git merge origin/main, fix, push again with [ship]"; exit 1; fi
+          git diff --stat "$BASE" HEAD | tee /tmp/diff.txt
+          if [ -z "$(git diff --name-only "$BASE" HEAD)" ]; then echo "NOTHING=1" >> "$GITHUB_ENV"; exit 0; fi
+          git push origin HEAD:main
+          echo "SHIP_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"; echo "PUSHED=1" >> "$GITHUB_ENV"
+      - name: Rebuild the site (GitHub Pages)
+        if: env.NOTHING != '1'
+        run: |
+          set -eo pipefail
+          echo "STEP=GitHub Pages rebuild" >> "$GITHUB_ENV"
+          gh api -X POST "repos/$GITHUB_REPOSITORY/pages/builds" > /dev/null
+          for i in $(seq 1 36); do
+            sleep 10
+            S=$(gh api "repos/$GITHUB_REPOSITORY/pages/builds/latest" --jq '.status + " " + .commit')
+            echo "$S"
+            case "$S" in "built $SHIP_SHA"*) echo "LIVE_OK=1" >> "$GITHUB_ENV"; exit 0;; "errored"*) echo "::error::Pages build errored"; exit 1;; esac
+          done
+          echo "::error::the site did not rebuild within 6 minutes"; exit 1
+      - name: Report (ship-status branch + summary)
+        if: always()
+        env:
+          OUTCOME: ${{ job.status }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set +e
+          git config user.name "Ship to live"; git config user.email "ljpo1991@gmail.com"
+          WHEN=$(TZ=Australia/Brisbane date '+%a %d %b %Y %H:%M QLD')
+          if [ "$OUTCOME" = "success" ] && [ "$NOTHING" = "1" ]; then TITLE="➖ NOTHING TO SHIP — $BRANCH is already in main"
+          elif [ "$OUTCOME" = "success" ]; then TITLE="✅ LIVE — $BRANCH @ ${REQ_SHA:0:7} is on main ${SHIP_SHA:0:7}; the site is rebuilt"
+          elif [ "$PUSHED" = "1" ]; then TITLE="⚠️ ON MAIN BUT THE SITE DID NOT REBUILD — stopped at: $STEP"
+          else TITLE="❌ NOT SHIPPED — stopped at: $STEP (nothing went live)"; fi
+          PREV=$(git show origin/ship-status:STATUS.md 2>/dev/null | sed -n '/^## History/,$p' | tail -n +2 | head -40)
+          {
+            echo "# Ship status — BellaMarequiz (policies site)"; echo
+            echo "**$TITLE**"; echo
+            echo "- when: $WHEN · run: $RUN_URL"
+            echo "- asked: \`$BRANCH\` @ ${REQ_SHA:0:7} — ${REQ_MSG}"
+            echo "- site: https://sprucesaustralia.github.io/BellaMarequiz/"
+            echo; echo '```'; cat /tmp/diff.txt 2>/dev/null | tail -30; echo '```'; echo
+            echo "## History"; echo "- $WHEN · $TITLE"; [ -n "$PREV" ] && echo "$PREV"
+          } > /tmp/STATUS.md
+          cat /tmp/STATUS.md >> "$GITHUB_STEP_SUMMARY"
+          B=$(git hash-object -w /tmp/STATUS.md); TREE=$(printf '100644 blob %s\tSTATUS.md\n' "$B" | git mktree)
+          C=$(git commit-tree "$TREE" -m "ship status: ${TITLE:0:80}")
+          git push -f origin "$C:refs/heads/ship-status" && echo "status written to ship-status"
