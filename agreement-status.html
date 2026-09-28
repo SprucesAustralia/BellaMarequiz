@@ -75,7 +75,8 @@
 
 <script>
 var SIGN_WINDOW_DAYS = 7;
-var AGREEMENT_LAUNCH = '2026-09-19T00:00:00+10:00';   // QLD midnight this went live
+var AGREEMENT_VERSION = 'v1.3-2026-09-28';   // the version everyone must have signed — same as agreement.html and utils/agreement.ts
+var AGREEMENT_LAUNCH = '2026-09-29T00:00:00+10:00';   // QLD midnight the current version (v1.3) went live — same as utils/agreement.ts
 function deadlineFor(rec) {
     var joined = rec && rec.createdAt ? new Date(rec.createdAt).getTime() : 0;
     var launch = new Date(AGREEMENT_LAUNCH).getTime();
@@ -120,7 +121,8 @@ function load() {
                 var daysLeft = Math.ceil((deadlineFor(t) - Date.now()) / 86400000);
 
                 var state;
-                if (sig && sig.signedAt) { state = 'signed'; signed++; }
+                // signed THIS version (an older signature needs signing again — v1.3, 28 Sep 2026)
+                if (sig && sig.signedAt && t.agreementSigned && t.agreementVersion === AGREEMENT_VERSION) { state = 'signed'; signed++; }
                 else if (daysLeft <= 0) { state = 'overdue'; overdue++; blocked.push(name); unsignedNames.push(name); }
                 else { state = 'pending'; pending++; unsignedNames.push(name); }
 
