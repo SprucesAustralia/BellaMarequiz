@@ -67,54 +67,15 @@
         <p class="text-base text-slate-500">Comprehensive breakdown of rates, standards, and payment structures.</p>
     </div>
 
-    <!-- Section: Departure Cleans -->
-    <section class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
-        <div class="bg-brand-50 px-6 py-5 border-b border-brand-100 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>
-                <h3 class="text-xl font-bold text-brand-900">Departure Cleans</h3>
-                <p class="text-sm text-brand-800 mt-1">Select your contractor type to view applicable rates.</p>
-            </div>
-            <div class="bg-white p-1 rounded-lg border border-brand-200 flex shadow-sm">
-                <button id="btn-regular" onclick="toggleContractorType('regular')" class="btn-toggle px-4 py-2 rounded-md text-sm font-semibold bg-brand-600 text-white shadow-sm">
-                    Regular Contractor
-                </button>
-                <button id="btn-casual" onclick="toggleContractorType('casual')" class="btn-toggle px-4 py-2 rounded-md text-sm font-semibold text-brand-600 hover:bg-brand-50">
-                    Casual Contractor
-                </button>
-            </div>
+    <!-- Section: Departure Cleans — ONE rate card for everyone from Mon 5 Oct 2026 (Leo, 2 Oct 2026: no more Regular/Casual) -->
+    <section id="rates" class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+        <div class="bg-brand-50 px-6 py-5 border-b border-brand-100">
+            <h3 class="text-xl font-bold text-brand-900">Departure Cleans</h3>
+            <p class="text-sm text-brand-800 mt-1">One rate card for everyone from <strong>Monday 5 October 2026</strong> &mdash; no more Regular / Casual.</p>
         </div>
 
-        <div id="casual-info" class="hidden bg-amber-50 border-b border-amber-100 px-6 py-3">
-            <div class="flex items-start gap-3">
-                <svg class="w-5 h-5 text-amber-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                <p class="text-sm text-amber-800 leading-relaxed">
-                    <strong>Casual Rate Notice:</strong> Casual contractors receive a higher flat rate regardless of the day (weekend or weekday). This increase accounts for last-minute calls, weekend availability, and travel requirements.
-                </p>
-            </div>
-        </div>
-
-        <!-- Regular vs Casual definition -->
-        <div class="bg-white border-b border-slate-100 px-6 py-5">
-            <h4 class="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wide">Am I a Regular or a Casual?</h4>
-            <div class="grid md:grid-cols-2 gap-4 text-sm">
-                <div class="bg-brand-50 rounded-lg p-4 border border-brand-200">
-                    <p class="font-bold text-brand-900 mb-1">Regular Contractor</p>
-                    <ul class="text-brand-800 space-y-1 list-disc list-inside ml-1">
-                        <li>Works <strong>every week</strong></li>
-                        <li>Does <strong>3 or more days per week</strong></li>
-                        <li>i.e. 12+ shifts in the past 4 weeks</li>
-                    </ul>
-                </div>
-                <div class="bg-amber-50 rounded-lg p-4 border border-amber-200">
-                    <p class="font-bold text-amber-900 mb-1">Casual Contractor</p>
-                    <ul class="text-amber-800 space-y-1 list-disc list-inside ml-1">
-                        <li>Does <strong>not</strong> work every week, <em>or</em></li>
-                        <li>Averages <strong>fewer than 3 days per week</strong> over the past 4 weeks</li>
-                        <li>i.e. fewer than 12 shifts in the past 4 weeks</li>
-                    </ul>
-                </div>
-            </div>
-            <p class="text-xs text-slate-500 mt-3">Your status is reviewed on a rolling 4-week basis. If your availability and shifts increase consistently, you move to Regular rates. If they drop, you move to Casual rates.</p>
+        <div class="bg-emerald-50 border-b border-emerald-100 px-6 py-3">
+            <p class="text-sm text-emerald-900 leading-relaxed"><strong>New from Monday 5 October 2026:</strong> everyone is paid the same rate. Monday to Friday is the weekday rate; Saturdays, Sundays and Queensland public holidays are <strong>$10 more per room</strong>. On hard days (late calls, short-staffed, very busy days) Spruces or the hotel may add an <strong>extra bonus</strong> to a room in the app &mdash; you see it on the room before you say yes, and it is paid on top of the rate.</p>
         </div>
 
         <div class="overflow-x-auto">
@@ -123,14 +84,14 @@
                     <tr>
                         <th class="px-6 py-4 font-semibold w-1/4">Room Type</th>
                         <th class="px-6 py-4 font-semibold">Avg. Time</th>
-                        <th id="header-col-1" class="px-4 py-4 font-semibold text-center bg-slate-100/50">Mon-Fri<br><span class="text-xs text-green-600 normal-case">Bonus Earned</span></th>
-                        <th id="header-col-2" class="px-4 py-4 font-semibold text-center">Mon-Fri<br><span class="text-xs text-orange-500 normal-case">No Bonus</span></th>
-                        <th id="header-col-3" class="px-4 py-4 font-semibold text-center bg-slate-100/50">Sat/Sun<br><span class="text-xs text-green-600 normal-case">Bonus Earned</span></th>
-                        <th id="header-col-4" class="px-4 py-4 font-semibold text-center">Sat/Sun<br><span class="text-xs text-orange-500 normal-case">No Bonus</span></th>
+                        <th class="px-4 py-4 font-semibold text-center bg-slate-100/50">Mon-Fri<br><span class="text-xs text-green-600 normal-case">Bonus Earned</span></th>
+                        <th class="px-4 py-4 font-semibold text-center">Mon-Fri<br><span class="text-xs text-orange-500 normal-case">No Bonus</span></th>
+                        <th class="px-4 py-4 font-semibold text-center bg-slate-100/50">Sat/Sun &amp; public holidays<br><span class="text-xs text-green-600 normal-case">Bonus Earned</span></th>
+                        <th class="px-4 py-4 font-semibold text-center">Sat/Sun &amp; public holidays<br><span class="text-xs text-orange-500 normal-case">No Bonus</span></th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100 table-stripe">
-                    <tr class="rate-row-regular hover:bg-brand-50/30 transition">
+                    <tr class="hover:bg-brand-50/30 transition">
                         <td class="px-6 py-4 font-medium text-slate-900">2 Bed</td>
                         <td class="px-6 py-4 text-slate-500">~1 hr 30 min</td>
                         <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$60</td>
@@ -138,7 +99,7 @@
                         <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$70</td>
                         <td class="px-4 py-4 text-center font-medium text-slate-500">$60</td>
                     </tr>
-                    <tr class="rate-row-regular hover:bg-brand-50/30 transition">
+                    <tr class="hover:bg-brand-50/30 transition">
                         <td class="px-6 py-4 font-medium text-slate-900">2 Bed Villa</td>
                         <td class="px-6 py-4 text-slate-500">~1 hr 45 min</td>
                         <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$70</td>
@@ -146,35 +107,11 @@
                         <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$80</td>
                         <td class="px-4 py-4 text-center font-medium text-slate-500">$70</td>
                     </tr>
-                    <tr class="rate-row-regular hover:bg-brand-50/30 transition">
+                    <tr class="hover:bg-brand-50/30 transition">
                         <td class="px-6 py-4 font-medium text-slate-900">3 Bed</td>
                         <td class="px-6 py-4 text-slate-500">~2 hrs</td>
                         <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$83</td>
                         <td class="px-4 py-4 text-center font-medium text-slate-500">$73</td>
-                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$93</td>
-                        <td class="px-4 py-4 text-center font-medium text-slate-500">$83</td>
-                    </tr>
-                    <tr class="rate-row-casual hidden hover:bg-brand-50/30 transition">
-                        <td class="px-6 py-4 font-medium text-slate-900">2 Bed <span class="text-xs font-normal text-amber-600 block">(Casual)</span></td>
-                        <td class="px-6 py-4 text-slate-500">~1 hr 30 min</td>
-                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$70</td>
-                        <td class="px-4 py-4 text-center font-medium text-slate-500">$60</td>
-                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$70</td>
-                        <td class="px-4 py-4 text-center font-medium text-slate-500">$60</td>
-                    </tr>
-                    <tr class="rate-row-casual hidden hover:bg-brand-50/30 transition">
-                        <td class="px-6 py-4 font-medium text-slate-900">2 Bed Villa <span class="text-xs font-normal text-amber-600 block">(Casual)</span></td>
-                        <td class="px-6 py-4 text-slate-500">~1 hr 45 min</td>
-                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$80</td>
-                        <td class="px-4 py-4 text-center font-medium text-slate-500">$70</td>
-                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$80</td>
-                        <td class="px-4 py-4 text-center font-medium text-slate-500">$70</td>
-                    </tr>
-                    <tr class="rate-row-casual hidden hover:bg-brand-50/30 transition">
-                        <td class="px-6 py-4 font-medium text-slate-900">3 Bed <span class="text-xs font-normal text-amb-600 block">(Casual)</span></td>
-                        <td class="px-6 py-4 text-slate-500">~2 hrs</td>
-                        <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$93</td>
-                        <td class="px-4 py-4 text-center font-medium text-slate-500">$83</td>
                         <td class="px-4 py-4 text-center font-bold text-green-700 bg-slate-50/50 text-lg">$93</td>
                         <td class="px-4 py-4 text-center font-medium text-slate-500">$83</td>
                     </tr>
@@ -183,7 +120,8 @@
         </div>
         <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 text-sm text-slate-500 space-y-2">
             <p><strong>Note on Times:</strong> Estimates for one experienced cleaner. Actual time may vary based on condition.</p>
-            <p><strong>Note on Rates:</strong> The green column includes the $10 bonus (earned when room passes inspection). For Regular contractors, Weekends are $10 more per room. Casuals receive a flat rate (including the weekend premium) on all days.</p>
+            <p><strong>Note on Rates:</strong> The green columns include the $10 bonus (earned when the room passes inspection). The same card applies to everyone. A day where you have only one room pays the weekend rate (it covers the trip).</p>
+            <p><strong>Rooms before 5 October 2026</strong> are paid the old way: Regular (Fixed) weekdays $60 / $70 / $83, Casual $70 / $80 / $93 every day.</p>
         </div>
     </section>
 
@@ -257,7 +195,7 @@
             <!-- Key Message -->
             <div class="bg-emerald-50 rounded-xl p-5 border-2 border-emerald-300 text-center">
                 <p class="text-2xl font-bold text-emerald-800 mb-2">The $10 is a BONUS you EARN</p>
-                <p class="text-emerald-700">It is <strong>not</strong> a penalty or deduction. The $10 is <strong>already inside the rate you see</strong> (e.g. casual Bella Mare: $70 two-bedroom, $80 villa). A perfect room keeps it. A fix-up takes it off. Departures only &#8211; services and deep cleans have no $10.</p>
+                <p class="text-emerald-700">It is <strong>not</strong> a penalty or deduction. The $10 is <strong>already inside the rate you see</strong> (e.g. Bella Mare on a weekday: $60 two-bedroom, $70 villa). A perfect room keeps it. A fix-up takes it off. Departures only &#8211; services and deep cleans have no $10.</p>
             </div>
 
             <!-- Important context: hotel shouldn't need to check -->
@@ -433,7 +371,7 @@
                 </button>
                 <div class="faq-answer px-6 pb-4">
                     <p class="text-sm text-slate-600 mb-2"><strong>No.</strong> Room allocation is done by management. Please do not self-assign rooms in the housekeeping page. If you book rooms yourself, they may be cancelled.</p>
-                    <p class="text-sm text-slate-600 mb-2">We have permanent cleaners who are allocated rooms first. Additional rooms are then assigned to other team members based on availability and need.</p>
+                    <p class="text-sm text-slate-600 mb-2">The app allocates rooms from your availability, the hotel&rsquo;s ranking, quality, reliability and a fair share. Additional rooms go to other team members based on availability and need.</p>
                     <p class="text-sm text-slate-600"><strong>What to do:</strong> Update your availability in the app, and wait for management to confirm your rooms. If you have questions, message in the group chat.</p>
                 </div>
             </div>
@@ -496,8 +434,8 @@
             How Room Allocation Works
         </h4>
         <div class="text-sm text-amber-800 space-y-2">
-            <p><strong>1.</strong> Permanent full-time cleaners are assigned rooms first (they have been with us the longest).</p>
-            <p><strong>2.</strong> If there are extra rooms, or days the permanent cleaners cannot work, we assign rooms to other available team members.</p>
+            <p><strong>1.</strong> The app shares each day&rsquo;s rooms between the hotel&rsquo;s ranked team who are available that day. Quality (stars, fix-ups), reliability and a fair share over the last two weeks decide who gets which room &mdash; nobody gets all the rooms.</p>
+            <p><strong>2.</strong> Extra rooms, or rooms nobody on the team can take, go to other available team members (the app asks you first).</p>
             <p><strong>3.</strong> <strong>Do NOT self-assign rooms in the app.</strong> If you do, they will be cancelled. Wait for management to allocate.</p>
             <p><strong>4.</strong> Keep your availability updated in the app so we know when you can work.</p>
             <p><strong>5.</strong> Check with management before assuming you are working on any given day.</p>
@@ -649,45 +587,6 @@
 </footer>
 
 <script>
-// --- Toggle Contractor Type ---
-function toggleContractorType(type) {
-    var regularRows = document.querySelectorAll('.rate-row-regular');
-    var casualRows = document.querySelectorAll('.rate-row-casual');
-    var regularBtn = document.getElementById('btn-regular');
-    var casualBtn = document.getElementById('btn-casual');
-    var casualInfo = document.getElementById('casual-info');
-    var h1 = document.getElementById('header-col-1');
-    var h2 = document.getElementById('header-col-2');
-    var h3 = document.getElementById('header-col-3');
-    var h4 = document.getElementById('header-col-4');
-
-    if (type === 'regular') {
-        regularRows.forEach(function(r) { r.classList.remove('hidden'); });
-        casualRows.forEach(function(r) { r.classList.add('hidden'); });
-        regularBtn.classList.add('bg-brand-600', 'text-white');
-        regularBtn.classList.remove('text-brand-600', 'hover:bg-brand-50');
-        casualBtn.classList.remove('bg-brand-600', 'text-white');
-        casualBtn.classList.add('text-brand-600', 'hover:bg-brand-50');
-        casualInfo.classList.add('hidden');
-        h1.innerHTML = 'Mon-Fri<br><span class="text-xs text-green-600 normal-case">Bonus Earned</span>';
-        h2.innerHTML = 'Mon-Fri<br><span class="text-xs text-orange-500 normal-case">No Bonus</span>';
-        h3.innerHTML = 'Sat/Sun<br><span class="text-xs text-green-600 normal-case">Bonus Earned</span>';
-        h4.innerHTML = 'Sat/Sun<br><span class="text-xs text-orange-500 normal-case">No Bonus</span>';
-    } else {
-        regularRows.forEach(function(r) { r.classList.add('hidden'); });
-        casualRows.forEach(function(r) { r.classList.remove('hidden'); });
-        casualBtn.classList.add('bg-brand-600', 'text-white');
-        casualBtn.classList.remove('text-brand-600', 'hover:bg-brand-50');
-        regularBtn.classList.remove('bg-brand-600', 'text-white');
-        regularBtn.classList.add('text-brand-600', 'hover:bg-brand-50');
-        casualInfo.classList.remove('hidden');
-        h1.innerHTML = 'Any Day<br><span class="text-xs text-green-600 normal-case">Bonus Earned</span>';
-        h2.innerHTML = 'Any Day<br><span class="text-xs text-orange-500 normal-case">No Bonus</span>';
-        h3.innerHTML = 'Any Day<br><span class="text-xs text-green-600 normal-case">Bonus Earned</span>';
-        h4.innerHTML = 'Any Day<br><span class="text-xs text-orange-500 normal-case">No Bonus</span>';
-    }
-}
-
 // --- FAQ Toggle ---
 function toggleFaq(btn) {
     var answer = btn.nextElementSibling;
