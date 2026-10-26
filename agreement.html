@@ -97,6 +97,16 @@
     <div id="doc" class="hidden space-y-6">
 
         <div id="deadline-banner" class="hidden rounded-2xl p-5 border-2"></div>
+        <!-- ⚡ QUICK RE-SIGN (27 Oct 2026, Leo: "before pay, sign it — should allow them to do it very quick"): someone who signed an older version sees only what changed -->
+        <div id="whats-new" class="hidden rounded-2xl p-5 border-2 border-amber-300 bg-amber-50">
+            <p class="font-bold text-amber-950 mb-2">&#9889; What changed (27 Oct 2026)</p>
+            <ul class="text-sm text-amber-900 space-y-1.5 mb-4">
+                <li>&bull; Dropping a day you already have rooms on: <strong>2 days&rsquo; notice</strong> (was 7).</li>
+                <li>&bull; <strong>Late cancel</strong> = under 48 hours&rsquo; notice (sick too). Same day counts as 2. <strong>3 in 90 days = a 1&#9733; on your file.</strong></li>
+                <li>&bull; Everything else is the same as what you signed before.</li>
+            </ul>
+            <button type="button" onclick="quickSign()" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-lg text-lg">&#9997;&#65039; Sign the update (30 sec)</button>
+        </div>
 
         <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
             <p class="text-slate-600 leading-relaxed">
@@ -519,6 +529,7 @@ function enter(id) {
             showAlreadySigned(existing);
         } else {
             showDoc(false);
+            if (existing && existing.signedAt) document.getElementById('whats-new').classList.remove('hidden');   // signed an older version → the quick way
         }
     }).catch(function () { showDoc(false); });
 }
@@ -608,6 +619,13 @@ function updateProgress() {
     }
 }
 
+/* ⚡ quick re-sign: she read and signed every section before — mark them read and jump to the signature */
+function quickSign() {
+    document.querySelectorAll('.rule-card').forEach(function (c) { var k = c.getAttribute('data-rule'); if (k) { readSections[k] = true; c.classList.add('read'); } });
+    updateProgress();
+    var sec = document.getElementById('sign-section');
+    if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 /* ---------------- signature pad ---------------- */
 
 var ctx, pad, drawing = false, last = null, padWired = false, padW = 0;
